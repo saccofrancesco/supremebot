@@ -1,0 +1,13 @@
+[
+    {
+        "Name Surname": "Your Name and Surname",
+        "Email": "Your E-Mail",
+        "Tel": "Your Phone - Number",
+        "Address": "Your Address",
+        "N": "Your Civic Number",
+        "City": "Your City",
+        "Postal Code": "Your Postal Code",
+        "Card Number": "Your Credit Card Number",
+        "CVV": "Your Card's Verification Token"
+    }
+]
