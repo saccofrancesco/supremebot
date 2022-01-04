@@ -53,4 +53,4 @@ Now you have only to run the `main.py` file just before the drop, which is at 12
 self.HOUR = "12"
 self.MINUTE = "00"
 ```
-Make sure to include the items you want to buy in the list, which is in the `Item.json` file and you are good to go! The Bot will by the items you requested for within seconds! **Happy Shopping!**
+Make sure to include the items you want to buy in the list, which is in the `Item.json` file and you are good to go! The Bot will buy the items you requested for within seconds! **Happy Shopping!**
