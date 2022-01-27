@@ -12,12 +12,12 @@ Then install the dependencies in a virtualenv, you can create one via `python -m
 pip install -r requirments.txt
 ```
 
-Now you need a Chrome Driver: you can download it from this [page](https://chromedriver.chromium.org/downloads). Then put in the folder where stands this project and you are done.
+Now you need a Chrome Driver: you can download it from this [page](https://chromedriver.chromium.org/downloads). Then put it in the folder where stands this project and you are done.
 
 ## Personalization
 Now that you have set up your environment you can add Items to the `Items.json` file with this parameter sequence:
 
-```json
+```JSON
 [
     {
         "Item": "Name of the Item",
@@ -28,9 +28,9 @@ Now that you have set up your environment you can add Items to the `Items.json` 
 ]
 ```
 
-Now you have to modify the data in `Data.json` file to suits your needs, like that:
+Now you have to modify the data in the `Data.json` file to suits your needs, like that:
 
-```json
+```JSON
 [
     {
         "Name Surname": "Your Name and Surname",
@@ -47,10 +47,10 @@ Now you have to modify the data in `Data.json` file to suits your needs, like th
 ```
 
 ## Start the Bot
-Now you have only to run the `main.py` file just before the drop, which is at 12:00 PM in Italy. You can modify the hours and minutes in the `bot.py` file, specifically:
+Now you have only to run the `main.py` file just before the drop, which is at 12:00 in Italy. You can modify the hours and minutes in the `bot.py` file, specifically:
 ```python
 # Buy Times
 self.HOUR = "12"
 self.MINUTE = "00"
 ```
-Make sure to include the items you want to buy in the list, which is in the `Item.json` file and you are good to go! The Bot will buy the items you requested for within seconds! **Happy Shopping!**
+Make sure to include the items you want to buy in the list, which is in the `Item.json` file and you are good to go! The Bot will buy the items you requested within seconds! **Happy Shopping!**
