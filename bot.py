@@ -148,3 +148,18 @@ class Bot:
         links = list(dict.fromkeys(links))
         for element in links:
             self.f_links_list.append(SUPREME_PARTIAL_LINK + element)
+
+    # Check the Links and Adding the Right One the the Item to Buy List
+    def check_and_Buy(self, x):
+        for y in range(len(self.f_links_list)):
+            code = requests.get(self.f_links_list[y]).text
+            soup = BeautifulSoup(code, 'lxml')
+            current_item_name = soup.find('h1', class_='protect').text
+            current_item_style = soup.find(
+                'p', class_='style protect').text
+            # print(f"Item: {current_item_name} Style: {current_item_style}")
+            if self.item_name[x] in current_item_name and self.item_style[x] in current_item_style:
+                self.items_to_buy_links.append(self.f_links_list[y])
+                self.f_links_list.clear()
+                print(f"Item {self.item_name[x]} Status: Found")
+                break
