@@ -163,3 +163,10 @@ class Bot:
                 self.f_links_list.clear()
                 print(f"Item {self.item_name[x]} Status: Found")
                 break
+
+    # Iterator for the Items
+    def ItemIterator(self):
+        for x in range(len(self.item_name)):
+            self.switch(x)
+            self.scrape()
+            self.check_and_Buy(x)
