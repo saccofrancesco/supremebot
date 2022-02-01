@@ -65,3 +65,12 @@ class Bot:
         self.postal_code = 0
         self.card_number = 0
         self.cvv = 0
+        # Scraping Item's Data
+        with open("Items.json", "r") as f:
+            Item_Dict = json.load(f)
+        for Item in Item_Dict:
+            self.item_name.append(Item["Item"])
+            self.item_style.append(Item["Style"])
+            self.item_size.append(Item["Size"])
+            self.item_type.append(Item["Type"])
+        f.close()
