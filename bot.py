@@ -74,3 +74,17 @@ class Bot:
             self.item_size.append(Item["Size"])
             self.item_type.append(Item["Type"])
         f.close()
+        # Scraping Payment's Data
+        with open("Data.json", "r") as d:
+            Data_Dict = json.load(d)
+        for Data in Data_Dict:
+            self.name_surname = Data["Name Surname"]
+            self.email = Data["Email"]
+            self.tel = Data["Tel"]
+            self.address = Data["Address"]
+            self.N = Data["N"]
+            self.city = Data["City"]
+            self.postal_code = Data["Postal Code"]
+            self.card_number = Data["Card Number"]
+            self.cvv = Data["CVV"]
+        d.close()
