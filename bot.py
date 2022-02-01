@@ -134,3 +134,17 @@ class Bot:
         elif self.item_type[x] == "Skate":
             skate_btn = self.driver.find_element_by_xpath(SKATES_XPATH)
             skate_btn.click()
+
+    # Scrape the Page for the Links
+    def scrape(self):
+        current_url = self.driver.current_url
+        source_code = requests.get(current_url).text
+        soup = BeautifulSoup(source_code, 'lxml')
+        container = soup.find('div', id='container')
+        links = []
+        for a in container.find_all('a', class_="name-link"):
+            hrefs = a['href']
+            links.append(hrefs)
+        links = list(dict.fromkeys(links))
+        for element in links:
+            self.f_links_list.append(SUPREME_PARTIAL_LINK + element)
