@@ -47,4 +47,21 @@ CVV_XPATH = '/html/body/div[2]/div[1]/form/div[2]/div[2]/fieldset/div[4]/div[2]/
 
 # Define the Bot Class
 class Bot:
-    pass
+    # Define the Constructor
+    def __init__(self):
+        self.driver = webdriver.Chrome('chromedriver.exe')
+        # Item's Data
+        self.item_name = []
+        self.item_style = []
+        self.item_size = []
+        self.item_type = []
+        # Payment's Data
+        self.name_surname = ""
+        self.email = ""
+        self.tel = 0
+        self.address = ""
+        self.N = ""
+        self.city = ""
+        self.postal_code = 0
+        self.card_number = 0
+        self.cvv = 0
