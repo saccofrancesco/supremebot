@@ -191,3 +191,12 @@ class Bot:
                 add_to_basket_btn.click()
             except:
                 print("There's been an ERROR or the Item is SOLD OUT!")
+
+    # defining going to the checkout
+    def go_checkout(self):
+        try:
+            buy_now_btn = self.driver.find_element_by_xpath(BUY_NOW_XPATH)
+            time.sleep(1)
+            buy_now_btn.click()
+        except:
+            print("An Error Occured!")
