@@ -88,3 +88,9 @@ class Bot:
             self.card_number = Data["Card Number"]
             self.cvv = Data["CVV"]
         d.close()
+        # Item's Links Listing
+        self.f_links_list = []
+        self.items_to_buy_links = []
+        # Buy Times
+        self.HOUR = "12"
+        self.MINUTE = "00"
