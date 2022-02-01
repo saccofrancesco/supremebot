@@ -94,3 +94,12 @@ class Bot:
         # Buy Times
         self.HOUR = "12"
         self.MINUTE = "00"
+
+    # Open Supreme Site and Set Up
+    def open_supreme_shop(self):
+        self.driver.get(SUPREME_SHOP_LINK)
+        btn = self.driver.find_element_by_xpath(UK_XPATH)
+        btn.click()
+        time.sleep(0.01)
+        btn = self.driver.find_element_by_xpath(IT_XPATH)
+        btn.click()
