@@ -103,3 +103,34 @@ class Bot:
         time.sleep(0.01)
         btn = self.driver.find_element_by_xpath(IT_XPATH)
         btn.click()
+
+    # Switch between Item's Types
+    def switch(self, x):
+        if self.item_type[x] == "Jacket":
+            jackets_btn = self.driver.find_element_by_xpath(JACKETS_XPATH)
+            jackets_btn.click()
+        elif self.item_type[x] == "Shirts":
+            shirts_btn = self.driver.find_element_by_xpath(SHIRTS_XPATH)
+            shirts_btn.click()
+        elif self.item_type[x] == "Tops Sweaters":
+            top_sweaters_btn = self.driver.find_element_by_xpath(
+                TOPS_SWEATERS_XPATH)
+            top_sweaters_btn.click()
+        elif self.item_type[x] == "Sweatshirt":
+            sweatshirt_btn = self.driver.find_element_by_xpath(SWEATSHIRTS_XPATH)
+            sweatshirt_btn.click()
+        elif self.item_type[x] == "Pants":
+            pants_btn = self.driver.find_element_by_xpath(PANTS_XPATH)
+            pants_btn.click()
+        elif self.item_type[x] == "Hats":
+            hats_btn = self.driver.find_element_by_xpath(HATS_XPATH)
+            hats_btn.click()
+        elif self.item_type[x] == "Bag":
+            bag_btn = self.driver.find_element_by_xpath(BAGS_XPATH)
+            bag_btn.click()
+        elif self.item_type[x] == "Accesories":
+            accesories_btn = self.driver.find_element_by_xpath(ACCESSORIES_XPATH)
+            accesories_btn.click()
+        elif self.item_type[x] == "Skate":
+            skate_btn = self.driver.find_element_by_xpath(SKATES_XPATH)
+            skate_btn.click()
