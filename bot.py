@@ -44,3 +44,7 @@ CARD_MONTH_INPUT = '/html/body/div[2]/div[1]/form/div[2]/div[2]/fieldset/div[4]/
 CARD_YEAR_SELECTOR_XPATH = '/html/body/div[2]/div[1]/form/div[2]/div[2]/fieldset/div[4]/div[2]/div[1]/select[2]'
 YEAR_NUMBER_XPATH = '/html/body/div[2]/div[1]/form/div[2]/div[2]/fieldset/div[4]/div[2]/div[1]/select[2]/option[6]'
 CVV_XPATH = '/html/body/div[2]/div[1]/form/div[2]/div[2]/fieldset/div[4]/div[2]/div[2]/input'
+
+# Define the Bot Class
+class Bot:
+    pass
