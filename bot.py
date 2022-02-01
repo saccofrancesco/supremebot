@@ -170,3 +170,24 @@ class Bot:
             self.switch(x)
             self.scrape()
             self.check_and_Buy(x)
+
+    # defining adding to basket and checkout function
+    def add_to_basket(self):
+        for e in range(len(self.items_to_buy_links)):
+            self.driver.get(self.items_to_buy_links[e])
+            try:
+                size_opt_btn = self.driver.find_element_by_xpath(SIZE_XPATH)
+                size_opt_btn.click()
+                time.sleep(0.3)
+                size_btn = self.driver.find_element_by_xpath(
+                    "(//*[contains(text(), '" + self.item_size[e] + "')] | //*[@value='" + self.item_size[e] + "'])")
+                size_btn.click()
+            except:
+                print("Size not Found!")
+            try:
+                add_to_basket_btn = self.driver.find_element_by_xpath(
+                    ADD_TO_BASKET_XPATH)
+                time.sleep(0.3)
+                add_to_basket_btn.click()
+            except:
+                print("There's been an ERROR or the Item is SOLD OUT!")
