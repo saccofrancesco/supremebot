@@ -4,10 +4,12 @@
         "Email": "Your E-Mail",
         "Tel": "Your Phone - Number",
         "Address": "Your Address",
-        "N": "Your Civic Number",
         "City": "Your City",
         "Postal Code": "Your Postal Code",
+        "Country": "Your Country",
         "Card Number": "Your Credit Card Number",
+        "Expiration Month": "Your Card Expiration Month",
+        "Expiration Year": "Your Card Expiration Year",
         "CVV": "Your Card's Verification Token"
     }
 ]
