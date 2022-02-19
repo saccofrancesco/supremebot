@@ -9,7 +9,7 @@ git clone https://github.com/TonicStark/Supreme-Bot.git
 
 Then install the dependencies in a virtualenv, you can create one via `python -m venv <name of the virtualenv>`, with:
 ```python
-pip install -r requirments.txt
+pip install -r requirements.txt
 ```
 
 Now you need a Chrome Driver: you can download it from this [page](https://chromedriver.chromium.org/downloads). Then put it in the folder where stands this project and you are done.
