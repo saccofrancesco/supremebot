@@ -1,5 +1,5 @@
 # Supreme-Bot
-Questo è il mio Bot Supreme personale per l'acquisto di oggetti nel giorno del Drop di Supreme!
+Questo è il mio Bot Supreme personale, per l'acquisto di oggetti nel giorno del Drop di Supreme!
 
 ## Set Up
 Scarica la cartella ZIP o clona il repository con:
@@ -12,7 +12,11 @@ Quindi installa le dipendenze in un virtualenv, puoi crearne uno tramite `python
 pip install -r requirements.txt
 ```
 
-Ora ti serve un Chromedriver: puoi scaricarlo da questa [pagina](https://chromedriver.chromium.org/downloads). Quindi mettilo nella cartella dove si trova questo progetto e il gioco è fatto.
+Dopo ave rinstallato le dipendenze, esegui questo comando:
+```
+playwright install
+```
+Questo comando installerà tutti i Web Driver che ti serviranno per usare Playwright sulla tua macchina.
 
 ## Personalizzazione
 Ora che hai impostato il tuo ambiente puoi aggiungere elementi al file `Items.json` con questa sequenza di parametri:
