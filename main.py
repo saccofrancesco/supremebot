@@ -45,8 +45,8 @@ class Bot:
         self.links_list= []
 
         # Buy Times
-        self.HOUR = "23"
-        self.MINUTE = "10"
+        self.HOUR = "12"
+        self.MINUTE = "00"
 
     # Scrape Method for Saving the urls
     def scrape(self) -> None:
