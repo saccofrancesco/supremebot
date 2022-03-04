@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 from sys import exit
 
-# Bot Classe
+# Bot Class
 class Bot:
 
     # Constructor
