@@ -54,27 +54,26 @@ class Bot:
         # Looping the Items' Types
         for i in range(len(self.items_name)):
 
-            # List for Links
-            links = []
-
             # Scraping
             url = "https://www.supremenewyork.com/shop/all/" + self.items_type[i]
             source = requests.get(url).text
             soup = BeautifulSoup(source, "html.parser")
-            for link in soup.find_all("a", class_ = "name-link"):
-                links.append("https://www.supremenewyork.com" + link["href"])
-        
+            links = [
+                "https://www.supremenewyork.com" + link["href"]
+                for link in soup.find_all("a", class_="name-link")
+            ]
+
             # Removing Duplicates
             links = list(dict.fromkeys(links))
 
             # Checking for the Right Link
-            for j in range(len(links)):
-                source = requests.get(links[j]).text
+            for link_ in links:
+                source = requests.get(link_).text
                 soup = BeautifulSoup(source, "html.parser")
                 name = soup.find("h1", class_ = "protect").text
                 style = soup.find("p", class_ = "style protect").text
                 if name == self.items_name[i] and style == self.items_style[i]:
-                    self.links_list.append(links[j])
+                    self.links_list.append(link_)
                     break
 
     # Method for add to the cart the requeted elements
