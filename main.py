@@ -7,6 +7,8 @@ from datetime import datetime
 from sys import exit
 
 # Bot Class
+
+
 class Bot:
 
     # Constructor
@@ -42,7 +44,7 @@ class Bot:
                 self.cvv = data["CVV"]
 
         # Item's Links Listing
-        self.links_list= []
+        self.links_list = []
 
         # Buy Times
         self.HOUR = "12"
@@ -55,7 +57,8 @@ class Bot:
         for i in range(len(self.items_name)):
 
             # Scraping
-            url = "https://www.supremenewyork.com/shop/all/" + self.items_type[i]
+            url = "https://www.supremenewyork.com/shop/all/" + \
+                self.items_type[i]
             source = requests.get(url).text
             soup = BeautifulSoup(source, "html.parser")
             links = [
@@ -70,28 +73,32 @@ class Bot:
             for link_ in links:
                 source = requests.get(link_).text
                 soup = BeautifulSoup(source, "html.parser")
-                name = soup.find("h1", class_ = "protect").text
-                style = soup.find("p", class_ = "style protect").text
+                name = soup.find("h1", class_="protect").text
+                style = soup.find("p", class_="style protect").text
                 if name == self.items_name[i] and style == self.items_style[i]:
                     self.links_list.append(link_)
                     break
 
     # Method for add to the cart the requeted elements
     def addTobasket(self, page) -> None:
-        
+
         # Looping the Element's to Buy List
         for i in range(len(self.links_list)):
             page.goto(self.links_list[i])
-            
+
             # Saving Page Data
             source = requests.get(self.links_list[i]).text
             soup = BeautifulSoup(source, "html.parser")
 
             # Checking if Elements is Buyable
-            if soup.find("select", id = "size") and soup.find("input", type = "submit"):
+            if soup.find(
+                    "select",
+                    id="size") and soup.find(
+                    "input",
+                    type="submit"):
                 page.click("#size")
                 option = page.query_selector("#size")
-                option.select_option(label = self.items_size[i])
+                option.select_option(label=self.items_size[i])
                 page.click("input.button")
 
     # Method for Compiling the Checkout Form
@@ -109,15 +116,16 @@ class Bot:
         page.fill("#order_billing_zip", str(self.postal_code))
         page.click("#order_billing_country")
         option = page.query_selector("#order_billing_country")
-        option.select_option(label = self.country.upper())
+        option.select_option(label=self.country.upper())
         page.fill("#credit_card_number", str(self.card_number))
         page.click("#credit_card_month")
         option = page.query_selector("#credit_card_month")
-        option.select_option(label = str(self.month_exp))
+        option.select_option(label=str(self.month_exp))
         page.click("#credit_card_year")
         option = page.query_selector("#credit_card_year")
-        option.select_option(label = str(self.year_exp))
+        option.select_option(label=str(self.year_exp))
         page.fill("#credit_card_verification_value", str(self.cvv))
+
 
 # Main Program
 if __name__ == "__main__":
@@ -127,7 +135,7 @@ if __name__ == "__main__":
 
     # Create a Loop for Instants Buying
     while True:
-        
+
         # Saving the Current Time
         now = datetime.now()
 
@@ -141,7 +149,7 @@ if __name__ == "__main__":
             with sync_playwright() as p:
 
                 # Creating a Browser Instance
-                browser = p.chromium.launch(headless = False)
+                browser = p.chromium.launch(headless=False)
                 page = browser.new_page()
 
                 # Adding the Requeted Elements to the Basket
