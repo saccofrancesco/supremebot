@@ -5,13 +5,13 @@ charset-normalizer==2.0.12
 commonmark==0.9.1
 greenlet==1.1.2
 idna==3.3
-playwright==1.19.0
+playwright==1.20.1
 pycodestyle==2.8.0
 pyee==8.1.0
 Pygments==2.11.2
 requests==2.27.1
-rich==12.0.1
+rich==12.2.0
 soupsieve==2.3.1
 toml==0.10.2
-urllib3==1.26.8
+urllib3==1.26.9
 websockets==10.1
