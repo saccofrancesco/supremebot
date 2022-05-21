@@ -12,7 +12,7 @@ Quindi installa le dipendenze in un virtualenv, puoi crearne uno tramite `python
 pip install -r requirements.txt
 ```
 
-Dopo ave rinstallato le dipendenze, esegui questo comando:
+Dopo aver installato le dipendenze, esegui questo comando:
 ```
 playwright install
 ```
