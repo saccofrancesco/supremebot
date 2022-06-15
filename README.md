@@ -1,5 +1,5 @@
 # Supreme-Bot
-This is my Personal Supreme Bot for Buying Items on the Day of the Supreme Shop's Drop!
+Supreme Bot is a free system for Buying Supreme's Items on the Day of the Supreme Shop's Drop!
 
 ## Set Up
 Download the ZIP Folder, or Clone the Repository with:
