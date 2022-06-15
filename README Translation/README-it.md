@@ -1,5 +1,5 @@
 # Supreme-Bot
-Questo è il mio Bot Supreme personale, per l'acquisto di oggetti nel giorno del Drop di Supreme!
+Supreme Bot è un sistema gratuito per Acquistare Articoli di Supreme nel Giorno del Drop del Negozio Supreme!
 
 ## Set Up
 Scarica la cartella ZIP o clona il repository con:
