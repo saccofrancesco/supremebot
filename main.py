@@ -80,7 +80,7 @@ class Bot:
             url = "https://www.supremenewyork.com/shop/all/" + \
                 self.ITEMS_TYPES[i]
 
-            # Requesting the Page
+            # Requesting the URL
             source = requests.get(url).text
             soup = BeautifulSoup(source, "html.parser")
 
@@ -90,10 +90,10 @@ class Bot:
                 for link in soup.find_all("a", class_="name-link")
             ]
 
-            # Removing Duplicates Links from the List
+            # Removing the Duplicates
             links = list(dict.fromkeys(links))
 
-            # Checking for the Right Link
+            # Checking for the Right Links
             for link in links:
 
                 # Requesting the Link's page
@@ -107,11 +107,11 @@ class Bot:
                 # Checking if the Item is To Buy
                 if name == self.ITEMS_NAMES[i] and style == self.ITEMS_STYLES[i]:
 
-                    # Appending the Link to the List of Links to Buy
+                    # Appending the Link to the List of To Buy
                     self.links_list.append(link)
                     break
 
-    # Method for Add to the Cart the requested Items
+    # Method for Add to the Cart the founded Items
     def add_to_basket(self, page) -> None:
 
         # Looping the Element's to Buy List
@@ -123,14 +123,14 @@ class Bot:
             source = requests.get(self.links_list[i]).text
             soup = BeautifulSoup(source, "html.parser")
 
-            # Checking if Elements is Buyable
+            # Checking if Elements have Multiple Sizes
             if soup.find(
                     "select",
                     id="size") and soup.find(
                     "input",
                     type="submit"):
 
-                # Selecting the Size
+                # Selecting the Right Size
                 page.click("#size")
                 option = page.query_selector("#size")
                 option.select_option(label=self.ITEMS_SIZES[i])
@@ -178,13 +178,13 @@ if __name__ == "__main__":
     # Creating the Bot Instance
     BOT = Bot()
 
-    # Create a Loop for Instant Buying
+    # Create a Loop for Fastest Buying
     while True:
 
         # Saving the Current Time
         now = datetime.now()
 
-        # Checking if the Current Time == the Time of the Drop
+        # Checking if the Current Time == the Time of the Drop (Buy Times)
         if str(now.hour) == BOT.HOUR and str(now.minute) == BOT.MINUTE:
 
             # Finding the Links for the Requested Elements
@@ -200,7 +200,7 @@ if __name__ == "__main__":
                 # Adding the Requested Elements to the Cart
                 BOT.add_to_basket(page)
 
-                # Checkout
+                # Performing the Checkout
                 BOT.checkout(page)
 
                 # Exit the Script
