@@ -21,15 +21,15 @@ Questo comando installerà tutti i Web Driver che ti serviranno per usare Playwr
 ## Personalizzazione
 Ora che hai impostato il tuo ambiente puoi aggiungere elementi al file `Items.json` con questa sequenza di parametri:
 
-!["code"](..\img\code.png)
+!["code"](../img/code.png)
 
 Ora devi modificare i dati nel file `Data.json` in base alle tue esigenze, in questo modo:
 
-!["code"](..\img\code2.png)
+!["code"](../img/code2.png)
 
 ## Avvia il bot
 Ora devi solo eseguire il file `main.py` appena prima del rilascio, che è alle 12:00 in Italia. Puoi modificare le ore e i minuti nel file `bot.py`, in particolare:
 
-!["code"](..\img\code3.png)
+!["code"](../img/code3.png)
 
 Assicurati di includere gli articoli che desideri acquistare nell'elenco, che si trova nel file `Item.json` e sei a posto! Il Bot acquisterà gli articoli richiesti in pochi secondi! **Felice Shopping!**
