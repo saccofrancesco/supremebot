@@ -21,15 +21,15 @@ This will install ALL the Web Drivers you will need to run Playwright on your ma
 ## Personalization
 Now that you have set up your environment you can add Items to the `Items.json` file with this parameter sequence:
 
-!["code"](img/code.png)
+![code](img/code.png)
 
 Now you have to modify the data in the `Data.json` file to suits your needs, like that:
 
-!["code"](img/code2.png)
+![code](img/code2.png)
 
 ## Start the Bot
 Now you have only to run the `main.py` file just before the drop, which is at 12:00 in Italy. You can modify the hours and minutes, specifically:
 
-!["code"](img/code3.png)
+![code](img/code3.png)
 
 Make sure to include the items you want to buy in the list, which is in the `Item.json` file and you are good to go! The Bot will buy the items you requested within seconds! **Happy Shopping!**
