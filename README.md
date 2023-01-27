@@ -4,7 +4,7 @@ Supreme Bot is a free system for Buying Supreme's Items on the Day of the Suprem
 ## Set Up
 Download the ZIP Folder, or Clone the Repository with:
 ```
-git clone https://github.com/TonicStark/Supreme-Bot.git
+git clone https://github.com/TonicStark/supreme-bot.git
 ```
 
 Then install the dependencies in a virtualenv, you can create one via `python -m venv <name of the virtualenv>`, with:
