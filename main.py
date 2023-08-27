@@ -77,7 +77,7 @@ class Bot:
                        description="🔗 [blue]Extracting Items' Links...[/blue]"):
 
             # URL to Scrape
-            url = "https://www.supremenewyork.com/shop/all/" + \
+            url = "https://us.supreme.com/collections/all/" + \ # updated shopify Supreme url
                 self.ITEMS_TYPES[i]
 
             # Requesting the URL
@@ -86,7 +86,7 @@ class Bot:
 
             # Storing all the Links of the Page
             links = [
-                "https://www.supremenewyork.com" + link["href"]
+                "https://us.supreme.com/" + link["href"] # Updated shopify url
                 for link in soup.find_all("a", class_="name-link")
             ]
 
