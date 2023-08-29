@@ -1,7 +1,7 @@
 # Importing Libraries
 from rich.console import Console
 from rich.progress import track
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, TimeoutError
 from bs4 import BeautifulSoup
 from datetime import datetime
 from sys import exit
@@ -9,7 +9,6 @@ import requests
 import json
 
 # Creating the Bot Class
-
 
 class Bot:
 
@@ -66,8 +65,8 @@ class Bot:
         self.links_list = []
 
         # Buy Times
-        self.HOUR = "12"
-        self.MINUTE = "0"
+        self.HOUR = "18"
+        self.MINUTE = "59"
 
     # Scrape Method for Saving the URLs
     def scrape(self) -> None:
@@ -77,8 +76,9 @@ class Bot:
                        description="🔗 [blue]Extracting Items' Links...[/blue]"):
 
             # URL to Scrape
-            url = "https://us.supreme.com/collections/all/" + \
+            url = "https://us.supreme.com/collections/" + \
                 self.ITEMS_TYPES[i]
+            print("Scraping URL:", url)  # Debugging print
 
             # Requesting the URL
             source = requests.get(url).text
@@ -109,6 +109,7 @@ class Bot:
 
                     # Appending the Link to the List of To Buy
                     self.links_list.append(link)
+                    print("Appended link:", link)  # Debugging print
                     break
 
     # Method for Add to the Cart the founded Items
@@ -118,6 +119,7 @@ class Bot:
         for i in track(range(len(self.links_list)),
                        description="💸 [green]Buying the Items...[/green]"):
             page.goto(self.links_list[i])
+            print("Adding to basket:", self.links_list[i])  # Debugging print
 
             # Requesting the Item's Page
             source = requests.get(self.links_list[i]).text
@@ -145,7 +147,10 @@ class Bot:
         with self.CONSOLE.status("🖋️ [yellow]Performing the Checkout...[/yellow]"):
 
             # Going to the Checkout
-            page.click("a.button:nth-child(3)")
+            try:
+                page.click('[data-cy="mini-cart-checkout-button"]', timeout=60000)  # Increased timeout
+            except TimeoutError:
+                print("Timeout while clicking on checkout button")
 
             # Using Data to Compile the Form
             # Name, Surname, Email and Tel
@@ -174,34 +179,27 @@ class Bot:
 
 # Main Program
 if __name__ == "__main__":
-
-    # Creating the Bot Instance
     BOT = Bot()
 
-    # Create a Loop for Fastest Buying
     while True:
-
-        # Saving the Current Time
         now = datetime.now()
 
-        # Checking if the Current Time == the Time of the Drop (Buy Times)
         if str(now.hour) == BOT.HOUR and str(now.minute) == BOT.MINUTE:
+            print("Time to buy!")
 
-            # Finding the Links for the Requested Elements
             BOT.scrape()
 
-            # Using Playwright API to perform Automatic Actions
             with sync_playwright() as p:
-
-                # Creating a Browser Instance
                 browser = p.chromium.launch(headless=False)
                 page = browser.new_page()
 
-                # Adding the Requested Elements to the Cart
                 BOT.add_to_basket(page)
 
-                # Performing the Checkout
-                BOT.checkout(page)
+                try:
+                    BOT.checkout(page)
+                except TimeoutError:
+                    print("Timeout while performing checkout")  # Handle timeout
+                finally:
+                    browser.close()
 
-                # Exit the Script
                 exit()
