@@ -77,7 +77,7 @@ class Bot:
                        description="🔗 [blue]Extracting Items' Links...[/blue]"):
 
             # URL to Scrape
-            url = "https://us.supreme.com/collections/all/" + \ # updated shopify Supreme url
+            url = "https://us.supreme.com/collections/all/" + \
                 self.ITEMS_TYPES[i]
 
             # Requesting the URL
