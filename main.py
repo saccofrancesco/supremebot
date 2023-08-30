@@ -65,52 +65,65 @@ class Bot:
         self.links_list = []
 
         # Buy Times
-        self.HOUR = "18"
-        self.MINUTE = "59"
+        self.HOUR = "23"
+        self.MINUTE = "10"
 
     # Scrape Method for Saving the URLs
     def scrape(self) -> None:
-
-        # Looping the Items' Types
         for i in track(range(len(self.ITEMS_NAMES)),
                        description="🔗 [blue]Extracting Items' Links...[/blue]"):
-
-            # URL to Scrape
-            url = "https://us.supreme.com/collections/" + \
-                self.ITEMS_TYPES[i]
+            url = "https://us.supreme.com/collections/" + self.ITEMS_TYPES[i]
             print("Scraping URL:", url)  # Debugging print
 
-            # Requesting the URL
-            source = requests.get(url).text
-            soup = BeautifulSoup(source, "html.parser")
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=False)
+                page = browser.new_page()
+                page.goto(url)  # Navigate to the URL
 
-            # Storing all the Links of the Page
-            links = [
-                "https://us.supreme.com/" + link["href"] # Updated shopify url
-                for link in soup.find_all("a", class_="name-link")
-            ]
+                # Wait for dynamic content to load (adjust the wait time as needed)
+                page.wait_for_selector("a[data-cy-title]")
+
+                # Extract the links using Playwright
+                links = page.query_selector_all("a[data-cy-title]")
+                links_list = [link.get_attribute("href") for link in links]
+
+                # Print the extracted links for debugging
+                print("Extracted links:", links_list)
+
+                # Checking for the Right Links
+                for link in links_list:
+                    complete_link = "https://us.supreme.com" + link
+                    page.goto(complete_link)  # Navigate to the link
+
+                    # Wait for the product info to load (adjust the wait time as needed)
+                    page.wait_for_selector("span.collection-product-info--title")
+
+                    name_style_element = page.query_selector("span.collection-product-info--title")
+
+                    if name_style_element:
+                        name_style = name_style_element.inner_text().strip().split(" - ")
+                        if len(name_style) >= 2 and name_style[0] == self.ITEMS_NAMES[i] and name_style[1] == self.ITEMS_STYLES[i]:
+                            self.links_list.append(complete_link)
+                            print("Appended link:", complete_link)  # Debugging print
+                            break
+
+                browser.close()
 
             # Removing the Duplicates
             links = list(dict.fromkeys(links))
 
             # Checking for the Right Links
             for link in links:
-
-                # Requesting the Link's page
-                source = requests.get(link).text
-                soup = BeautifulSoup(source, "html.parser")
-
-                # Finding the name and Style of the Item
-                name = soup.find("h1", class_="protect").text
-                style = soup.find("p", class_="style protect").text
+                # Extracting data-cy-title attribute (name and style)
+                name_style = link.get("data-cy-title", "").split(" - ")
 
                 # Checking if the Item is To Buy
-                if name == self.ITEMS_NAMES[i] and style == self.ITEMS_STYLES[i]:
-
+                if len(name_style) >= 2 and name_style[0] == self.ITEMS_NAMES[i] and name_style[1] == self.ITEMS_STYLES[i]:
                     # Appending the Link to the List of To Buy
                     self.links_list.append(link)
                     print("Appended link:", link)  # Debugging print
                     break
+
 
     # Method for Add to the Cart the founded Items
     def add_to_basket(self, page) -> None:
