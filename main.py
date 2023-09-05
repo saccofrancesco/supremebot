@@ -72,7 +72,7 @@ class Bot:
     def scrape(self) -> None:
         for i in track(range(len(self.ITEMS_NAMES)),
                        description="🔗 [blue]Extracting Items' Links...[/blue]"):
-            url = "https://us.supreme.com/collections/" + self.ITEMS_TYPES[i]
+            url = f"https://us.supreme.com/collections/{self.ITEMS_TYPES[i]}"
             print("Scraping URL:", url)  # Debugging print
 
             with sync_playwright() as p:
@@ -92,15 +92,15 @@ class Bot:
 
                 # Checking for the Right Links
                 for link in links_list:
-                    complete_link = "https://us.supreme.com" + link
+                    complete_link = f"https://us.supreme.com{link}"
                     page.goto(complete_link)  # Navigate to the link
 
                     # Wait for the product info to load (adjust the wait time as needed)
                     page.wait_for_selector("span.collection-product-info--title")
 
-                    name_style_element = page.query_selector("span.collection-product-info--title")
-
-                    if name_style_element:
+                    if name_style_element := page.query_selector(
+                        "span.collection-product-info--title"
+                    ):
                         name_style = name_style_element.inner_text().strip().split(" - ")
                         if len(name_style) >= 2 and name_style[0] == self.ITEMS_NAMES[i] and name_style[1] == self.ITEMS_STYLES[i]:
                             self.links_list.append(complete_link)
