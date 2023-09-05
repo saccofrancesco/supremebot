@@ -1,7 +1,7 @@
 # Importing Libraries
 from rich.console import Console
 from rich.progress import track
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, TimeoutError
 from bs4 import BeautifulSoup
 from datetime import datetime
 from sys import exit
@@ -9,7 +9,6 @@ import requests
 import json
 
 # Creating the Bot Class
-
 
 class Bot:
 
@@ -66,50 +65,65 @@ class Bot:
         self.links_list = []
 
         # Buy Times
-        self.HOUR = "12"
-        self.MINUTE = "0"
+        self.HOUR = "23"
+        self.MINUTE = "10"
 
     # Scrape Method for Saving the URLs
     def scrape(self) -> None:
-
-        # Looping the Items' Types
         for i in track(range(len(self.ITEMS_NAMES)),
                        description="🔗 [blue]Extracting Items' Links...[/blue]"):
+            url = "https://us.supreme.com/collections/" + self.ITEMS_TYPES[i]
+            print("Scraping URL:", url)  # Debugging print
 
-            # URL to Scrape
-            url = "https://www.supremenewyork.com/shop/all/" + \
-                self.ITEMS_TYPES[i]
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=False)
+                page = browser.new_page()
+                page.goto(url)  # Navigate to the URL
 
-            # Requesting the URL
-            source = requests.get(url).text
-            soup = BeautifulSoup(source, "html.parser")
+                # Wait for dynamic content to load (adjust the wait time as needed)
+                page.wait_for_selector("a[data-cy-title]")
 
-            # Storing all the Links of the Page
-            links = [
-                "https://www.supremenewyork.com" + link["href"]
-                for link in soup.find_all("a", class_="name-link")
-            ]
+                # Extract the links using Playwright
+                links = page.query_selector_all("a[data-cy-title]")
+                links_list = [link.get_attribute("href") for link in links]
+
+                # Print the extracted links for debugging
+                print("Extracted links:", links_list)
+
+                # Checking for the Right Links
+                for link in links_list:
+                    complete_link = "https://us.supreme.com" + link
+                    page.goto(complete_link)  # Navigate to the link
+
+                    # Wait for the product info to load (adjust the wait time as needed)
+                    page.wait_for_selector("span.collection-product-info--title")
+
+                    name_style_element = page.query_selector("span.collection-product-info--title")
+
+                    if name_style_element:
+                        name_style = name_style_element.inner_text().strip().split(" - ")
+                        if len(name_style) >= 2 and name_style[0] == self.ITEMS_NAMES[i] and name_style[1] == self.ITEMS_STYLES[i]:
+                            self.links_list.append(complete_link)
+                            print("Appended link:", complete_link)  # Debugging print
+                            break
+
+                browser.close()
 
             # Removing the Duplicates
             links = list(dict.fromkeys(links))
 
             # Checking for the Right Links
             for link in links:
-
-                # Requesting the Link's page
-                source = requests.get(link).text
-                soup = BeautifulSoup(source, "html.parser")
-
-                # Finding the name and Style of the Item
-                name = soup.find("h1", class_="protect").text
-                style = soup.find("p", class_="style protect").text
+                # Extracting data-cy-title attribute (name and style)
+                name_style = link.get("data-cy-title", "").split(" - ")
 
                 # Checking if the Item is To Buy
-                if name == self.ITEMS_NAMES[i] and style == self.ITEMS_STYLES[i]:
-
+                if len(name_style) >= 2 and name_style[0] == self.ITEMS_NAMES[i] and name_style[1] == self.ITEMS_STYLES[i]:
                     # Appending the Link to the List of To Buy
                     self.links_list.append(link)
+                    print("Appended link:", link)  # Debugging print
                     break
+
 
     # Method for Add to the Cart the founded Items
     def add_to_basket(self, page) -> None:
@@ -118,6 +132,7 @@ class Bot:
         for i in track(range(len(self.links_list)),
                        description="💸 [green]Buying the Items...[/green]"):
             page.goto(self.links_list[i])
+            print("Adding to basket:", self.links_list[i])  # Debugging print
 
             # Requesting the Item's Page
             source = requests.get(self.links_list[i]).text
@@ -145,7 +160,10 @@ class Bot:
         with self.CONSOLE.status("🖋️ [yellow]Performing the Checkout...[/yellow]"):
 
             # Going to the Checkout
-            page.click("a.button:nth-child(3)")
+            try:
+                page.click('[data-cy="mini-cart-checkout-button"]', timeout=60000)  # Increased timeout
+            except TimeoutError:
+                print("Timeout while clicking on checkout button")
 
             # Using Data to Compile the Form
             # Name, Surname, Email and Tel
@@ -174,34 +192,27 @@ class Bot:
 
 # Main Program
 if __name__ == "__main__":
-
-    # Creating the Bot Instance
     BOT = Bot()
 
-    # Create a Loop for Fastest Buying
     while True:
-
-        # Saving the Current Time
         now = datetime.now()
 
-        # Checking if the Current Time == the Time of the Drop (Buy Times)
         if str(now.hour) == BOT.HOUR and str(now.minute) == BOT.MINUTE:
+            print("Time to buy!")
 
-            # Finding the Links for the Requested Elements
             BOT.scrape()
 
-            # Using Playwright API to perform Automatic Actions
             with sync_playwright() as p:
-
-                # Creating a Browser Instance
                 browser = p.chromium.launch(headless=False)
                 page = browser.new_page()
 
-                # Adding the Requested Elements to the Cart
                 BOT.add_to_basket(page)
 
-                # Performing the Checkout
-                BOT.checkout(page)
+                try:
+                    BOT.checkout(page)
+                except TimeoutError:
+                    print("Timeout while performing checkout")  # Handle timeout
+                finally:
+                    browser.close()
 
-                # Exit the Script
                 exit()
