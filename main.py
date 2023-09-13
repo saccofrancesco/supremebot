@@ -105,7 +105,6 @@ class Bot:
 
                 browser.close()
 
-
     # Method for Add to the Cart the founded Items
     def add_to_basket(self, page) -> None:
 
@@ -113,26 +112,11 @@ class Bot:
         for i in track(range(len(self.links_list)),
                        description="💸 [green]Buying the Items...[/green]"):
             page.goto(self.links_list[i])
-            print("Adding to basket:", self.links_list[i])  # Debugging print
 
-            # Requesting the Item's Page
-            source = requests.get(self.links_list[i]).text
-            soup = BeautifulSoup(source, "html.parser")
-
-            # Checking if Elements have Multiple Sizes
-            if soup.find(
-                    "select",
-                    id="size") and soup.find(
-                    "input",
-                    type="submit"):
-
-                # Selecting the Right Size
-                page.click("#size")
-                option = page.query_selector("#size")
-                option.select_option(label=self.ITEMS_SIZES[i])
-
-                # Adding the Item to the Cart
-                page.click("input.button")
+            page.wait_for_selector("#size-7701429420236")
+            select = page.locator("#size-7701429420236")
+            select.select_option(label=f"{self.ITEMS_SIZES[i]}")
+            page.click("input[data-type='product-add']")
 
     # Method for Compiling the Checkout Form
     def checkout(self, page) -> None:
