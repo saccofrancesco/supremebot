@@ -65,66 +65,49 @@ class Bot:
         self.links_list = []
 
         # Buy Times
-        self.HOUR = "15"
-        self.MINUTE = "31"
+        self.HOUR = "23"
+        self.MINUTE = "10"
 
     # Scrape Method for Saving the URLs
     def scrape(self) -> None:
         for i in track(range(len(self.ITEMS_NAMES)),
-                    description="🔗 [blue]Extracting Items' Links...[/blue]"):
-            base_url = "https://us.supreme.com"
-            url = base_url + "/collections/" + self.ITEMS_TYPES[i]
+                       description="🔗 [blue]Extracting Items' Links...[/blue]"):
+            url = f"https://us.supreme.com/collections/{self.ITEMS_TYPES[i]}"
             print("Scraping URL:", url)  # Debugging print
-
-            title_matched = False  # Flag to indicate if matching title is found
 
             with sync_playwright() as p:
                 browser = p.chromium.launch(headless=False)
                 page = browser.new_page()
                 page.goto(url)  # Navigate to the URL
 
-                while not title_matched:
-                    # Wait for dynamic content to load (adjust the wait time as needed)
-                    page.wait_for_selector("a[data-cy-title]")
+                # Wait for dynamic content to load (adjust the wait time as needed)
+                page.wait_for_selector("a[data-cy-title]")
 
-                    # Extract the links using Playwright
-                    links = page.query_selector_all("a[data-cy-title]")
-                    links_list = [link.get_attribute("href") for link in links]
-                    print(links_list)
+                # Extract the links using Playwright
+                links = page.query_selector_all("a[data-cy-title]")
+                links_list = [link.get_attribute("href") for link in links]
 
-                    # Checking for the Right Links
-                    for link in links_list:
-                        complete_link = base_url + link
-                        page.goto(complete_link)  # Navigate to the link
+                # Print the extracted links for debugging
+                print("Extracted links:", links_list)
 
-                        # Wait for the product info to load (adjust the wait time as needed)
-                        page.wait_for_selector("span.collection-product-info--title")
+                # Checking for the Right Links
+                for link in links_list:
+                    complete_link = f"https://us.supreme.com{link}"
+                    page.goto(complete_link)  # Navigate to the link
 
-                        name_style_element = page.query_selector("span.collection-product-info--title")
+                    # Wait for the product info to load (adjust the wait time as needed)
+                    page.wait_for_selector("span.collection-product-info--title")
 
-                        if name_style_element:
-                            name_style = name_style_element.inner_text().strip().split(" - ")
-                            print(f"Checking title match: Expected: {self.ITEMS_NAMES[i]} - {self.ITEMS_STYLES[i]}, Actual: {name_style}")
-                            if len(name_style) >= 2 and name_style[0] == self.ITEMS_NAMES[i] and name_style[1] == self.ITEMS_STYLES[i]:
-                                self.links_list.append(complete_link)
-                                print("Appended link:", complete_link)  # Debugging print
-                                title_matched = True  # Set the flag to exit the loop
-                                break
-
-                    if not title_matched:
-                        # Find and click the "Next" button
-                        next_button = page.query_selector('.js-next-product-link')
-                        if next_button:
-                            print("Clicking Next button")  # Debugging print
-                            next_button.click()
-                            # Wait for the page to load after clicking the "Next" button
-                            page.wait_for_load_state("networkidle")
-                        else:
-                            print("Next button not found, exiting loop")  # Debugging print
+                    if name_style_element := page.query_selector(
+                        "span.collection-product-info--title"
+                    ):
+                        name_style = name_style_element.inner_text().strip().split(" - ")
+                        if len(name_style) >= 2 and name_style[0] == self.ITEMS_NAMES[i] and name_style[1] == self.ITEMS_STYLES[i]:
+                            self.links_list.append(complete_link)
+                            print("Appended link:", complete_link)  # Debugging print
                             break
 
                 browser.close()
-
 
             # Removing the Duplicates
             links = list(dict.fromkeys(links))
@@ -140,6 +123,7 @@ class Bot:
                     self.links_list.append(link)
                     print("Appended link:", link)  # Debugging print
                     break
+
 
     # Method for Add to the Cart the founded Items
     def add_to_basket(self, page) -> None:
