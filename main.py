@@ -37,7 +37,7 @@ class Bot:
                 self.ITEMS_NAMES.append(item["Item"])
                 self.ITEMS_STYLES.append(item["Style"])
                 self.ITEMS_SIZES.append(item["Size"])
-                self.ITEMS_TYPES.append(item["Type"])
+                self.ITEMS_TYPES.append(item["Type"].replace("/", "-")) # Preventing tops/sweaters to make error in the link
 
         # Opening the Data File
         with open("Data.json", "r") as d:
@@ -73,7 +73,6 @@ class Bot:
         for i in track(range(len(self.ITEMS_NAMES)),
                        description="🔗 [blue]Extracting Items' Links...[/blue]"):
             url = f"https://us.supreme.com/collections/{self.ITEMS_TYPES[i]}"
-            print("Scraping URL:", url)  # Debugging print
 
             with sync_playwright() as p:
                 browser = p.chromium.launch(headless=False)
@@ -87,42 +86,24 @@ class Bot:
                 links = page.query_selector_all("a[data-cy-title]")
                 links_list = [link.get_attribute("href") for link in links]
 
-                # Print the extracted links for debugging
-                print("Extracted links:", links_list)
-
                 # Checking for the Right Links
                 for link in links_list:
                     complete_link = f"https://us.supreme.com{link}"
                     page.goto(complete_link)  # Navigate to the link
 
                     # Wait for the product info to load (adjust the wait time as needed)
-                    page.wait_for_selector("span.collection-product-info--title")
+                    page.wait_for_selector("#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > h1")
 
-                    if name_style_element := page.query_selector(
-                        "span.collection-product-info--title"
-                    ):
-                        name_style = name_style_element.inner_text().strip().split(" - ")
-                        if len(name_style) >= 2 and name_style[0] == self.ITEMS_NAMES[i] and name_style[1] == self.ITEMS_STYLES[i]:
+                    if product_name := page.query_selector(
+                        "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > h1"
+                    ).inner_text():
+                        
+                        product_style = page.query_selector("#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > div.display-flex.flexWrap-wrap.bpS-bg-none.bg-white.mobile-shadow.pt-m.pb-m.bpS-p-0.flexDirection-columnReverse.bpS-flexDirection-column > div.fontWeight-bold.mb-s.display-none.bpS-display-block.js-variant").inner_text()
+                        if len(product_style) >= 2 and product_name == self.ITEMS_NAMES[i] and product_style == self.ITEMS_STYLES[i]:
                             self.links_list.append(complete_link)
-                            print("Appended link:", complete_link)  # Debugging print
                             break
 
                 browser.close()
-
-            # Removing the Duplicates
-            links = list(dict.fromkeys(links))
-
-            # Checking for the Right Links
-            for link in links:
-                # Extracting data-cy-title attribute (name and style)
-                name_style = link.get("data-cy-title", "").split(" - ")
-
-                # Checking if the Item is To Buy
-                if len(name_style) >= 2 and name_style[0] == self.ITEMS_NAMES[i] and name_style[1] == self.ITEMS_STYLES[i]:
-                    # Appending the Link to the List of To Buy
-                    self.links_list.append(link)
-                    print("Appended link:", link)  # Debugging print
-                    break
 
 
     # Method for Add to the Cart the founded Items
