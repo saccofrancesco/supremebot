@@ -1,15 +1,15 @@
 [
     {
-        "Name Surname": "Your Name and Surname",
-        "Email": "Your E-Mail",
-        "Tel": "Your Phone - Number",
-        "Address": "Your Address",
-        "City": "Your City",
-        "Postal Code": "Your Postal Code",
-        "Country": "Your Country",
-        "Card Number": "Your Credit Card Number",
-        "Expiration Month": "Your Card Expiration Month",
-        "Expiration Year": "Your Card Expiration Year",
-        "CVV": "Your Card's Verification Token"
+        "Name Surname": "Brice Kuhlman",
+        "Email": "bricekuhlman@gmail.com",
+        "Tel": "(518) 272-8188",
+        "Address": "2312 15th St",
+        "City": "Troy",
+        "Postal Code": "12180",
+        "Country": "United States",
+        "Card Number": "2014281053449894",
+        "Expiration Month": "09",
+        "Expiration Year": "2027",
+        "CVV": "751"
     }
 ]
