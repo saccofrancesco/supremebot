@@ -1,15 +1,15 @@
 [
     {
-        "Name Surname": "Brice Kuhlman",
-        "Email": "bricekuhlman@gmail.com",
-        "Tel": "(518) 272-8188",
-        "Address": "2312 15th St",
-        "City": "Troy",
-        "Postal Code": "12180",
-        "Country": "United States",
-        "Card Number": "2014281053449894",
-        "Expiration Month": "09",
-        "Expiration Year": "2027",
-        "CVV": "751"
+        "Name Surname": "placeholder(str)",
+        "Email": "placeholder(str)",
+        "Tel": "INT",
+        "Address": "Str + int",
+        "City": "placeholder(str)",
+        "Postal Code": "int",
+        "Country": "placeholder(str)",
+        "Card Number": "int",
+        "Expiration Month": "int",
+        "Expiration Year": "int",
+        "CVV": "int"
     }
 ]
