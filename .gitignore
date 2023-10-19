@@ -1,4 +1,4 @@
-/venv
+.venv
 .python-version
 .DS_store
 components/__pycache__
