@@ -108,7 +108,7 @@ def is_item_in_basket(item_name: str) -> bool:
     try:
 
         # Load existing items from the JSON file if it exists
-        with open("./config/items.json", "r") as json_file:
+        with open("./.config/items.json", "r") as json_file:
             basket: list = json.load(json_file)
     except FileNotFoundError:
 
@@ -145,7 +145,7 @@ def add_to_basket(
     try:
 
         # Load existing items from the JSON file if it exists
-        with open("./config/items.json", "r") as json_file:
+        with open("./.config/items.json", "r") as json_file:
             basket: list = json.load(json_file)
     except FileNotFoundError:
 
@@ -156,7 +156,7 @@ def add_to_basket(
     basket.append(item_object)
 
     # Write the updated basket to the JSON file
-    with open("./config/items.json", "w") as json_file:
+    with open("./.config/items.json", "w") as json_file:
         json.dump(basket, json_file, indent=4)
 
     # Showing a succes message
@@ -167,7 +167,7 @@ def remove_from_basket(item_name: str) -> bool:
     try:
 
         # Load existing items from the JSON file if it exists
-        with open("./config/items.json", "r") as json_file:
+        with open("./.config/items.json", "r") as json_file:
             basket: list = json.load(json_file)
     except FileNotFoundError:
 
@@ -187,7 +187,7 @@ def remove_from_basket(item_name: str) -> bool:
     if item_deleted:
 
         # Write the updated basket to the JSON file
-        with open("./config/items.json", "w") as json_file:
+        with open("./.config/items.json", "w") as json_file:
             json.dump(basket, json_file, indent=4)
 
     # Showing a succes message
@@ -208,7 +208,7 @@ def is_json_file_empty(file_path: str) -> bool:
 # Util function to get infos about an item in the basket
 def get_info_for_item(item_name: str, param: str):
     try:
-        with open("./config/items.json", 'r') as json_file:
+        with open("./.config/items.json", 'r') as json_file:
             data: str = json.load(json_file)
             for item in data:
                 if "name" in item:

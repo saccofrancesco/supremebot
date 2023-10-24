@@ -9,11 +9,11 @@ class BasketUI:
     def __init__(self) -> None:
 
         # Showing the basket content if not empty
-        if not is_json_file_empty("./config/items.json"):
+        if not is_json_file_empty("./.config/items.json"):
             self.is_empty = False
             colored_header(":page_with_curl: Selected Products", "")
             add_vertical_space(1)
-            with open("./config/items.json", "r") as file:
+            with open("./.config/items.json", "r") as file:
                 data: str = json.load(file)
             total: int = 0
             for item in data:
