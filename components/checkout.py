@@ -23,6 +23,7 @@ class CheckoutUI:
             label_visibility="collapsed",
             placeholder="Email")
         st.subheader("Billing / Shipping information")
+
         from components.utils import country_list
         self.country: str = st.selectbox(
             " ", country_list(), label_visibility="collapsed", 
@@ -47,6 +48,7 @@ class CheckoutUI:
             self.city: str = city_col.text_input(
                 " ", label_visibility="collapsed", placeholder="City",
                 value=get_pay_prop(pay_config, "city") if pay_config else "")
+            
             from components.utils import country_zones
             self.zone: str = zone_col.selectbox(
                 " ", country_zones(self.country), label_visibility="collapsed",
@@ -70,10 +72,12 @@ class CheckoutUI:
             " ", label_visibility="collapsed", placeholder="Card Number",
             value=get_pay_prop(pay_config, "card_number") if pay_config else "")
         expiration_year_col, expiration_month_col, cvv_col = st.columns(3)
+
         from components.utils import get_card_exp_years
         self.expiration_year: str = expiration_year_col.selectbox(
             " ", get_card_exp_years(), label_visibility="collapsed", placeholder="Exp. year",
             index=get_card_exp_years().index(get_pay_prop(pay_config, "expiration_year")) if pay_config else 0)
+        
         from components.utils import months_in_numbers
         self.expiration_month: str = expiration_month_col.selectbox(
             " ", months_in_numbers(int(self.expiration_year)),
