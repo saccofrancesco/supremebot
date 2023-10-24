@@ -1,18 +1,15 @@
 [
     {
-        "email": "francescosacco.fs.fs@gmail.com",
-        "country": "Italy",
-        "first_name": "Francesco",
-        "last_name": "Sacco",
-        "address": "Via Vittime di Str\u00e0, 42/a",
-        "postal_code": "29122",
-        "city": "Piacenza",
-        "phone": "3207562145",
-        "card_number": "4242424242424242",
-        "expiration_month": "4",
-        "expiration_year": "2024",
-        "cvv": "765",
-        "name_on_card": "Sacco Francesco",
-        "zone": "Piacenza"
+        "Name Surname": "placeholder(str)",
+        "Email": "placeholder(str)",
+        "Tel": "INT",
+        "Address": "Str + int",
+        "City": "placeholder(str)",
+        "Postal Code": "int",
+        "Country": "placeholder(str)",
+        "Card Number": "int",
+        "Expiration Month": "int",
+        "Expiration Year": "int",
+        "CVV": "int"
     }
 ]
