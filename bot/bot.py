@@ -138,7 +138,3 @@ class Bot:
             pass
         page.fill("input[name='postalCode']", self.POSTAL_CODE)
         page.fill("input[name='phone']", self.PHONE)
-        page.fill("input[name='number']", self. CARD_NUMBER)
-        page.fill("input[name='expiry']", f"{self.MONTH_EXP} / {self.YEAR_EXP}")
-        page.fill("input[name='verification_value']", self.CVV)
-        page.fill("input[name='name']", self.NAME_ON_CARD)
