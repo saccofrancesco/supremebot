@@ -1,5 +1,4 @@
 # Importing Libraries
-from rich.console import Console
 from playwright.sync_api import sync_playwright, TimeoutError
 import json
 import playwright
@@ -9,9 +8,6 @@ class Bot:
 
     # Constructor
     def __init__(self) -> None:
-
-        # Creating a Console Instance
-        self.CONSOLE: Console = Console()
 
         # Opening the Items File
         with open("./config/items.json", "r") as i:
