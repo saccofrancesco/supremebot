@@ -2,7 +2,6 @@
 import streamlit as st
 from bot.bot import Bot
 from playwright.sync_api import sync_playwright, TimeoutError
-from sys import exit
 
 class BuyButtonUI:
     def __init__(self) -> None:
