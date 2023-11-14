@@ -54,7 +54,7 @@ six==1.16.0
 smmap==5.0.1
 soupsieve==2.5
 st-annotated-text==4.0.1
-streamlit==1.28.1
+streamlit==1.28.2
 streamlit-camera-input-live==0.2.0
 streamlit-card==0.0.61
 streamlit-embedcode==0.1.2
@@ -71,6 +71,6 @@ tornado==6.3.3
 typing_extensions==4.8.0
 tzdata==2023.3
 tzlocal==5.2
-urllib3==2.0.7
+urllib3==2.1.0
 validators==0.22.0
 zipp==3.17.0
