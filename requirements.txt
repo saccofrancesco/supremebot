@@ -40,7 +40,7 @@ protobuf==4.25.1
 pyarrow==14.0.1
 pydeck==0.8.1b0
 pyee==11.0.1
-Pygments==2.16.1
+Pygments==2.17.1
 pymdown-extensions==10.4
 pyparsing==3.1.1
 python-dateutil==2.8.2
