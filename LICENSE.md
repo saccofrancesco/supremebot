@@ -1,4 +1,3 @@
-Can I use this:
 Attribution-NonCommercial-ShareAlike 4.0 International
 
 =======================================================================
