@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="img/icon.png" alt="Markdownify" width="200">
+  <img src="img/icon.png" alt="Supremebot" width="400">
   <h1>Supremebot</h1>
 </div>
 

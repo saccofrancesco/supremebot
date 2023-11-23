@@ -11,7 +11,7 @@ class BasketUI:
         # Showing the basket content if not empty
         if not is_json_file_empty("./config/items.json"):
             self.is_empty = False
-            colored_header(":page_with_curl: Selected Products", "")
+            colored_header("Selected Products", "")
             add_vertical_space(1)
             with open("./config/items.json", "r") as file:
                 data: str = json.load(file)
