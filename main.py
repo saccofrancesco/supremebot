@@ -12,7 +12,7 @@ from components.download_btn import DownloadButtonUI
 if __name__ == "__main__":
 
     # Configuration
-    st.set_page_config("SupremeBot", "img/favicon.png", "wide")
+    st.set_page_config("SupremeBot", "img/icon.png", "wide")
 
     # Injecting CSS for image styling
     st.markdown(
