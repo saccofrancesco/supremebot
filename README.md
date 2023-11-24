@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="img/icon.png" alt="Supremebot" width="400">
+  <img src="img/icon.png" alt="Supremebot" width="350">
   <h1>Supremebot</h1>
 </div>
 
@@ -68,8 +68,8 @@ This software uses the following open source packages:
 - [Beautifulsoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
 ## You may also like...
-- [Pomolectron](https://github.com/amitmerchant1990/pomolectron) - A pomodoro app
-- [Correo](https://github.com/amitmerchant1990/correo) - A menubar/taskbar Gmail App for Windows and macOS
+- [crossword-solver](https://github.com/TonicStark/crosswords-solver) built on top of [Streamlit](https://streamlit.io/) and [Tesseract](https://github.com/tesseract-ocr/tesseract);
+- [studymate](https://github.com/TonicStark/studymate) built on top of [Streamlit](https://streamlit.io/), using [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf).
 
 ## License
 Attribution - NonCommercial - ShareAlike 4.0 International
