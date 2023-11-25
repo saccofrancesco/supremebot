@@ -8,7 +8,7 @@ class CheckoutUI:
     def __init__(self) -> None:
 
         # Requesting user personal infos
-        colored_header("Checkout", "")
+        colored_header("Checkout", "", "red-80")
         add_vertical_space(1)
 
         # Option to load a pay config saved from previus buys

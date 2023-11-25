@@ -11,7 +11,7 @@ class ItemUI:
 
         if category != "None":
             items: dict = fetch_items(dates, category)
-            colored_header(f"{category} Products", "")
+            colored_header(f"{category} Products", "", "red-80")
             add_vertical_space(1)
 
             # For each item, show the product card

@@ -15,7 +15,7 @@ class DropDatesUI:
         drop_dates: list = get_drop_dates()
 
         # Input for the user to select a valid Drop Date
-        colored_header("Select a Drop Date", "")
+        colored_header("Select a Drop Date", "", "red-80")
         add_vertical_space(1)
         self.selected_date: str = st.selectbox(
             " ", drop_dates, label_visibility="collapsed")

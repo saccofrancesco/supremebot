@@ -8,7 +8,7 @@ class CategoriesUI:
     def __init__(self) -> None:
 
         # Input for the user to select item types
-        colored_header("Select a Category", "")
+        colored_header("Select a Category", "", "red-80")
         add_vertical_space(1)
         self.items_category: str = st.radio(" ",
                                             ["None",
