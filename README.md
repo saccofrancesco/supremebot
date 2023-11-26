@@ -18,7 +18,9 @@
   <a href="#license">License</a>
 </p>
 
-![screenshot](img/usage.gif)
+<div align="center">
+  <img src="./img/usage.gif">
+</div>
 
 ## Key Features
 * Web Interface - use and navigate easly
