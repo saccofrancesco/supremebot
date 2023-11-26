@@ -53,6 +53,9 @@ $ cd electron-markdownify
 # Install dependencies
 $ pip install -r requirements.txt
 
+# Install playwright's browsers
+$ playwright install
+
 # Run the app
 $ streamlit run main.py
 ```
@@ -71,7 +74,7 @@ This software uses the following open source packages:
 
 ## You may also like...
 - [crossword-solver](https://github.com/TonicStark/crosswords-solver) built on top of [Streamlit](https://streamlit.io/) and [Tesseract](https://github.com/tesseract-ocr/tesseract);
-- [studymate](https://github.com/TonicStark/studymate) built on top of [Streamlit](https://streamlit.io/), using [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf).
+- [studymate](https://github.com/TonicStark/studymate) built on top of [Streamlit](https://streamlit.io/) and [Spacy](https://spacy.io/), using [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf).
 
 ## License
 Attribution - NonCommercial - ShareAlike 4.0 International
