@@ -20,5 +20,6 @@ class CategoriesUI:
                                              "Tops-Sweaters",
                                              "Pants",
                                              "Skate",
+                                             "Bags",
                                              "Shirts"],
                                             label_visibility="collapsed")
