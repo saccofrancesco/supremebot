@@ -139,11 +139,11 @@ class Bot:
             page.wait_for_selector("select[name='zone']")
             options = page.locator("select[name='zone']")
             options.select_option(value="JP-13")  # 例として "JP-13" を選択
+            print("wait for 送料")
+            page.wait_for_timeout(1000)
         except Exception as e:
             print(e)
 
-        print("wait for 送料")
-        page.wait_for_timeout(1000)
        # カード番号のiframeを特定して、iframe内の要素にアクセスして値を入力
         page.frame_locator(
             "iframe[src*='checkout.shopifycs.com/number']").locator("input[name='number']").fill(self.CARD_NUMBER)
@@ -159,10 +159,8 @@ class Bot:
 
         # チェックボックスを特定してチェックを入れる
         # チェックボックスのラベルテキストを使って要素を特定してチェックを入れる
-        page.wait_for_timeout(500)
-        selector = "input[type='checkbox']"
-        page.wait_for_selector(selector, state="visible")
-        page.click(selector)
+        page.evaluate(
+            "() => document.querySelectorAll('input[type=checkbox]')[1].click()")
 
         # '購入する' ボタンをクリック
         page.click("button[type='submit']")
