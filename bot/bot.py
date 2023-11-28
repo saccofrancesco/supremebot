@@ -142,6 +142,8 @@ class Bot:
         except Exception as e:
             print(e)
 
+        print("wait for 送料")
+        page.wait_for_timeout(1000)
        # カード番号のiframeを特定して、iframe内の要素にアクセスして値を入力
         page.frame_locator(
             "iframe[src*='checkout.shopifycs.com/number']").locator("input[name='number']").fill(self.CARD_NUMBER)
@@ -157,11 +159,10 @@ class Bot:
 
         # チェックボックスを特定してチェックを入れる
         # チェックボックスのラベルテキストを使って要素を特定してチェックを入れる
+        page.wait_for_timeout(500)
         selector = "input[type='checkbox']"
         page.wait_for_selector(selector, state="visible")
         page.click(selector)
-
-        print("4\n")
 
         # '購入する' ボタンをクリック
         page.click("button[type='submit']")
