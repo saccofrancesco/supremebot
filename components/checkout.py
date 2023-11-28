@@ -35,7 +35,7 @@ class CheckoutUI:
             " ", label_visibility="collapsed", placeholder="Name",
             value=get_pay_prop(pay_config, "first_name") if pay_config else "")
         self.surname: str = last_name_col.text_input(
-            " ", label_visibility="collapsed", placeholder="姓",
+            " ", label_visibility="collapsed", placeholder="Surname",
             value=get_pay_prop(pay_config, "last_name") if pay_config else "")
         self.address: str = st.text_input(
             " ", label_visibility="collapsed", placeholder="Address",
