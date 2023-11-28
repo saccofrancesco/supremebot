@@ -104,6 +104,10 @@ class Bot:
         for i in range(len(self.links_list)):
             page.goto(self.links_list[i])
 
+            if self.ITEMS_TYPES[i] == "bags":
+                page.click("input[data-type='product-add']")
+                continue
+
             page.wait_for_selector("select[data-cy='size-selector']")
             options = page.locator("select[data-cy='size-selector']")
             options.select_option(label=f"{self.ITEMS_SIZES[i]}")
