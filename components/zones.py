@@ -16,6 +16,7 @@ NATIONS = {
     "Iceland": "IS",
     "Ireland": "IE",
     "Italy": "IT",
+    "Japan": "JP",
     "Latvia": "LV",
     "Lithuania": "LT",
     "Luxembourg": "LU",

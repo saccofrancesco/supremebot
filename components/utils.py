@@ -1,6 +1,7 @@
 # Importing libraries
 import streamlit as st
 import requests
+import os
 from bs4 import BeautifulSoup
 import datetime
 import re
@@ -10,6 +11,8 @@ from components.checkout import CheckoutUI
 from io import StringIO
 
 # Util function to get all the drop dates for the current release
+
+
 @st.cache_data
 def get_drop_dates() -> list:
 
@@ -28,6 +31,8 @@ def get_drop_dates() -> list:
     return dates
 
 # Util function to convert a date to a certain format
+
+
 @st.cache_data
 def convert_date(date: str) -> str:
 
@@ -41,6 +46,8 @@ def convert_date(date: str) -> str:
     return formatted_date
 
 # Util function to fetch all information based on Drop Date and Item Category
+
+
 def fetch_items(drop_date: str, item_category: str) -> dict:
 
     # Coverting data to url format
@@ -104,6 +111,8 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     return items_dict
 
 # Util function to check if an item is already
+
+
 def is_item_in_basket(item_name: str) -> bool:
     try:
 
@@ -124,6 +133,8 @@ def is_item_in_basket(item_name: str) -> bool:
     return False
 
 # Util function to add an item to the basket (items.json)
+
+
 def add_to_basket(
         item_image: str,
         item_price: int,
@@ -163,6 +174,8 @@ def add_to_basket(
     st.toast("Item added to basket", icon="✅")
 
 # Util function to delete an item
+
+
 def remove_from_basket(item_name: str) -> bool:
     try:
 
@@ -194,6 +207,8 @@ def remove_from_basket(item_name: str) -> bool:
     st.toast("Item removed from basket", icon="❌")
 
 # Util function to check if the basket is empty
+
+
 def is_json_file_empty(file_path: str) -> bool:
     try:
         with open(file_path, 'r') as file:
@@ -206,6 +221,8 @@ def is_json_file_empty(file_path: str) -> bool:
         return True  # Error occurred or file doesn't exist
 
 # Util function to get infos about an item in the basket
+
+
 def get_info_for_item(item_name: str, param: str):
     try:
         with open("./config/items.json", 'r') as json_file:
@@ -221,39 +238,47 @@ def get_info_for_item(item_name: str, param: str):
         return "Invalid JSON data"
 
 # Util function to list all the available country
+
+
 @st.cache_data
 def country_list() -> list:
 
     return [nation for nation in NATIONS.keys()]
 
 # Util function to get a selected country and retur the list of his zones
+
+
 @st.cache_data
 def country_zones(country_name: str) -> list:
 
     return [zone for zone in ZONES[country_name].keys()]
 
 # Util function to save payments data
+
+
 def save_pay_data(form: CheckoutUI) -> dict:
 
     # Creating a pay data dict
-        return {
-            "email": form.email,
-            "country": form.country,
-            "first_name": form.name,
-            "last_name": form.surname,
-            "address": form.address,
-            "postal_code": form.postal_code,
-            "city": form.city,
-            "phone": form.phone,
-            "card_number" : form.card_number,
-            "expiration_month": form.expiration_month,
-            "expiration_year": form.expiration_year,
-            "cvv": form.cvv,
-            "name_on_card": form.name_on_card,
-            "zone": form.zone if hasattr(form, "zone") else "None"
-        }
+    return {
+        "email": form.email,
+        "country": form.country,
+        "first_name": form.name,
+        "last_name": form.surname,
+        "address": form.address,
+        "postal_code": form.postal_code,
+        "city": form.city,
+        "phone": form.phone,
+        "card_number": form.card_number,
+        "expiration_month": form.expiration_month,
+        "expiration_year": form.expiration_year,
+        "cvv": form.cvv,
+        "name_on_card": form.name_on_card,
+        "zone": form.zone if hasattr(form, "zone") else "None"
+    }
 
 # Util function to get the next 5 years from current year
+
+
 @st.cache_data
 def get_card_exp_years() -> list:
     current_year: datetime.datetime = datetime.datetime.now().year
@@ -261,6 +286,8 @@ def get_card_exp_years() -> list:
     return next_5_years
 
 # Util function to get month in a list based on current day
+
+
 def months_in_numbers(selected_year: str):
     current_year: datetime.datetime = datetime.datetime.now().year
     current_month: datetime.datetime = datetime.datetime.now().month
@@ -275,6 +302,8 @@ def months_in_numbers(selected_year: str):
     return months
 
 # Util function to get pay props from pay.config file
+
+
 def get_pay_prop(file, prop: str) -> str:
 
     # Coverting the uploaded file to a readable format

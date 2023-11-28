@@ -4,6 +4,7 @@ from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
 from components.zones import ZONES
 
+
 class CheckoutUI:
     def __init__(self) -> None:
 
@@ -13,7 +14,8 @@ class CheckoutUI:
 
         # Option to load a pay config saved from previus buys
         st.subheader("Select a Pay configuration file")
-        pay_config = st.file_uploader(" ", label_visibility="collapsed", type="JSON")
+        pay_config = st.file_uploader(
+            " ", label_visibility="collapsed", type="JSON")
 
         st.subheader("Contact")
         from components.utils import get_pay_prop
@@ -26,14 +28,14 @@ class CheckoutUI:
 
         from components.utils import country_list
         self.country: str = st.selectbox(
-            " ", country_list(), label_visibility="collapsed", 
+            " ", country_list(), label_visibility="collapsed",
             index=country_list().index(get_pay_prop(pay_config, "country")) if pay_config else 0)
         first_name_col, last_name_col = st.columns(2)
         self.name: str = first_name_col.text_input(
             " ", label_visibility="collapsed", placeholder="Name",
             value=get_pay_prop(pay_config, "first_name") if pay_config else "")
         self.surname: str = last_name_col.text_input(
-            " ", label_visibility="collapsed", placeholder="Surname",
+            " ", label_visibility="collapsed", placeholder="姓",
             value=get_pay_prop(pay_config, "last_name") if pay_config else "")
         self.address: str = st.text_input(
             " ", label_visibility="collapsed", placeholder="Address",
@@ -48,7 +50,7 @@ class CheckoutUI:
             self.city: str = city_col.text_input(
                 " ", label_visibility="collapsed", placeholder="City",
                 value=get_pay_prop(pay_config, "city") if pay_config else "")
-            
+
             from components.utils import country_zones
             self.zone: str = zone_col.selectbox(
                 " ", country_zones(self.country), label_visibility="collapsed",
@@ -77,11 +79,12 @@ class CheckoutUI:
         self.expiration_year: str = expiration_year_col.selectbox(
             " ", get_card_exp_years(), label_visibility="collapsed", placeholder="Exp. year",
             index=get_card_exp_years().index(get_pay_prop(pay_config, "expiration_year")) if pay_config else 0)
-        
+
         from components.utils import months_in_numbers
         self.expiration_month: str = expiration_month_col.selectbox(
             " ", months_in_numbers(int(self.expiration_year)),
-            index=months_in_numbers(int(self.expiration_year)).index(get_pay_prop(pay_config, "expiration_month")) if pay_config else 0,
+            index=months_in_numbers(int(self.expiration_year)).index(
+                get_pay_prop(pay_config, "expiration_month")) if pay_config else 0,
             label_visibility="collapsed",
             placeholder="Exp. month")
         self.cvv: int = cvv_col.text_input(
