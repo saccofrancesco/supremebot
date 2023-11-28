@@ -128,17 +128,40 @@ class Bot:
 
         # Using Data to Compile the Form
         page.fill("input[id='email']", self.EMAIL)
-        options = page.locator("select[name='countryCode']")
-        options.select_option(label=f"{self.COUNTRY}")
         page.fill("input[name='firstName']", self.FIRST_NAME)
         page.fill("input[name='lastName']", self.LAST_NAME)
+        page.fill("input[id='postalCode']", self.POSTAL_CODE)
         page.fill("input[name='address1']", self.ADDRESS)
+        page.fill("input[name='address2']", "建物番号")
         page.fill("input[name='city']", self.CITY)
+        page.fill("input[name='phone']", self.PHONE)
         try:
             page.wait_for_selector("select[name='zone']")
             options = page.locator("select[name='zone']")
-            options.select_option(label=f"{self.ZONE}")
-        except Exception:
-            pass
-        page.fill("input[name='postalCode']", self.POSTAL_CODE)
-        page.fill("input[name='phone']", self.PHONE)
+            options.select_option(value="JP-13")  # 例として "JP-13" を選択
+        except Exception as e:
+            print(e)
+
+       # カード番号のiframeを特定して、iframe内の要素にアクセスして値を入力
+        page.frame_locator(
+            "iframe[src*='checkout.shopifycs.com/number']").locator("input[name='number']").fill(self.CARD_NUMBER)
+        # 有効期限のiframeを特定して、iframe内の要素にアクセスして値を入力
+        page.frame_locator("iframe[src*='checkout.shopifycs.com/expiry']").locator(
+            "input[name='expiry']").fill(f"{self.MONTH_EXP}/{self.YEAR_EXP}")
+        # CVV番号のiframeを特定して、iframe内の要素にアクセスして値を入力
+        page.frame_locator("iframe[src*='checkout.shopifycs.com/verification_value']").locator(
+            "input[name='verification_value']").fill(self.CVV)
+        # カード名義人の名前のiframeを特定して、iframe内の要素にアクセスして値を入力
+        page.frame_locator(
+            "iframe[src*='checkout.shopifycs.com/name']").locator("input[name='name']").fill(self.NAME_ON_CARD)
+
+        # チェックボックスを特定してチェックを入れる
+        # チェックボックスのラベルテキストを使って要素を特定してチェックを入れる
+        selector = "input[type='checkbox']"
+        page.wait_for_selector(selector, state="visible")
+        page.click(selector)
+
+        print("4\n")
+
+        # '購入する' ボタンをクリック
+        page.click("button[type='submit']")
