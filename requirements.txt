@@ -1,4 +1,4 @@
-altair==5.1.2
+altair==5.2.0
 attrs==23.1.0
 beautifulsoup4==4.12.2
 blinker==1.7.0
