@@ -65,43 +65,74 @@ class Bot:
         self.links_list: list = []
 
     # Scrape Method for Saving the URLs
+    # def scrape(self) -> None:
+    #     for i in range(len(self.ITEMS_NAMES)):
+    #         url: str = f"https://jp.supreme.com/collections/{self.ITEMS_TYPES[i]}"
+    #         print(f"Processing {self.ITEMS_NAMES[i]}...")
+
+    #         with sync_playwright() as p:
+    #             browser: playwright.sync_api._generated.Browser = p.chromium.launch(
+    #                 headless=True, args=["--no-images"])
+    #             page: playwright.sync_api._generated.Browser = browser.new_page()
+    #             page.goto(url)  # Navigate to the URL
+
+    #             # Wait for dynamic content to load (adjust the wait time as needed)
+    #             page.wait_for_selector("a[data-cy-title]")
+
+    #             # Extract the links using Playwright
+    #             links: list = page.query_selector_all("a[data-cy-title]")
+    #             links_list: list = [
+    #                 link.get_attribute("href") for link in links]
+
+    #             # Checking for the Right Links
+    #             for link in links_list:
+    #                 complete_link: str = f"https://jp.supreme.com{link}"
+    #                 page.goto(complete_link)  # Navigate to the link
+
+    #                 # Wait for the product info to load (adjust the wait time as needed)
+    #                 page.wait_for_selector(
+    #                     "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > h1")
+
+    #                 if product_name := page.query_selector(
+    #                     "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > h1"
+    #                 ).inner_text():
+
+    #                     product_style: str = page.query_selector(
+    #                         "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > div.display-flex.flexWrap-wrap.bpS-bg-none.bg-white.mobile-shadow.pt-m.pb-m.bpS-p-0.flexDirection-columnReverse.bpS-flexDirection-column > div.fontWeight-bold.mb-s.display-none.bpS-display-block.js-variant").inner_text()
+    #                     if len(product_style) >= 2 and product_name == self.ITEMS_NAMES[i] and product_style == self.ITEMS_STYLES[i]:
+    #                         self.links_list.append(complete_link)
+    #                         break
+
+    #             browser.close()
+
     def scrape(self) -> None:
         for i in range(len(self.ITEMS_NAMES)):
             url: str = f"https://jp.supreme.com/collections/{self.ITEMS_TYPES[i]}"
             print(f"Processing {self.ITEMS_NAMES[i]}...")
 
             with sync_playwright() as p:
-                browser: playwright.sync_api._generated.Browser = p.chromium.launch(
-                    headless=True, args=["--no-images"])
-                page: playwright.sync_api._generated.Browser = browser.new_page()
-                page.goto(url)  # Navigate to the URL
+                browser = p.chromium.launch(headless=True)
+                page = browser.new_page()
 
-                # Wait for dynamic content to load (adjust the wait time as needed)
-                page.wait_for_selector("a[data-cy-title]")
+                # ページの読み込みレベルを調整
+                page.goto(url, wait_until="domcontentloaded")
 
-                # Extract the links using Playwright
-                links: list = page.query_selector_all("a[data-cy-title]")
-                links_list: list = [
-                    link.get_attribute("href") for link in links]
+                # 商品一覧から必要な情報を収集
+                product_elements = page.query_selector_all(
+                    "li.collection-product-item")
+                for element in product_elements:
+                    # 売り切れや非表示のアイテムをスキップ
+                    if element.get_attribute("data-available") == "false":
+                        continue
 
-                # Checking for the Right Links
-                for link in links_list:
-                    complete_link: str = f"https://jp.supreme.com{link}"
-                    page.goto(complete_link)  # Navigate to the link
-
-                    # Wait for the product info to load (adjust the wait time as needed)
-                    page.wait_for_selector(
-                        "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > h1")
-
-                    if product_name := page.query_selector(
-                        "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > h1"
-                    ).inner_text():
-
-                        product_style: str = page.query_selector(
-                            "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > div.display-flex.flexWrap-wrap.bpS-bg-none.bg-white.mobile-shadow.pt-m.pb-m.bpS-p-0.flexDirection-columnReverse.bpS-flexDirection-column > div.fontWeight-bold.mb-s.display-none.bpS-display-block.js-variant").inner_text()
-                        if len(product_style) >= 2 and product_name == self.ITEMS_NAMES[i] and product_style == self.ITEMS_STYLES[i]:
-                            self.links_list.append(complete_link)
-                            break
+                    product_name = element.query_selector(
+                        "span.collection-product-info--title").inner_text()
+                    if product_name == self.ITEMS_NAMES[i]:
+                        product_link = element.query_selector(
+                            "a[data-cy-title]").get_attribute("href")
+                        complete_link = f"https://jp.supreme.com{product_link}"
+                        self.links_list.append(complete_link)
+                        break
 
                 browser.close()
 
