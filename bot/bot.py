@@ -68,6 +68,7 @@ class Bot:
     def scrape(self) -> None:
         for i in range(len(self.ITEMS_NAMES)):
             url: str = f"https://jp.supreme.com/collections/{self.ITEMS_TYPES[i]}"
+            print(f"Processing {self.ITEMS_NAMES[i]}...")
 
             with sync_playwright() as p:
                 browser: playwright.sync_api._generated.Browser = p.chromium.launch(
@@ -144,7 +145,7 @@ class Bot:
             page.wait_for_selector("select[name='zone']")
             options = page.locator("select[name='zone']")
             options.select_option(value="JP-13")  # 例として "JP-13" を選択
-            page.wait_for_timeout(1000)
+            page.wait_for_timeout(1500)  # 配送情報を待機
         except Exception as e:
             print(e)
 
