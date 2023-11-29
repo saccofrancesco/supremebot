@@ -72,9 +72,10 @@ class Bot:
 
             with sync_playwright() as p:
                 browser: playwright.sync_api._generated.Browser = p.chromium.launch(
-                    headless=True)
+                    headless=True, args=["--no-images"])
                 page: playwright.sync_api._generated.Browser = browser.new_page()
                 page.goto(url)  # Navigate to the URL
+                print("no img")
 
                 # Wait for dynamic content to load (adjust the wait time as needed)
                 page.wait_for_selector("a[data-cy-title]")
