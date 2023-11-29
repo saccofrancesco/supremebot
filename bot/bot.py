@@ -75,7 +75,6 @@ class Bot:
                     headless=True, args=["--no-images"])
                 page: playwright.sync_api._generated.Browser = browser.new_page()
                 page.goto(url)  # Navigate to the URL
-                print("no img")
 
                 # Wait for dynamic content to load (adjust the wait time as needed)
                 page.wait_for_selector("a[data-cy-title]")
@@ -107,6 +106,7 @@ class Bot:
                 browser.close()
 
     # Method for Add to the Cart the founded Items
+
     def add_to_basket(self, page) -> None:
 
         # Looping the Element's to Buy List
@@ -162,7 +162,8 @@ class Bot:
         # カード名義人の名前のiframeを特定して、iframe内の要素にアクセスして値を入力
         page.frame_locator(
             "iframe[src*='checkout.shopifycs.com/name']").locator("input[name='name']").fill(self.NAME_ON_CARD)
-
+        # 入力されないことがあるので改め入力
+        page.fill("input[name='firstName']", self.FIRST_NAME)
         # チェックボックスを特定してチェックを入れる
         # チェックボックスのラベルテキストを使って要素を特定してチェックを入れる
         page.evaluate(
