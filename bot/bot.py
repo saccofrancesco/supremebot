@@ -110,13 +110,18 @@ class Bot:
         # Looping the Element's to Buy List
         for i in range(len(self.links_list)):
             page.goto(self.links_list[i])
-
+            if self.ITEMS_TYPES[i] == "bags":
+                page.click("input[data-type='product-add']")
+                page.wait_for_timeout(1000)
+                continue
             page.wait_for_selector("select[data-cy='size-selector']")
             options = page.locator("select[data-cy='size-selector']")
             options.select_option(label=f"{self.ITEMS_SIZES[i]}")
             page.click("input[data-type='product-add']")
+            page.wait_for_timeout(1000)
 
     # Method for Compiling the Checkout Form
+
     def checkout(self, page) -> None:
 
         # Going to the Checkout
@@ -139,7 +144,6 @@ class Bot:
             page.wait_for_selector("select[name='zone']")
             options = page.locator("select[name='zone']")
             options.select_option(value="JP-13")  # 例として "JP-13" を選択
-            print("wait for 送料")
             page.wait_for_timeout(1000)
         except Exception as e:
             print(e)

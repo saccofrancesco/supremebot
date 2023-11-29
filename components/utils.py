@@ -68,6 +68,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
         "Jackets": "jackets",
         "Tops-Sweaters": "tops-sweaters",
         "Pants": "pants",
+        "Bags": "bags",
         "Skate": "skate",
         "Shirts": "shirts"
     }
