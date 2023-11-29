@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import datetime
 import re
 import json
-from components.zones import *
+from components.prefectures import *
 from components.checkout import CheckoutUI
 from io import StringIO
 
@@ -242,17 +242,9 @@ def get_info_for_item(item_name: str, param: str):
 
 
 @st.cache_data
-def country_list() -> list:
+def prefecture_list() -> list:
 
-    return [nation for nation in NATIONS.keys()]
-
-# Util function to get a selected country and retur the list of his zones
-
-
-@st.cache_data
-def country_zones(country_name: str) -> list:
-
-    return [zone for zone in ZONES[country_name].keys()]
+    return [prefecture for prefecture in PREFECTURES.keys()]
 
 # Util function to save payments data
 
@@ -262,12 +254,13 @@ def save_pay_data(form: CheckoutUI) -> dict:
     # Creating a pay data dict
     return {
         "email": form.email,
-        "country": form.country,
         "first_name": form.name,
         "last_name": form.surname,
+        "prefecture": form.prefecture,
         "address": form.address,
         "postal_code": form.postal_code,
         "city": form.city,
+        "buildings_name": form.buildings_name,
         "phone": form.phone,
         "card_number": form.card_number,
         "expiration_month": form.expiration_month,

@@ -1,7 +1,8 @@
 # Importing Libraries
 from playwright.sync_api import sync_playwright, TimeoutError
 import json
-import playwright
+
+from components.prefectures import *
 
 # Creating the Bot Class
 
@@ -44,12 +45,13 @@ class Bot:
 
                 # Storing Personal Data
                 self.EMAIL: str = info["email"]
-                self.COUNTRY: str = info["country"]
                 self.FIRST_NAME: str = info["first_name"]
                 self.LAST_NAME: str = info["last_name"]
                 self.ADDRESS: str = info["address"]
                 self.POSTAL_CODE: str = info["postal_code"]
                 self.CITY: str = info["city"]
+                self.BUILDINGS_NAME: str = info["buildings_name"]
+                self.PREFECTURE: str = info["prefecture"]
                 self.PHONE: str = info["phone"]
                 self.CARD_NUMBER: str = info["card_number"]
                 self.MONTH_EXP: str = info["expiration_month"]
@@ -144,13 +146,14 @@ class Bot:
         page.fill("input[name='lastName']", self.LAST_NAME)
         page.fill("input[id='postalCode']", self.POSTAL_CODE)
         page.fill("input[name='address1']", self.ADDRESS)
-        page.fill("input[name='address2']", "建物番号")
+        page.fill("input[name='address2']", self.BUILDINGS_NAME)
         page.fill("input[name='city']", self.CITY)
         page.fill("input[name='phone']", self.PHONE)
         try:
             page.wait_for_selector("select[name='zone']")
             options = page.locator("select[name='zone']")
-            options.select_option(value="JP-13")  # 例として "JP-13" を選択
+            options.select_option(
+                value=PREFECTURES[self.PREFECTURE])
             page.wait_for_timeout(1500)  # 配送情報を待機
         except Exception as e:
             print(e)
@@ -171,6 +174,9 @@ class Bot:
         # チェックボックスのラベルテキストを使って要素を特定してチェックを入れる
         page.evaluate(
             "() => document.querySelectorAll('input[type=checkbox]')[1].click()")
+
+        # 念のため再記入する
+        page.fill("input[name='firstName']", self.FIRST_NAME)
 
         # '購入する' ボタンをクリック
         page.click("button[type='submit']")

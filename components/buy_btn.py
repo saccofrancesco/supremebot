@@ -18,7 +18,7 @@ class BuyButtonUI:
             # Start the automation
             bot.scrape()
             end_time = time.time()
-            print(f"スクレイプ処理にかかった時間: {end_time - start_time} 秒")
+            print(f"Time For Scrayping Items: {end_time - start_time} s.")
 
             with sync_playwright() as p:
                 browser = p.chromium.launch(headless=False)
@@ -28,10 +28,12 @@ class BuyButtonUI:
 
                 try:
                     bot.checkout(page)
+                    end_time = time.time()
+                    print(f"Time For Checkout: {end_time - start_time} s.")
                 except TimeoutError:
                     # Handle timeout
                     print("Timeout while performing checkout")
                 end_time = time.time()
-                print(f"すべての処理にかかった時間: {end_time - start_time} 秒")
+                print(f"Total Time: {end_time - start_time} s.")
 
                 input()  # input() を使用することで、プログラムがすぐに終了するのを防ぎ、ユーザーが結果を確認する時間を確保
