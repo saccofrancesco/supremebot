@@ -65,33 +65,42 @@ class Bot:
     def scrape(self) -> None:
         for i in range(len(self.ITEMS_NAMES)):
             url: str = f"https://us.supreme.com/collections/{self.ITEMS_TYPES[i]}"
+            print(f"Processing {self.ITEMS_NAMES[i]}...")
 
             with sync_playwright() as p:
-                browser: playwright.sync_api._generated.Browser = p.chromium.launch(headless=True)
-                page: playwright.sync_api._generated.Browser = browser.new_page()
-                page.goto(url)  # Navigate to the URL
+                browser = p.chromium.launch(headless=True, args=["--no-images"])
+                page = browser.new_page()
 
-                # Wait for dynamic content to load (adjust the wait time as needed)
-                page.wait_for_selector("a[data-cy-title]")
+                # Adjust the level of page loading
+                page.goto(url, wait_until="domcontentloaded")
 
-                # Extract the links using Playwright
-                links: list = page.query_selector_all("a[data-cy-title]")
-                links_list: list = [link.get_attribute("href") for link in links]
+                # Collect the necessary information from the product list
+                product_elements = page.query_selector_all("li.collection-product-item")
+                temp_links = []
+                for element in product_elements:
+                    # Skip sold-out or hidden items
+                    if element.get_attribute("data-available") == "false":
+                        continue
+
+                    product_name_elm = element.query_selector("span.collection-product-info--title")
+                    if product_name_elm is None:
+                        continue
+                    product_name = product_name_elm.inner_text()
+                    if product_name == self.ITEMS_NAMES[i]:
+                        product_link = element.query_selector("a[data-cy-title]").get_attribute("href")
+                        complete_link = f"https://us.supreme.com{product_link}"
+                        temp_links.append(complete_link)
 
                 # Checking for the Right Links
-                for link in links_list:
-                    complete_link: str = f"https://us.supreme.com{link}"
+                for complete_link in temp_links:
                     page.goto(complete_link)  # Navigate to the link
+                    product_style_element = page.query_selector(
+                        "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-left.bpS-bg-none.bg-white.mobile-shadow.pt-s.pb-s.bpS-pt-0.bpS-pb-0.position-relative.pr-0.bpS-pr-s > div.product-title-container.bpS-display-none.pl-s.pr-s > div")
 
-                    # Wait for the product info to load (adjust the wait time as needed)
-                    page.wait_for_selector("#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > h1")
+                    if product_style_element:
+                        product_style_text = product_style_element.inner_text()
 
-                    if product_name := page.query_selector(
-                        "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > h1"
-                    ).inner_text():
-                        
-                        product_style: str = page.query_selector("#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-right > form > div.width-100 > div > div.display-flex.flexWrap-wrap.bpS-bg-none.bg-white.mobile-shadow.pt-m.pb-m.bpS-p-0.flexDirection-columnReverse.bpS-flexDirection-column > div.fontWeight-bold.mb-s.display-none.bpS-display-block.js-variant").inner_text()
-                        if len(product_style) >= 2 and product_name == self.ITEMS_NAMES[i] and product_style == self.ITEMS_STYLES[i]:
+                        if product_style_text == self.ITEMS_STYLES[i]:
                             self.links_list.append(complete_link)
                             break
 
