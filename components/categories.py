@@ -22,4 +22,5 @@ class CategoriesUI:
                                              "Skate",
                                              "Bags",
                                              "Shirts"],
-                                            label_visibility="collapsed")
+                                            label_visibility="collapsed",
+                                            horizontal=True)
