@@ -30,9 +30,9 @@ class ItemUI:
                 if not is_item_in_basket(self.name):
                     if items[self.name]["colors"]:
                         self.color: str = buttons_col.radio(
-                            "Colors:", items[self.name]["colors"], key=f"{self.name}_color", horizontal=True)
+                            "Colors", items[self.name]["colors"], key=f"{self.name}_color", horizontal=True)
                     else:
-                        buttons_col.markdown("**Colors:** None")
+                        buttons_col.markdown("**Colors** None")
                         self.color: str = "None"
 
                     if items[self.name]["category"] in [
@@ -41,13 +41,14 @@ class ItemUI:
                         "jackets",
                         "tops-sweaters",
                         "pants",
-                            "shirts"]:
+                        "shirts"
+                    ]:
 
                         # Generate a unique key for the selectbox based on item
                         # name
                         size_key: str = f"{self.name}_size"
                         self.size: str = buttons_col.selectbox(
-                            "Sizes:", ["Small", "Medium", "Large", "XLarge"], key=size_key)
+                            "Sizes", ["Small", "Medium", "Large", "XLarge"], key=size_key)
                     else:
                         self.size: str = "None"
 
