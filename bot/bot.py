@@ -85,7 +85,7 @@ class Bot:
                 temp_links = []
                 for element in product_elements:
                     # 売り切れや非表示のアイテムをスキップ
-                    if element.get_attribute("data-available") == "false":
+                    if element.get_attribute("data-availale") == "false":
                         continue
 
                     product_name_elm = element.query_selector(
