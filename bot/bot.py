@@ -65,30 +65,29 @@ class Bot:
     def scrape(self) -> None:
         for i in range(len(self.ITEMS_NAMES)):
             url: str = f"https://us.supreme.com/collections/{self.ITEMS_TYPES[i]}"
-            print(f"Processing {self.ITEMS_NAMES[i]}...")
 
             with sync_playwright() as p:
-                browser = p.chromium.launch(headless=True, args=["--no-images"])
-                page = browser.new_page()
+                browser: playwright.sync_api._generated.Browser = p.chromium.launch(headless=True, args=["--no-images"])
+                page: playwright.sync_api._generated.Browser  = browser.new_page()
 
                 # Adjust the level of page loading
                 page.goto(url, wait_until="domcontentloaded")
 
                 # Collect the necessary information from the product list
-                product_elements = page.query_selector_all("li.collection-product-item")
-                temp_links = []
+                product_elements: list = page.query_selector_all("li.collection-product-item")
+                temp_links: list = []
                 for element in product_elements:
                     # Skip sold-out or hidden items
-                    if element.get_attribute("data-available") == "false":
+                    if element.get_attribute("data-availale") == "false":
                         continue
 
                     product_name_elm = element.query_selector("span.collection-product-info--title")
                     if product_name_elm is None:
                         continue
-                    product_name = product_name_elm.inner_text()
+                    product_name: str = product_name_elm.inner_text()
                     if product_name == self.ITEMS_NAMES[i]:
-                        product_link = element.query_selector("a[data-cy-title]").get_attribute("href")
-                        complete_link = f"https://us.supreme.com{product_link}"
+                        product_link: str = element.query_selector("a[data-cy-title]").get_attribute("href")
+                        complete_link: str = f"https://us.supreme.com{product_link}"
                         temp_links.append(complete_link)
 
                 # Checking for the Right Links
@@ -98,7 +97,7 @@ class Bot:
                         "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-left.bpS-bg-none.bg-white.mobile-shadow.pt-s.pb-s.bpS-pt-0.bpS-pb-0.position-relative.pr-0.bpS-pr-s > div.product-title-container.bpS-display-none.pl-s.pr-s > div")
 
                     if product_style_element:
-                        product_style_text = product_style_element.inner_text()
+                        product_style_text: str = product_style_element.inner_text()
 
                         if product_style_text == self.ITEMS_STYLES[i]:
                             self.links_list.append(complete_link)
