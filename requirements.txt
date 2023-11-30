@@ -20,7 +20,7 @@ idna==3.6
 importlib-metadata==6.8.0
 Jinja2==3.1.2
 jsonschema==4.20.0
-jsonschema-specifications==2023.11.1
+jsonschema-specifications==2023.11.2
 kiwisolver==1.4.5
 lxml==4.9.3
 Markdown==3.5.1
@@ -54,7 +54,7 @@ six==1.16.0
 smmap==5.0.1
 soupsieve==2.5
 st-annotated-text==4.0.1
-streamlit==1.28.2
+streamlit==1.29.0
 streamlit-camera-input-live==0.2.0
 streamlit-card==0.0.61
 streamlit-embedcode==0.1.2
