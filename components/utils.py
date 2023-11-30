@@ -52,26 +52,12 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     # Creating an Object to store the fetched items
     items_dict: dict = {}
 
-    # Object for mapping categories to urllike category
-    categories: dict = {
-        "T-Shirts": "t-shirts",
-        "Accessories": "accessories",
-        "Sweatshirts": "sweatshirts",
-        "Hats": "hats",
-        "Jackets": "jackets",
-        "Tops-Sweaters": "tops-sweaters",
-        "Pants": "pants",
-        "Skate": "skate",
-        "Bags": "bags",
-        "Shirts": "shirts"
-    }
-
     # Fetching all items of a certain type
     response: requests.models.Response = requests.get(url)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
     item_divs: list = soup.find_all(
-        "div", {"data-category": f"{categories[item_category]}"})
+        "div", {"data-category": f"{item_category.lower()}"})
 
     # Storing Items' Infos
     for item in item_divs:
