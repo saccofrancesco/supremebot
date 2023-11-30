@@ -86,6 +86,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
             "price": item_price,
             "image": item_image,
             "colors": item_colors,
+            "link": item_full_link
         }
 
     return items_dict

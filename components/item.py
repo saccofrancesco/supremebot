@@ -20,11 +20,12 @@ class ItemUI:
                 # Creating Items attributes
                 self.name = item
                 self.image = items[self.name]["image"]
-                self.price = items[self.name]['price']
+                self.price = items[self.name]["price"]
+                self.link = items[self.name]["link"]
 
                 image_col, info_col, buttons_col = st.columns([1, 1.5, 2.5])
                 image_col.image(self.image, width=220)
-                info_col.markdown(f"**Item Name:** {self.name}")
+                info_col.markdown(f"**Item Name:** [{self.name}]({self.link})")
                 info_col.markdown(f"**Price:** {self.price}")
                 if not is_item_in_basket(self.name):
                     if items[self.name]["colors"]:
