@@ -110,6 +110,9 @@ class Bot:
                         self.links_list.append(complete_link)
                         break
 
+                if len(self.links_list) == 0:
+                    print("Failed to find items")
+
                 browser.close()
 
     # Method for Add to the Cart the founded Items
