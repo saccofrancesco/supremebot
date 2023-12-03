@@ -67,7 +67,7 @@ class Bot:
             url: str = f"https://us.supreme.com/collections/{self.ITEMS_TYPES[i]}"
 
             with sync_playwright() as p:
-                browser: playwright.sync_api._generated.Browser = p.chromium.launch(headless=True, args=["--no-images"])
+                browser: playwright.sync_api._generated.Browser = p.webkit.launch(headless=True, args=["--no-images"])
                 page: playwright.sync_api._generated.Browser  = browser.new_page()
 
                 # Adjust the level of page loading
