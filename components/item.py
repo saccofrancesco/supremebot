@@ -5,7 +5,6 @@ from components.utils import is_item_in_basket, add_to_basket, remove_from_baske
 from components.utils import get_info_for_item, fetch_items
 from streamlit_extras.colored_header import colored_header
 
-
 class ItemUI:
     def __init__(self, category: str, dates: str) -> None:
 
