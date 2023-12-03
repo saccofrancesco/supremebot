@@ -48,6 +48,8 @@ def convert_date(date: str) -> str:
 # Util function to fetch all information based on Drop Date and Item Category
 
 
+# スクレイピングしてアイテムを取得するコード
+# 現在シーズンはfw23固定になっている
 def fetch_items(drop_date: str, item_category: str) -> dict:
 
     # Coverting data to url format
@@ -69,6 +71,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
         "Tops-Sweaters": "tops-sweaters",
         "Pants": "pants",
         "Bags": "bags",
+        "Shoes": "shoes",
         "Skate": "skate",
         "Shirts": "shirts"
     }

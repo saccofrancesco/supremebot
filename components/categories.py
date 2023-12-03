@@ -21,5 +21,6 @@ class CategoriesUI:
                                              "Pants",
                                              "Skate",
                                              "Bags",
+                                             "Shoes",
                                              "Shirts"],
                                             label_visibility="collapsed")
