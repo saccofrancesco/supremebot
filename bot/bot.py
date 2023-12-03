@@ -122,7 +122,7 @@ class Bot:
         # Looping the Element's to Buy List
         for i in range(len(self.links_list)):
             page.goto(self.links_list[i])
-            if self.ITEMS_TYPES[i] == "bags":
+            if self.ITEMS_TYPES[i] == "bags" or self.ITEMS_TYPES[i] == "hat" or self.ITEMS_TYPES[i] == "accessories":
                 page.click("input[data-type='product-add']")
                 page.wait_for_timeout(1000)
                 continue
