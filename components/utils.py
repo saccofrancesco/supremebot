@@ -46,6 +46,9 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     # Coverting data to url format
     data: str = convert_date(drop_date)
 
+    # Converting the tops-sweater option
+    if item_category == "Tops": item_category = "tops-sweaters"
+
     # Constructing URL based on the Drop Date
     url: str = f"https://www.supremecommunity.com/season/fall-winter2023/droplist/{data}/#"
 

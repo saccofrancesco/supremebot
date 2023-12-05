@@ -1,25 +1,22 @@
 # Importing Libraries
-import streamlit as st
-from streamlit_extras.colored_header import colored_header
-from streamlit_extras.add_vertical_space import add_vertical_space
+from streamlit_option_menu import option_menu
 
 class CategoriesUI:
     def __init__(self) -> None:
 
         # Input for the user to select item types
-        colored_header("Select a Category", "", "red-80")
-        add_vertical_space(1)
-        self.items_category: str = st.radio(" ",
-                                            ["None",
-                                             "T-Shirts",
-                                             "Accessories",
-                                             "Sweatshirts",
-                                             "Hats",
-                                             "Jackets",
-                                             "Tops-Sweaters",
-                                             "Pants",
-                                             "Skate",
-                                             "Bags",
-                                             "Shirts"],
-                                            label_visibility="collapsed",
-                                            horizontal=True)
+        self.items_category: str = option_menu(
+            menu_title = "Select a Category",
+            options = [" T-Shirts", "Accessories", "Sweatshirts", "Hats", "Jackets",
+                       "Tops", "Pants", "Skate", "Bags", "Shirts"],
+            default_index = 0,
+            menu_icon = "list-task",
+            icons = None,
+            orientation="horizontal",
+            styles = {
+                "container": {"font-family": "sans-serif"},
+                "menu-title": {"font-weight": "bold"},
+                "separator": {"color": "solid red"},
+                "icon": {"display": "none"}
+            }
+        )
