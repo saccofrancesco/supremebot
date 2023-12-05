@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     # Injecting CSS for image styling
     st.markdown(
-        "<style> img { border-radius: 5%; }</style>",
+        "<style> img { border-radius: 5%; } </style>",
         unsafe_allow_html=True)
 
     # Setting up the dates selection
