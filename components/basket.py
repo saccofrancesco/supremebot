@@ -4,16 +4,20 @@ from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
 from components.utils import is_json_file_empty
 import json
+import os
 
 class BasketUI:
     def __init__(self) -> None:
 
+        # Get the absolute path to the JSON file
+        json_file_path = os.path.join("config", "items.json")
+
         # Showing the basket content if not empty
-        if not is_json_file_empty("./config/items.json"):
+        if not is_json_file_empty(json_file_path):
             self.is_empty = False
             colored_header("Selected Products", "", "red-80")
             add_vertical_space(1)
-            with open("./config/items.json", "r") as file:
+            with open(json_file_path, "r") as file:
                 data: str = json.load(file)
             total: int = 0
             for item in data:

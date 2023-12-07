@@ -24,7 +24,6 @@ class BuyButtonUI:
                 try:
                     bot.checkout(page)
                 except TimeoutError:
-                    # Handle timeout
-                    print("Timeout while performing checkout")
+                    pass
 
                 input()

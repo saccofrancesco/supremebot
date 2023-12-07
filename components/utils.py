@@ -8,6 +8,7 @@ import json
 from components.zones import *
 from components.checkout import CheckoutUI
 from io import StringIO
+import os
 
 # Util function to get all the drop dates for the current release
 @st.cache_data
@@ -100,13 +101,14 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
 
 # Util function to check if an item is already
 def is_item_in_basket(item_name: str) -> bool:
-    try:
+    # Get the absolute path to the JSON file
+    json_file_path = os.path.join("config", "items.json")
 
+    try:
         # Load existing items from the JSON file if it exists
-        with open("./config/items.json", "r") as json_file:
+        with open(json_file_path, "r") as json_file:
             basket: list = json.load(json_file)
     except FileNotFoundError:
-
         # If the file doesn't exist, the item is not in the basket
         return False
 
@@ -137,13 +139,14 @@ def add_to_basket(
         "category": item_category
     }
 
-    try:
+    # Get the absolute path to the JSON file
+    json_file_path = os.path.join("config", "items.json")
 
+    try:
         # Load existing items from the JSON file if it exists
-        with open("./config/items.json", "r") as json_file:
+        with open(json_file_path, "r") as json_file:
             basket: list = json.load(json_file)
     except FileNotFoundError:
-
         # If the file doesn't exist, start with an empty basket
         basket: list = []
 
@@ -151,42 +154,47 @@ def add_to_basket(
     basket.append(item_object)
 
     # Write the updated basket to the JSON file
-    with open("./config/items.json", "w") as json_file:
+    with open(json_file_path, "w") as json_file:
         json.dump(basket, json_file, indent=4)
 
-    # Showing a succes message
-    st.toast("Item added to basket", icon="✅")
+    # Showing a success message
+    st.toast("Item added to the basket", icon="✅")
 
 # Util function to delete an item
 def remove_from_basket(item_name: str) -> bool:
-    try:
+    # Get the absolute path to the JSON file
+    json_file_path = os.path.join("config", "items.json")
 
+    try:
         # Load existing items from the JSON file if it exists
-        with open("./config/items.json", "r") as json_file:
+        with open(json_file_path, "r") as json_file:
             basket: list = json.load(json_file)
     except FileNotFoundError:
-
         # If the file doesn't exist, there are no items to delete
         return False
 
     # Create a flag to check if the item was found and deleted
     item_deleted: bool = False
 
+    # Create a copy of the basket to avoid modifying it during iteration
+    basket_copy = basket.copy()
+
     # Iterate through items in the basket
-    for item in basket:
+    for item in basket_copy:
         if item.get("name") == item_name:
             basket.remove(item)  # Remove the item from the basket
-            item_deleted: bool = True
+            item_deleted = True
             break
 
     if item_deleted:
-
         # Write the updated basket to the JSON file
-        with open("./config/items.json", "w") as json_file:
+        with open(json_file_path, "w") as json_file:
             json.dump(basket, json_file, indent=4)
 
-    # Showing a succes message
-    st.toast("Item removed from basket", icon="❌")
+        # Showing a success message
+        st.toast("Item removed from the basket", icon="❌")
+
+    return item_deleted
 
 # Util function to check if the basket is empty
 def is_json_file_empty(file_path: str) -> bool:
@@ -202,13 +210,16 @@ def is_json_file_empty(file_path: str) -> bool:
 
 # Util function to get infos about an item in the basket
 def get_info_for_item(item_name: str, param: str):
+    # Get the absolute path to the JSON file
+    json_file_path = os.path.join("config", "items.json")
+
     try:
-        with open("./config/items.json", 'r') as json_file:
+        with open(json_file_path, 'r') as json_file:
             data: str = json.load(json_file)
             for item in data:
                 if "name" in item:
                     if item["name"] == item_name:
-                        return item[f"{param}"]
+                        return item.get(param, f"No such parameter: {param}")
             return "Item not found in JSON data"
     except FileNotFoundError:
         return "JSON file not found"
