@@ -2,6 +2,8 @@
 import streamlit as st
 import requests
 import os
+import pytz
+import time
 from bs4 import BeautifulSoup
 import datetime
 import re
@@ -316,3 +318,25 @@ def get_pay_prop(file, prop: str) -> str:
         return None  # File not found
     except json.JSONDecodeError:
         return None  # Invalid JSON format in the file
+
+
+def wait_until_start(hour, minute=0):
+    # 日本時間のタイムゾーンを設定
+    jst = pytz.timezone('Asia/Tokyo')
+
+    # 現在時刻と目標時刻を取得
+    now = datetime.datetime.now(jst)
+    start_time = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+
+    # 現在時刻が目標時刻を過ぎていたら、翌日の目標時刻に設定
+    if now > start_time:
+        start_time = start_time + datetime.timedelta(days=1)
+
+    # 目標時刻になるまで待機
+    while datetime.datetime.now(jst) < start_time:
+        current_time = datetime.datetime.now(jst)
+        print(f"現在時刻: {current_time.strftime('%Y-%m-%d %H:%M:%S')}, 開始まで待機中...")
+        time.sleep(1)  # 1秒ごとにチェック
+
+    # 目標時刻に到達したらスクリプトを実行
+    print("Starting script...")

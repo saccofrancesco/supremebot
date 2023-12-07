@@ -75,43 +75,47 @@ class Bot:
                 browser = p.chromium.launch(
                     headless=True, args=["--no-images"])
                 page = browser.new_page()
+                attempts = 10
+                for attempt in range(attempts):
+                    # ページの読み込みレベルを調整
+                    page.goto(url, wait_until="domcontentloaded")
+                    # 商品一覧から必要な情報を収集
+                    product_elements = page.query_selector_all(
+                        "li.collection-product-item")
 
-                # ページの読み込みレベルを調整
-                page.goto(url, wait_until="domcontentloaded")
+                    temp_links = []
+                    for element in product_elements:
+                        # 売り切れや非表示のアイテムをスキップ
+                        if element.get_attribute("data-availale") == "false":
+                            continue
 
-                # 商品一覧から必要な情報を収集
-                product_elements = page.query_selector_all(
-                    "li.collection-product-item")
-                temp_links = []
-                for element in product_elements:
-                    # 売り切れや非表示のアイテムをスキップ
-                    if element.get_attribute("data-availale") == "false":
-                        continue
+                        product_name_elm = element.query_selector(
+                            "span.collection-product-info--title")
+                        if product_name_elm is None:
+                            continue
+                        product_name = product_name_elm.inner_text()
+                        if product_name == self.ITEMS_NAMES[i]:
+                            product_link = element.query_selector(
+                                "a[data-cy-title]").get_attribute("href")
+                            complete_link = f"https://jp.supreme.com{product_link}"
+                            temp_links.append(complete_link)
 
-                    product_name_elm = element.query_selector(
-                        "span.collection-product-info--title")
-                    if product_name_elm is None:
-                        continue
-                    product_name = product_name_elm.inner_text()
-                    if product_name == self.ITEMS_NAMES[i]:
-                        product_link = element.query_selector(
-                            "a[data-cy-title]").get_attribute("href")
-                        complete_link = f"https://jp.supreme.com{product_link}"
-                        temp_links.append(complete_link)
+                    for complete_link in temp_links:
+                        page.goto(complete_link)  # Navigate to the link
+                        product_style_element = page.query_selector(
+                            "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-left.bpS-bg-none.bg-white.mobile-shadow.pt-s.pb-s.bpS-pt-0.bpS-pb-0.position-relative.pr-0.bpS-pr-s > div.product-title-container.bpS-display-none.pl-s.pr-s > div")
 
-                for complete_link in temp_links:
-                    page.goto(complete_link)  # Navigate to the link
-                    product_style_element = page.query_selector(
-                        "#product-root > div > div.Product.width-100.js-product.routing-transition.fade-on-routing > div.product-column-left.bpS-bg-none.bg-white.mobile-shadow.pt-s.pb-s.bpS-pt-0.bpS-pb-0.position-relative.pr-0.bpS-pr-s > div.product-title-container.bpS-display-none.pl-s.pr-s > div")
+                        product_style_text = product_style_element.inner_text()
 
-                    product_style_text = product_style_element.inner_text()
+                        if product_style_text == self.ITEMS_STYLES[i]:
+                            self.links_list.append(complete_link)
+                            break
 
-                    if product_style_text == self.ITEMS_STYLES[i]:
-                        self.links_list.append(complete_link)
+                    if len(self.links_list) != 0:
                         break
-
-                if len(self.links_list) == 0:
-                    print("Failed to find items")
+                    else:
+                        print(f"Attempt {attempt + 1} failed, retrying...")
+                        page.wait_for_timeout(500)
 
                 browser.close()
 

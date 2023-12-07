@@ -4,12 +4,15 @@ from bot.bot import Bot
 from playwright.sync_api import sync_playwright, TimeoutError
 import time
 
+from components.utils import wait_until_start
+
 
 class BuyButtonUI:
     def __init__(self) -> None:
 
         self.buy_btn = st.button("BUY", key="buy-btn", type="primary")
         if self.buy_btn:
+            wait_until_start(11, 00)
             print("start...")
             # Creating the Bot
             bot: Bot = Bot()
@@ -19,6 +22,10 @@ class BuyButtonUI:
             bot.scrape()
             end_time = time.time()
             print(f"Time For Scrayping Items: {end_time - start_time} s.")
+
+            if len(bot.links_list) == 0:
+                print("No items in the cart")
+                return
 
             with sync_playwright() as p:
                 browser = p.chromium.launch(headless=False)
