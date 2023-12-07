@@ -120,6 +120,7 @@ class Bot:
             options = page.locator("select[data-cy='size-selector']")
             options.select_option(label=f"{self.ITEMS_SIZES[i]}")
             page.click("input[data-type='product-add']")
+            page.wait_for_timeout(1000)
 
     # Method for Compiling the Checkout Form
     def checkout(self, page) -> None:
