@@ -297,3 +297,17 @@ def get_pay_prop(file, prop: str) -> str:
         return None  # File not found
     except json.JSONDecodeError:
         return None  # Invalid JSON format in the file
+
+# Util function to verify and normalize filepath names
+def sanitize_filename(filename: str) -> str:
+
+    # Define a set of characters that are not allowed in filenames
+    forbidden_chars: list = ['<', '>', ':', '"', '/', '\\', '|', '?', '*']
+
+    # Replace forbidden characters with underscores
+    sanitized_filename: str = ''.join(c if c not in forbidden_chars else '_' for c in filename)
+
+    # Remove leading and trailing whitespaces
+    sanitized_filename: str = sanitized_filename.strip()
+
+    return sanitized_filename
