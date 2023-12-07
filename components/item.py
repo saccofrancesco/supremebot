@@ -68,8 +68,9 @@ class ItemUI:
                 self.remove_key: str = f"{self.name}_remove_from_basket"
                 info_col.markdown(
                     f'**Color:** {get_info_for_item(self.name, "color")}')
-                info_col.markdown(
-                    f'**Size:** {get_info_for_item(self.name, "size")}')
+                size_info: str = get_info_for_item(self.name, "size")
+                if size_info != "None":
+                    info_col.markdown(f'**Size:** {size_info}')
                 info_col.button(
                     "Remove from basket",
                     key=self.remove_key,
