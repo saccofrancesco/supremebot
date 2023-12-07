@@ -40,6 +40,6 @@ if __name__ == "__main__":
         # Button for saving paying methods
         with form.save_data_col:
             DownloadButtonUI(form)
-        
+
         # User input to start the Bot
         buy_btn: BuyButtonUI = BuyButtonUI()

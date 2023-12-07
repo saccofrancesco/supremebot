@@ -26,8 +26,8 @@ class ItemUI:
             info_col.markdown(f"**Price:** {self.price}")
             if not is_item_in_basket(self.name):
                 if items[self.name]["colors"]:
-                    self.color: str = buttons_col.radio(
-                        "Colors", items[self.name]["colors"], key=f"{self.name}_color", horizontal=True)
+                    self.color: str = buttons_col.radio("Colors", items[self.name]["colors"], key=f"{
+                        self.name}_color", horizontal=True)
                 else:
                     buttons_col.markdown("**Colors** None")
                     self.color: str = "None"

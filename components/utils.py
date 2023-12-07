@@ -47,10 +47,12 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     data: str = convert_date(drop_date)
 
     # Converting the tops-sweater option
-    if item_category == "Tops": item_category = "tops-sweaters"
+    if item_category == "Tops":
+        item_category = "tops-sweaters"
 
     # Constructing URL based on the Drop Date
-    url: str = f"https://www.supremecommunity.com/season/fall-winter2023/droplist/{data}/#"
+    url: str = f"https://www.supremecommunity.com/season/fall-winter2023/droplist/{
+        data}/#"
 
     # Creating an Object to store the fetched items
     items_dict: dict = {}
@@ -70,9 +72,11 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
                                     {"class": "catalog-label-price"}).text.replace("\n",
                                                                                    "").split("/")[0] if item.find("span",
                                                                                                                   {"class": "catalog-label-price"}) else "None"
-        item_image: str = f'https://www.supremecommunity.com{item.find("img")["src"]}'
+        item_image: str = f'https://www.supremecommunity.com{item.find("img")[
+            "src"]}'
         item_colors: list = []
-        item_full_link: str = f'https://www.supremecommunity.com{item.find("a")["href"]}'
+        item_full_link: str = f'https://www.supremecommunity.com{item.find("a")[
+            "href"]}'
         response: requests.models.Response = requests.get(item_full_link)
         if item_price != "None" and response.status_code == 200:
             soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
@@ -227,22 +231,22 @@ def country_zones(country_name: str) -> list:
 def save_pay_data(form: CheckoutUI) -> dict:
 
     # Creating a pay data dict
-        return {
-            "email": form.email,
-            "country": form.country,
-            "first_name": form.name,
-            "last_name": form.surname,
-            "address": form.address,
-            "postal_code": form.postal_code,
-            "city": form.city,
-            "phone": form.phone,
-            "card_number" : form.card_number,
-            "expiration_month": form.expiration_month,
-            "expiration_year": form.expiration_year,
-            "cvv": form.cvv,
-            "name_on_card": form.name_on_card,
-            "zone": form.zone if hasattr(form, "zone") else "None"
-        }
+    return {
+        "email": form.email,
+        "country": form.country,
+        "first_name": form.name,
+        "last_name": form.surname,
+        "address": form.address,
+        "postal_code": form.postal_code,
+        "city": form.city,
+        "phone": form.phone,
+        "card_number": form.card_number,
+        "expiration_month": form.expiration_month,
+        "expiration_year": form.expiration_year,
+        "cvv": form.cvv,
+        "name_on_card": form.name_on_card,
+        "zone": form.zone if hasattr(form, "zone") else "None"
+    }
 
 # Util function to get the next 5 years from current year
 @st.cache_data
@@ -257,7 +261,8 @@ def months_in_numbers(selected_year: str):
     current_month: datetime.datetime = datetime.datetime.now().month
 
     if selected_year == current_year:
-        # If the selected year is the current year, return months from the next month to December
+        # If the selected year is the current year, return months from the next
+        # month to December
         months: list = [str(month) for month in range(current_month + 1, 13)]
     else:
         # For any other year, return all months
