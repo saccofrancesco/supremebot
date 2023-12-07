@@ -38,8 +38,9 @@ if __name__ == "__main__":
         form: CheckoutUI = CheckoutUI()
 
         # Button for saving paying methods
-        with form.save_data_col:
+        with form.save_pay_method_col:
             DownloadButtonUI(form)
 
         # User input to start the Bot
-        buy_btn: BuyButtonUI = BuyButtonUI()
+        with form.buy_col:
+            buy_btn: BuyButtonUI = BuyButtonUI()

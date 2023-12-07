@@ -10,8 +10,9 @@ class DownloadButtonUI:
         self.download_btn = st.button(
             "Save Pay Method data",
             key="save-btn",
-            type="secondary")
+            type="secondary",
+            use_container_width=True)
         if self.download_btn:
-            with open("./config/pay.config.json", "w") as f:
+            with open(f"./config/{form.payment_method_name}.json", "w") as f:
                 f.write(f"[{json.dumps(save_pay_data(form), indent=4)}]")
             st.toast("Payment configuration saved", icon="✅")
