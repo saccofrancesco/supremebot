@@ -142,7 +142,19 @@ class Bot:
             page.wait_for_selector("select[name='zone']")
             options = page.locator("select[name='zone']")
             options.select_option(label=f"{self.ZONE}")
+            page.wait_for_timeout(1500) # Timeout for zone selection
         except Exception:
             pass
         page.fill("input[name='postalCode']", self.POSTAL_CODE)
         page.fill("input[name='phone']", self.PHONE)
+        page.frame_locator(
+            "iframe[src*='checkout.shopifycs.com/number']").locator("input[name='number']").fill(self.CARD_NUMBER)
+        page.frame_locator("iframe[src*='checkout.shopifycs.com/expiry']").locator(
+            "input[name='expiry']").fill(f"{self.MONTH_EXP}/{self.YEAR_EXP}")
+        page.frame_locator("iframe[src*='checkout.shopifycs.com/verification_value']").locator(
+            "input[name='verification_value']").fill(self.CVV)
+        page.frame_locator(
+            "iframe[src*='checkout.shopifycs.com/name']").locator("input[name='name']").fill(self.NAME_ON_CARD)
+        page.evaluate(
+            "() => document.querySelectorAll('input[type=checkbox]')[1].click()")
+        page.fill("input[name='firstName']", self.FIRST_NAME)
