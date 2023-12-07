@@ -48,7 +48,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [P
 $ git clone https://github.com/TonicStark/supreme-bot.git
 
 # Go into the repository
-$ cd electron-markdownify
+$ cd supreme-bot
 
 # Install dependencies
 $ pip install -r requirements.txt
