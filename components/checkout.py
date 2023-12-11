@@ -13,8 +13,9 @@ class CheckoutUI:
 
         # Option to load a pay config saved from previus buys
         st.subheader("Select a Pay configuration file")
-        pay_config = st.file_uploader(
-            " ", label_visibility="collapsed", type="JSON")
+        from components.utils import get_possible_pay_configs
+        pay_config = st.selectbox(
+            " ", get_possible_pay_configs(), 0, label_visibility="collapsed")
         
         # Requesting contact email
         st.subheader("Contact")

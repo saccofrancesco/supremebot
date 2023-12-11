@@ -282,17 +282,16 @@ def months_in_numbers(selected_year: str):
     return months
 
 # Util function to get pay props from pay.config file
-def get_pay_prop(file, prop: str) -> str:
+def get_pay_prop(file_name: str, prop: str) -> str:
 
-    # Coverting the uploaded file to a readable format
-    stringio: StringIO = StringIO(file.getvalue().decode("utf-8"))
-
-    # To read file as string:
-    string_data: str = stringio.read()
+    directory = "./config"
+    file_name = f"{file_name}.pay.json"
+    file_path = os.path.join(directory, file_name)
 
     try:
-        data: str = json.loads(string_data)
-        return data[0][prop]
+        with open(file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+            return data[0][prop]
     except FileNotFoundError:
         return None  # File not found
     except json.JSONDecodeError:
@@ -311,3 +310,18 @@ def sanitize_filename(filename: str) -> str:
     sanitized_filename: str = sanitized_filename.strip()
 
     return sanitized_filename
+
+# Util function to get a list of the possible payment configurations
+def get_possible_pay_configs() -> list:
+
+    # Use os.path.join to create the full file path
+    directory = "config"
+    files = [os.path.join(directory, file) for file in os.listdir(directory) if os.path.isfile(os.path.join(directory, file))]
+
+    # Extract only the base name (excluding extension and ".pay") from the path
+    file_names = [os.path.splitext(os.path.basename(file))[0].replace(".pay", "") for file in files]
+
+    # Remove the "items" file, if present
+    file_names = [name for name in file_names if name != "items"]
+
+    return file_names
