@@ -10,7 +10,7 @@ click==8.1.7
 contourpy==1.2.0
 cycler==0.12.1
 entrypoints==0.4
-Faker==20.1.0
+Faker==21.0.0
 favicon==0.7.0
 fonttools==4.46.0
 gitdb==4.0.11
