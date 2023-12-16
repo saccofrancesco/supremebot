@@ -7,7 +7,6 @@ import re
 import json
 from components.zones import *
 from components.checkout import CheckoutUI
-from io import StringIO
 import os
 
 # Util function to get all the drop dates for the current release
@@ -267,14 +266,15 @@ def get_card_exp_years() -> list:
     return next_5_years
 
 # Util function to get month in a list based on current day
+@st.cache_data
 def months_in_numbers(selected_year: str):
     current_year: datetime.datetime = datetime.datetime.now().year
     current_month: datetime.datetime = datetime.datetime.now().month
 
     if selected_year == current_year:
-        # If the selected year is the current year, return months from the next
+        # If the selected year is the current year, return months from the current
         # month to December
-        months: list = [str(month) for month in range(current_month + 1, 13)]
+        months: list = [str(month) for month in range(current_month, 13)]
     else:
         # For any other year, return all months
         months: list = [str(month) for month in range(1, 13)]
@@ -282,11 +282,10 @@ def months_in_numbers(selected_year: str):
     return months
 
 # Util function to get pay props from pay.config file
-def get_pay_prop(file_name: str, prop: str) -> str:
+@st.cache_data
+def get_pay_prop(prop: str) -> str:
 
-    directory = "./config"
-    file_name = f"{file_name}.pay.json"
-    file_path = os.path.join(directory, file_name)
+    file_path = os.path.join("config", "pay.json")
 
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -296,32 +295,3 @@ def get_pay_prop(file_name: str, prop: str) -> str:
         return None  # File not found
     except json.JSONDecodeError:
         return None  # Invalid JSON format in the file
-
-# Util function to verify and normalize filepath names
-def sanitize_filename(filename: str) -> str:
-
-    # Define a set of characters that are not allowed in filenames
-    forbidden_chars: list = ['<', '>', ':', '"', '/', '\\', '|', '?', '*']
-
-    # Replace forbidden characters with underscores
-    sanitized_filename: str = ''.join(c if c not in forbidden_chars else '_' for c in filename)
-
-    # Remove leading and trailing whitespaces
-    sanitized_filename: str = sanitized_filename.strip()
-
-    return sanitized_filename
-
-# Util function to get a list of the possible payment configurations
-def get_possible_pay_configs() -> list:
-
-    # Use os.path.join to create the full file path
-    directory = "config"
-    files = [os.path.join(directory, file) for file in os.listdir(directory) if os.path.isfile(os.path.join(directory, file))]
-
-    # Extract only the base name (excluding extension and ".pay") from the path
-    file_names = [os.path.splitext(os.path.basename(file))[0].replace(".pay", "") for file in files]
-
-    # Remove the "items" file, if present
-    file_names = [name for name in file_names if name != "items"]
-
-    return file_names
