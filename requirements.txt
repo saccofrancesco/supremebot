@@ -23,7 +23,7 @@ Jinja2==3.1.2
 jsonschema==4.20.0
 jsonschema-specifications==2023.11.2
 kiwisolver==1.4.5
-lxml==4.9.3
+lxml==4.9.4
 Markdown==3.5.1
 markdown-it-py==3.0.0
 markdownlit==0.0.7
