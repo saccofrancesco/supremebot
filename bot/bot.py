@@ -31,7 +31,7 @@ class Bot:
                 self.ITEMS_TYPES.append(item["category"].replace("/", "-")) # Preventing tops/sweaters to make error in the link
 
         # Opening the Data File
-        with open("./config/pay.config.json", "r") as d:
+        with open("./config/pay.json", "r") as d:
 
             # Loading the JSON File
             DATA: str = json.load(d)
