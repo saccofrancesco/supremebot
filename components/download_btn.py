@@ -21,7 +21,7 @@ class DownloadButtonUI:
                 self.save_payment_data(json_file_path, form)
                 st.toast("Payment configuration saved", icon="✅")
             except Exception as e:
-                st.toast(f"Error saving payment configuration: {e}", icon="❌")
+                st.error(f"Error saving payment configuration: {e}")
 
     @staticmethod
     def save_payment_data(file_path: str, form: CheckoutUI) -> None:
