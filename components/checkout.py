@@ -15,7 +15,7 @@ class CheckoutUI:
         # Option to load a pay config saved from previus buys
         path: str = os.path.join("config", "pay.json")
         pay_config: bool = os.path.exists(path)
-        
+
         # Requesting contact email
         st.subheader("Contact")
         from components.utils import get_pay_prop
@@ -32,10 +32,8 @@ class CheckoutUI:
         col1.subheader("Shipping Info")
         from components.utils import country_list
         self.country: str = col1.selectbox(
-            " ",
-            country_list(),
-            label_visibility="collapsed",
-            index=country_list().index(get_pay_prop("country")) if pay_config else 0)
+            " ", country_list(), label_visibility="collapsed", index=country_list().index(
+                get_pay_prop("country")) if pay_config else 0)
         first_name_col, last_name_col = col1.columns(2)
         self.name: str = first_name_col.text_input(
             " ", label_visibility="collapsed", placeholder="Name",
@@ -61,7 +59,8 @@ class CheckoutUI:
             self.zone: str = zone_col.selectbox(
                 " ", country_zones(
                     self.country), label_visibility="collapsed", index=country_zones(
-                    self.country).index(get_pay_prop("zone")) if pay_config else 0)
+                    self.country).index(
+                    get_pay_prop("zone")) if pay_config and get_pay_prop("zone") != "None" else 0)
         else:
             postal_code_col, city_col = col1.columns(2)
             self.postal_code: str = postal_code_col.text_input(
@@ -76,7 +75,7 @@ class CheckoutUI:
             value=get_pay_prop("phone") if pay_config else "",
             label_visibility="collapsed",
             placeholder="Phone")
-        
+
         # Filling second column
         self.col2.subheader("Credit Card Info")
         self.card_number: str = self.col2.text_input(
