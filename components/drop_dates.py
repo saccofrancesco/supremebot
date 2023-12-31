@@ -11,13 +11,7 @@ class DropDatesUI:
         self.setup_ui()
 
     def setup_ui(self) -> None:
-        # Setting up the App Title and Icon
-        icon_col, title_col = st.columns([0.07, 0.93])
-        title_col.title("Supremebot")
-
-        # Get the absolute path to the icon image file
-        icon_file_path = os.path.join("img", "icon.png")
-        icon_col.image(icon_file_path, width=100)
+        st.title("Supremebot")
 
         try:
             # Fetching the dates
