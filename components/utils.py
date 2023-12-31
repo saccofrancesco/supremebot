@@ -282,7 +282,6 @@ def months_in_numbers(selected_year: str):
     return months
 
 # Util function to get pay props from pay.config file
-@st.cache_data
 def get_pay_prop(prop: str) -> str:
 
     file_path = os.path.join("config", "pay.json")
@@ -290,7 +289,7 @@ def get_pay_prop(prop: str) -> str:
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             data = json.load(file)
-            return data[0][prop]
+            return data[prop]
     except FileNotFoundError:
         return None  # File not found
     except json.JSONDecodeError:
