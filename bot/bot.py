@@ -36,27 +36,24 @@ class Bot:
             # Loading the JSON File
             DATA: str = json.load(d)
 
-            # Looping the JSON File
-            for info in DATA:
-
-                # Storing Personal Data
-                self.EMAIL: str = info["email"]
-                self.COUNTRY: str = info["country"]
-                self.FIRST_NAME: str = info["first_name"]
-                self.LAST_NAME: str = info["last_name"]
-                self.ADDRESS: str = info["address"]
-                self.POSTAL_CODE: str = info["postal_code"]
-                self.CITY: str = info["city"]
-                self.PHONE: str = info["phone"]
-                self.CARD_NUMBER: str = info["card_number"]
-                self.MONTH_EXP: str = info["expiration_month"]
-                self.YEAR_EXP: str = info["expiration_year"]
-                self.CVV : str= info["cvv"]
-                self.NAME_ON_CARD: str = info["name_on_card"]
-                try:
-                    self.ZONE: str = info["zone"]
-                except Exception:
-                    pass
+        # Storing Personal Data
+        self.EMAIL: str = DATA["email"]
+        self.COUNTRY: str = DATA["country"]
+        self.FIRST_NAME: str = DATA["first_name"]
+        self.LAST_NAME: str = DATA["last_name"]
+        self.ADDRESS: str = DATA["address"]
+        self.POSTAL_CODE: str = DATA["postal_code"]
+        self.CITY: str = DATA["city"]
+        self.PHONE: str = DATA["phone"]
+        self.CARD_NUMBER: str = DATA["card_number"]
+        self.MONTH_EXP: str = DATA["expiration_month"]
+        self.YEAR_EXP: str = DATA["expiration_year"]
+        self.CVV : str= DATA["cvv"]
+        self.NAME_ON_CARD: str = DATA["name_on_card"]
+        try:
+            self.ZONE: str = DATA["zone"]
+        except Exception:
+            pass
 
         # Creating the Link's List
         self.links_list: list = []
