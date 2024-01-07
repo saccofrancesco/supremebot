@@ -87,6 +87,9 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
                     "\n", "") for color in colors_div.find_all(
                     "div", {
                         "class": "product-option"})]
+            # Removing the VOTE button (not a color option, but a public pool)
+            if "VOTING >" in item_colors:
+                item_colors.remove("VOTING >")
         item_type: str = item["data-category"]
         items_dict[item_name] = {
             "category": item_type,
