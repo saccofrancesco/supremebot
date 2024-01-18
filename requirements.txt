@@ -16,7 +16,7 @@ favicon==0.7.0
 fonttools==4.47.2
 gitdb==4.0.11
 GitPython==3.1.41
-greenlet==3.0.1
+greenlet==3.0.3
 htbuilder==0.6.2
 idna==3.6
 importlib-metadata==7.0.1
@@ -37,7 +37,7 @@ packaging==23.2
 pandas==2.1.4
 pillow==10.2.0
 pip-review==1.3.0
-playwright==1.40.0
+playwright==1.41.0
 protobuf==4.25.2
 proxy_tools==0.1.0
 pyarrow==14.0.2
@@ -71,7 +71,7 @@ streamlit-extras==0.3.6
 streamlit-faker==0.0.3
 streamlit-image-coordinates==0.1.6
 streamlit-keyup==0.2.2
-streamlit-option-menu==0.3.6
+streamlit-option-menu==0.3.12
 streamlit-toggle-switch==1.0.2
 streamlit-vertical-slider==2.5.5
 tenacity==8.2.3
