@@ -28,7 +28,7 @@ lxml==5.1.0
 Markdown==3.5.2
 markdown-it-py==3.0.0
 markdownlit==0.0.7
-MarkupSafe==2.1.4
+MarkupSafe==2.1.5
 matplotlib==3.8.2
 mdurl==0.1.2
 more-itertools==10.2.0
