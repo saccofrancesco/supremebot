@@ -80,7 +80,7 @@ toml==0.10.2
 toolz==0.12.1
 tornado==6.4
 typing_extensions==4.9.0
-tzdata==2023.4
+tzdata==2024.1
 tzlocal==5.2
 urllib3==2.2.0
 validators==0.22.0
