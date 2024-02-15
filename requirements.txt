@@ -11,7 +11,7 @@ click==8.1.7
 contourpy==1.2.0
 cycler==0.12.1
 entrypoints==0.4
-Faker==23.1.0
+Faker==23.2.0
 favicon==0.7.0
 fonttools==4.48.1
 gitdb==4.0.11
@@ -29,7 +29,7 @@ Markdown==3.5.2
 markdown-it-py==3.0.0
 markdownlit==0.0.7
 MarkupSafe==2.1.5
-matplotlib==3.8.2
+matplotlib==3.8.3
 mdurl==0.1.2
 more-itertools==10.2.0
 numpy==1.26.4
@@ -38,7 +38,7 @@ pandas==2.2.0
 pillow==10.2.0
 pip-review==1.3.0
 playwright==1.41.2
-prometheus-client==0.19.0
+prometheus_client==0.20.0
 protobuf==4.25.2
 proxy_tools==0.1.0
 pyarrow==15.0.0
@@ -71,7 +71,7 @@ streamlit-embedcode==0.1.2
 streamlit-extras==0.4.0
 streamlit-faker==0.0.3
 streamlit-image-coordinates==0.1.6
-streamlit-keyup==0.2.2
+streamlit-keyup==0.2.3
 streamlit-option-menu==0.3.12
 streamlit-toggle-switch==1.0.2
 streamlit-vertical-slider==2.5.5
