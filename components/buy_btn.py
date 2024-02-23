@@ -12,7 +12,7 @@ class BuyButtonUI:
 
         self.buy_btn = st.button("BUY", key="buy-btn", type="primary")
         if self.buy_btn:
-            wait_until_start(11, 00)
+          #  wait_until_start(11, 00)
             print("start...")
             # Creating the Bot
             bot: Bot = Bot()

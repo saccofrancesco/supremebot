@@ -19,7 +19,7 @@ from io import StringIO
 def get_drop_dates() -> list:
 
     # Drops Site
-    url: str = "https://www.supremecommunity.com/season/fall-winter2023/droplists/"
+    url: str = "https://www.supremecommunity.com/season/spring-summer2024/droplists/"
 
     # Fetching the source code
     response: requests.models.Response = requests.get(url)
@@ -58,7 +58,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     data: str = convert_date(drop_date)
 
     # Constructing URL based on the Drop Date
-    url: str = f"https://www.supremecommunity.com/season/fall-winter2023/droplist/{data}/#"
+    url: str = "https://www.supremecommunity.com/season/spring-summer2024/droplists/{data}/#"
 
     # Creating an Object to store the fetched items
     items_dict: dict = {}
@@ -335,7 +335,8 @@ def wait_until_start(hour, minute=0):
     # 目標時刻になるまで待機
     while datetime.datetime.now(jst) < start_time:
         current_time = datetime.datetime.now(jst)
-        print(f"現在時刻: {current_time.strftime('%Y-%m-%d %H:%M:%S')}, 開始まで待機中...")
+        print(
+            f"Now: {current_time.strftime('%Y-%m-%d %H:%M:%S')}, Waiting for {hour}:{minute}...")
         time.sleep(1)  # 1秒ごとにチェック
 
     # 目標時刻に到達したらスクリプトを実行
