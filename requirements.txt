@@ -52,7 +52,7 @@ pyobjc-framework-Cocoa==10.1
 pyobjc-framework-Security==10.1
 pyobjc-framework-WebKit==10.1
 pyparsing==3.1.1
-python-dateutil==2.8.2
+python-dateutil==2.9.0
 pytz==2024.1
 pywebview==4.4.1
 PyYAML==6.0.1
