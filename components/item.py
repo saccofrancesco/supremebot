@@ -14,9 +14,12 @@ class ItemUI:
             colored_header(f"{category} Products", "", "red-80")
             add_vertical_space(1)
 
+            # iem がNoneである場合は、商品が見つかりませんと表示
+            if items is None:
+                st.markdown("No items found")
+                return
             # For each item, show the product card
             for item in items:
-
                 # Creating Items attributes
                 self.name = item
                 self.image = items[self.name]["image"]

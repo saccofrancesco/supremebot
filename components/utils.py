@@ -58,7 +58,8 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     data: str = convert_date(drop_date)
 
     # Constructing URL based on the Drop Date
-    url: str = "https://www.supremecommunity.com/season/spring-summer2024/droplists/{data}/#"
+    # 例: https://www.supremecommunity.com/season/spring-summer2024/droplist/2024-02-29/
+    url: str = f"https://www.supremecommunity.com/season/fw23/droplist/{data}/"
 
     # Creating an Object to store the fetched items
     items_dict: dict = {}
@@ -82,39 +83,42 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     response: requests.models.Response = requests.get(url)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
-    item_divs: list = soup.find_all(
-        "div", {"data-category": f"{categories[item_category]}"})
+        item_divs: list = soup.find_all(
+            "div", {"data-category": f"{categories[item_category]}"})
 
-    # Storing Items' Infos
-    for item in item_divs:
-        item_name: str = item.find(
-            "div", {"class": "catalog-item__title"}).text.replace("\n", "")
-        item_price: str = item.find("span",
-                                    {"class": "catalog-label-price"}).text.replace("\n",
-                                                                                   "").split("/")[0] if item.find("span",
-                                                                                                                  {"class": "catalog-label-price"}) else "None"
-        item_image: str = f'https://www.supremecommunity.com{item.find("img")["src"]}'
-        item_colors: list = []
-        item_full_link: str = f'https://www.supremecommunity.com{item.find("a")["href"]}'
-        response: requests.models.Response = requests.get(item_full_link)
-        if item_price != "None" and response.status_code == 200:
-            soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
-            colors_div: list = soup.find_all(
-                "div", {"class": "product-options active"})[1]
-            item_colors: list = [
-                color.text.replace(
-                    "\n", "") for color in colors_div.find_all(
-                    "div", {
-                        "class": "product-option"})]
-        item_type: str = item["data-category"]
-        items_dict[item_name] = {
-            "category": item_type,
-            "price": item_price,
-            "image": item_image,
-            "colors": item_colors,
-        }
+        # Storing Items' Infos
+        for item in item_divs:
+            item_name: str = item.find(
+                "div", {"class": "catalog-item__title"}).text.replace("\n", "")
+            item_price: str = item.find("span",
+                                        {"class": "catalog-label-price"}).text.replace("\n",
+                                                                                       "").split("/")[0] if item.find("span",
+                                                                                                                      {"class": "catalog-label-price"}) else "None"
+            item_image: str = f'https://www.supremecommunity.com{item.find("img")[
+                "src"]}'
+            item_colors: list = []
+            item_full_link: str = f'https://www.supremecommunity.com{item.find("a")[
+                "href"]}'
+            response: requests.models.Response = requests.get(item_full_link)
+            if item_price != "None" and response.status_code == 200:
+                soup: BeautifulSoup = BeautifulSoup(
+                    response.text, "html.parser")
+                colors_div: list = soup.find_all(
+                    "div", {"class": "product-options active"})[1]
+                item_colors: list = [
+                    color.text.replace(
+                        "\n", "") for color in colors_div.find_all(
+                        "div", {
+                            "class": "product-option"})]
+            item_type: str = item["data-category"]
+            items_dict[item_name] = {
+                "category": item_type,
+                "price": item_price,
+                "image": item_image,
+                "colors": item_colors,
+            }
 
-    return items_dict
+        return items_dict
 
 # Util function to check if an item is already
 

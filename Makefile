@@ -10,7 +10,7 @@ setup:
 
 # Run the application
 run:
-	streamlit run main.py
+	poetry run streamlit run main.py
 
 # Help command
 help:
