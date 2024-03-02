@@ -68,14 +68,15 @@ class Bot:
 
     def scrape(self) -> None:
         for i in range(len(self.ITEMS_NAMES)):
-            url: str = f"https://jp.supreme.com/collections/{self.ITEMS_TYPES[i]}"
+            url: str = f"https://jp.supreme.com/collections/{
+                self.ITEMS_TYPES[i]}"
             print(f"Processing {self.ITEMS_NAMES[i]}...")
 
             with sync_playwright() as p:
                 browser = p.chromium.launch(
                     headless=True, args=["--no-images"])
                 page = browser.new_page()
-                attempts = 10
+                attempts = 10000
                 for attempt in range(attempts):
                     # ページの読み込みレベルを調整
                     page.goto(url, wait_until="domcontentloaded")
@@ -97,7 +98,8 @@ class Bot:
                         if product_name == self.ITEMS_NAMES[i]:
                             product_link = element.query_selector(
                                 "a[data-cy-title]").get_attribute("href")
-                            complete_link = f"https://jp.supreme.com{product_link}"
+                            complete_link = f"https://jp.supreme.com{
+                                product_link}"
                             temp_links.append(complete_link)
 
                     for complete_link in temp_links:
@@ -143,9 +145,17 @@ class Bot:
         # Going to the Checkout
         try:
             # Increased timeout
-            page.click('#product-root > div > div.collection-nav.display-none.bpS-display-block > div > div > div > a.button.button--s.c-white.width-100.display-flex.bg-red--aa', timeout=60000)
+            page.click('#product-root > div > div.collection-nav.display-none.bpS-display-block > div > div > div > a.button.button--s.c-white.width-100.display-flex.bg-red--aa', timeout=600000)
         except TimeoutError:
             pass
+
+        try:
+            # wait_for_selectorを使用して、指定の要素が見つかるまで待機
+            page.wait_for_selector("input[id='email']", timeout=6000000)
+        except TimeoutError:
+            # タイムアウトの場合の処理
+            print("Timeout while waiting for email input field.")
+            return
 
         # Using Data to Compile the Form
         page.fill("input[id='email']", self.EMAIL)
@@ -187,3 +197,4 @@ class Bot:
 
         # '購入する' ボタンをクリック
         page.click("button[type='submit']")
+        print("good")
