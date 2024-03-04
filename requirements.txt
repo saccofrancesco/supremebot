@@ -54,7 +54,7 @@ pyobjc-framework-WebKit==10.1
 pyparsing==3.1.1
 python-dateutil==2.9.0.post0
 pytz==2024.1
-pywebview==5.0.1
+pywebview==5.0.3
 PyYAML==6.0.1
 referencing==0.33.0
 requests==2.31.0
