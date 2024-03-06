@@ -37,7 +37,7 @@ packaging==23.2
 pandas==2.2.1
 pillow==10.2.0
 pip-review==1.3.0
-playwright==1.41.2
+playwright==1.42.0
 prometheus_client==0.20.0
 protobuf==4.25.3
 proxy_tools==0.1.0
@@ -51,7 +51,7 @@ pyobjc-core==10.1
 pyobjc-framework-Cocoa==10.1
 pyobjc-framework-Security==10.1
 pyobjc-framework-WebKit==10.1
-pyparsing==3.1.1
+pyparsing==3.1.2
 python-dateutil==2.9.0.post0
 pytz==2024.1
 pywebview==5.0.4
