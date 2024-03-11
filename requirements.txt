@@ -44,7 +44,7 @@ proxy_tools==0.1.0
 pyarrow==15.0.1
 pycodestyle==2.11.1
 pydeck==0.8.1b0
-pyee==11.0.1
+pyee==11.1.0
 Pygments==2.17.2
 pymdown-extensions==10.7.1
 pyobjc-core==10.1
