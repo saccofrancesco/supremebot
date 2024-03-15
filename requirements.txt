@@ -25,7 +25,7 @@ jsonschema==4.21.1
 jsonschema-specifications==2023.12.1
 kiwisolver==1.4.5
 lxml==5.1.0
-Markdown==3.5.2
+Markdown==3.6
 markdown-it-py==3.0.0
 markdownlit==0.0.7
 MarkupSafe==2.1.5
@@ -64,7 +64,7 @@ six==1.16.0
 smmap==5.0.1
 soupsieve==2.5
 st-annotated-text==4.0.1
-streamlit==1.32.1
+streamlit==1.32.2
 streamlit-camera-input-live==0.2.0
 streamlit-card==1.0.0
 streamlit-embedcode==0.1.2
@@ -85,4 +85,4 @@ tzlocal==5.2
 urllib3==2.2.1
 validators==0.22.0
 watchdog==4.0.0
-zipp==3.18.0
+zipp==3.18.1
