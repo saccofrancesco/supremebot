@@ -1,6 +1,6 @@
 altair==5.2.0
 attrs==23.2.0
-autopep8==2.0.4
+autopep8==2.1.0
 beautifulsoup4==4.12.3
 blinker==1.7.0
 bottle==0.12.25
