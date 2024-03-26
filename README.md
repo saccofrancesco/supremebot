@@ -6,9 +6,9 @@
 <h4 align="center">A simple UI tool for buying Supreme items built on top of <a href="https://streamlit.io/" target="_blank">Streamlit</a>.</h4>
 
 <p align="center">
-  <img src="https://img.shields.io/github/contributors/TonicStark/supreme-bot?style=for-the-badge" alt="Contributors">
-  <img src="https://img.shields.io/github/forks/TonicStark/supreme-bot?style=for-the-badge" alt="Forks">
-  <img src="https://img.shields.io/github/stars/TonicStark/supreme-bot?style=for-the-badge" alt="Stars">
+  <img src="https://img.shields.io/github/contributors/saccofrancesco/supreme-bot?style=for-the-badge" alt="Contributors">
+  <img src="https://img.shields.io/github/forks/saccofrancesco/supreme-bot?style=for-the-badge" alt="Forks">
+  <img src="https://img.shields.io/github/stars/saccofrancesco/supreme-bot?style=for-the-badge" alt="Stars">
 </p>
 
 <p align="center">
