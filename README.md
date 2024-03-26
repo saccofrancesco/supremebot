@@ -45,7 +45,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [P
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/TonicStark/supreme-bot.git
+$ git clone https://github.com/saccofrancesco/supreme-bot.git
 
 # Go into the repository
 $ cd supreme-bot
@@ -73,11 +73,11 @@ This software uses the following open source packages:
 - [Beautifulsoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
 ## You may also like...
-- [crossword-solver](https://github.com/TonicStark/crosswords-solver) built on top of [Streamlit](https://streamlit.io/) and [Tesseract](https://github.com/tesseract-ocr/tesseract);
-- [studymate](https://github.com/TonicStark/studymate) built on top of [Streamlit](https://streamlit.io/) and [Spacy](https://spacy.io/), using [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf).
+- [crossword-solver](https://github.com/saccofrancesco/crosswords-solver) built on top of [Streamlit](https://streamlit.io/) and [Tesseract](https://github.com/tesseract-ocr/tesseract);
+- [lock](https://github.com/saccofrancesco/lock) built on top of [Customtkinter](https://customtkinter.tomschimansky.com/).
 
 ## License
 Attribution - NonCommercial - ShareAlike 4.0 International
 
 ---
-> GitHub [@TonicStark](https://github.com/TonicStark)
+> GitHub [@saccofrancesco](https://github.com/saccofrancesco)
