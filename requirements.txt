@@ -35,7 +35,7 @@ more-itertools==10.2.0
 numpy==1.26.4
 packaging==23.2
 pandas==2.2.1
-pillow==10.2.0
+pillow==10.3.0
 pip-review==1.3.0
 playwright==1.42.0
 prometheus_client==0.20.0
@@ -71,7 +71,7 @@ streamlit-embedcode==0.1.2
 streamlit-extras==0.4.0
 streamlit-faker==0.0.3
 streamlit-image-coordinates==0.1.6
-streamlit-keyup==0.2.3
+streamlit-keyup==0.2.4
 streamlit-option-menu==0.3.12
 streamlit-toggle-switch==1.0.2
 streamlit-vertical-slider==2.5.5
@@ -83,6 +83,6 @@ typing_extensions==4.10.0
 tzdata==2024.1
 tzlocal==5.2
 urllib3==2.2.1
-validators==0.24.0
+validators==0.26.0
 watchdog==4.0.0
 zipp==3.18.1
