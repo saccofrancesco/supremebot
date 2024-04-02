@@ -9,6 +9,24 @@ from components.zones import *
 from components.checkout import CheckoutUI
 import os
 
+# Function to initialize the program
+@st.cache_data
+def init() -> None:
+
+    # Injecting CSS for image styling
+    st.markdown(
+        "<style> img { border-radius: 5%; } </style>",
+        unsafe_allow_html=True)
+    
+    # Create the directory if it doesn't exist
+    if not os.path.exists("./config"):
+        os.makedirs("./config")
+
+    # Write data (empty list) to the JSON file (if the file doesn't exists)
+    if not os.path.exists("./config/items.json"):
+        with open("./config/items.json", 'w') as json_file:
+            json.dump([], json_file, indent=4)
+
 # Util function to get all the drop dates for the current release
 @st.cache_data
 def get_drop_dates() -> list:

@@ -1,5 +1,6 @@
 # Importing Libraries
 import streamlit as st
+from components.utils import init
 from components.drop_dates import DropDatesUI
 from components.categories import CategoriesUI
 from components.item import ItemUI
@@ -14,10 +15,8 @@ if __name__ == "__main__":
     # Configuration
     st.set_page_config("Supremebot", "img/icon.png", "wide")
 
-    # Injecting CSS for image styling
-    st.markdown(
-        "<style> img { border-radius: 5%; } </style>",
-        unsafe_allow_html=True)
+    # Intialization
+    init()
 
     # Setting up the dates selection
     dates: DropDatesUI = DropDatesUI()
