@@ -29,7 +29,7 @@ Markdown==3.6
 markdown-it-py==3.0.0
 markdownlit==0.0.7
 MarkupSafe==2.1.5
-matplotlib==3.8.3
+matplotlib==3.8.4
 mdurl==0.1.2
 more-itertools==10.2.0
 numpy==1.26.4
@@ -83,6 +83,6 @@ typing_extensions==4.10.0
 tzdata==2024.1
 tzlocal==5.2
 urllib3==2.2.1
-validators==0.27.0
+validators==0.28.0
 watchdog==4.0.0
 zipp==3.18.1
