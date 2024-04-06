@@ -11,9 +11,9 @@ click==8.1.7
 contourpy==1.2.1
 cycler==0.12.1
 entrypoints==0.4
-Faker==24.4.0
+Faker==24.7.1
 favicon==0.7.0
-fonttools==4.50.0
+fonttools==4.51.0
 gitdb==4.0.11
 GitPython==3.1.43
 greenlet==3.0.3
@@ -79,7 +79,7 @@ tenacity==8.2.3
 toml==0.10.2
 toolz==0.12.1
 tornado==6.4
-typing_extensions==4.10.0
+typing_extensions==4.11.0
 tzdata==2024.1
 tzlocal==5.2
 urllib3==2.2.1
