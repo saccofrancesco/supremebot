@@ -11,7 +11,7 @@ click==8.1.7
 contourpy==1.2.1
 cycler==0.12.1
 entrypoints==0.4
-Faker==24.9.0
+Faker==24.11.0
 favicon==0.7.0
 fonttools==4.51.0
 gitdb==4.0.11
@@ -46,7 +46,7 @@ pycodestyle==2.11.1
 pydeck==0.8.1b0
 pyee==11.1.0
 Pygments==2.17.2
-pymdown-extensions==10.7.1
+pymdown-extensions==10.8
 pyobjc-core==10.2
 pyobjc-framework-Cocoa==10.2
 pyobjc-framework-Security==10.2
@@ -54,7 +54,7 @@ pyobjc-framework-WebKit==10.2
 pyparsing==3.1.2
 python-dateutil==2.9.0.post0
 pytz==2024.1
-pywebview==5.0.5
+pywebview==5.1
 PyYAML==6.0.1
 referencing==0.34.0
 requests==2.31.0
