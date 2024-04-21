@@ -41,7 +41,7 @@ playwright==1.43.0
 prometheus_client==0.20.0
 protobuf==4.25.3
 proxy_tools==0.1.0
-pyarrow==15.0.2
+pyarrow==16.0.0
 pycodestyle==2.11.1
 pydeck==0.8.1b0
 pyee==11.1.0
