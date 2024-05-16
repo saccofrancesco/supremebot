@@ -29,7 +29,7 @@ Markdown==3.6
 markdown-it-py==3.0.0
 markdownlit==0.0.7
 MarkupSafe==2.1.5
-matplotlib==3.8.4
+matplotlib==3.9.0
 mdurl==0.1.2
 more-itertools==10.2.0
 numpy==1.26.4
