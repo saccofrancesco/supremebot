@@ -13,7 +13,7 @@ cycler==0.12.1
 entrypoints==0.4
 Faker==25.2.0
 favicon==0.7.0
-fonttools==4.52.1
+fonttools==4.52.4
 gitdb==4.0.11
 GitPython==3.1.43
 greenlet==3.0.3
@@ -47,10 +47,10 @@ pydeck==0.9.1
 pyee==11.1.0
 Pygments==2.18.0
 pymdown-extensions==10.8.1
-pyobjc-core==10.2
-pyobjc-framework-Cocoa==10.2
-pyobjc-framework-Security==10.2
-pyobjc-framework-WebKit==10.2
+pyobjc-core==10.3
+pyobjc-framework-Cocoa==10.3
+pyobjc-framework-Security==10.3
+pyobjc-framework-WebKit==10.3
 pyparsing==3.1.2
 python-dateutil==2.9.0.post0
 pytz==2024.1
