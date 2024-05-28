@@ -1,6 +1,6 @@
 altair==5.3.0
 attrs==23.2.0
-autopep8==2.1.1
+autopep8==2.1.2
 beautifulsoup4==4.12.3
 blinker==1.8.2
 bottle==0.12.25
@@ -11,7 +11,7 @@ click==8.1.7
 contourpy==1.2.1
 cycler==0.12.1
 entrypoints==0.4
-Faker==25.2.0
+Faker==25.3.0
 favicon==0.7.0
 fonttools==4.52.4
 gitdb==4.0.11
