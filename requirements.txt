@@ -57,7 +57,7 @@ pytz==2024.1
 pywebview==5.1
 PyYAML==6.0.1
 referencing==0.35.1
-requests==2.32.2
+requests==2.32.3
 rich==13.7.1
 rpds-py==0.18.1
 six==1.16.0
@@ -72,7 +72,7 @@ streamlit-extras==0.4.2
 streamlit-faker==0.0.3
 streamlit-image-coordinates==0.1.6
 streamlit-keyup==0.2.4
-streamlit-option-menu==0.3.12
+streamlit-option-menu==0.3.13
 streamlit-toggle-switch==1.0.2
 streamlit-vertical-slider==2.5.5
 tenacity==8.3.0
