@@ -64,11 +64,12 @@ six==1.16.0
 smmap==5.0.1
 soupsieve==2.5
 st-annotated-text==4.0.1
+st-theme==1.2.3
 streamlit==1.35.0
 streamlit-camera-input-live==0.2.0
 streamlit-card==1.0.2
 streamlit-embedcode==0.1.2
-streamlit-extras==0.4.2
+streamlit-extras==0.4.3
 streamlit-faker==0.0.3
 streamlit-image-coordinates==0.1.6
 streamlit-keyup==0.2.4
