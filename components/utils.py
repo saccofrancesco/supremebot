@@ -38,12 +38,15 @@ def get_drop_dates() -> list:
     response: requests.models.Response = requests.get(url)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
+        # Find all dates
+        dates_divs: list = soup.find_all("div", {"class": "week-item-subtitle"})
+        dates: list = [date.text for date in dates_divs]
 
-    # Find all dates
-    dates_divs: list = soup.find_all("div", {"class": "week-item-subtitle"})
-    dates: list = [date.text for date in dates_divs]
+        return dates
 
-    return dates
+    else:
+        # Return an empty list or handle the error as needed
+        return []
 
 # Util function to convert a date to a certain format
 @st.cache_data
@@ -69,18 +72,19 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
         item_category = "tops-sweaters"
 
     # Constructing URL based on the Drop Date
-    url: str = f"https://www.supremecommunity.com/season/spring-summer2024/droplist/{
-        data}"
+    url: str = f"https://www.supremecommunity.com/season/spring-summer2024/droplists/{data}"
 
     # Creating an Object to store the fetched items
     items_dict: dict = {}
+
+    # Initializing item_divs to an empty list
+    item_divs: list = []
 
     # Fetching all items of a certain type
     response: requests.models.Response = requests.get(url)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
-    item_divs: list = soup.find_all(
-        "div", {"data-category": f"{item_category.lower()}"})
+        item_divs: list = soup.find_all("div", {"data-category": f"{item_category.lower()}"})
 
     # Storing Items' Infos
     for item in item_divs:
@@ -90,11 +94,9 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
                                     {"class": "catalog-label-price"}).text.replace("\n",
                                                                                    "").split("/")[0] if item.find("span",
                                                                                                                   {"class": "catalog-label-price"}) else "None"
-        item_image: str = f'https://www.supremecommunity.com{item.find("img")[
-            "src"]}'
+        item_image: str = f'https://www.supremecommunity.com{item.find("img")["src"]}'
         item_colors: list = []
-        item_full_link: str = f'https://www.supremecommunity.com{item.find("a")[
-            "href"]}'
+        item_full_link: str = f'https://www.supremecommunity.com{item.find("a")["href"]}'
         response: requests.models.Response = requests.get(item_full_link)
         if item_price != "None" and response.status_code == 200:
             soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
