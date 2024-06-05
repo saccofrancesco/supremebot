@@ -11,7 +11,7 @@ click==8.1.7
 contourpy==1.2.1
 cycler==0.12.1
 entrypoints==0.4
-Faker==25.4.0
+Faker==25.5.0
 favicon==0.7.0
 fonttools==4.53.0
 gitdb==4.0.11
@@ -71,7 +71,7 @@ streamlit-card==1.0.2
 streamlit-embedcode==0.1.2
 streamlit-extras==0.4.3
 streamlit-faker==0.0.3
-streamlit-image-coordinates==0.1.7
+streamlit-image-coordinates==0.1.9
 streamlit-keyup==0.2.4
 streamlit-option-menu==0.3.13
 streamlit-toggle-switch==1.0.2
@@ -86,4 +86,4 @@ tzlocal==5.2
 urllib3==2.2.1
 validators==0.28.3
 watchdog==4.0.1
-zipp==3.19.1
+zipp==3.19.2
