@@ -47,10 +47,10 @@ pydeck==0.9.1
 pyee==11.1.0
 Pygments==2.18.0
 pymdown-extensions==10.8.1
-pyobjc-core==10.3
-pyobjc-framework-Cocoa==10.3
-pyobjc-framework-Security==10.3
-pyobjc-framework-WebKit==10.3
+pyobjc-core==10.3.1
+pyobjc-framework-Cocoa==10.3.1
+pyobjc-framework-Security==10.3.1
+pyobjc-framework-WebKit==10.3.1
 pyparsing==3.1.2
 python-dateutil==2.9.0.post0
 pytz==2024.1
