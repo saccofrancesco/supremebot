@@ -3,14 +3,25 @@ import streamlit as st
 from components.utils import get_drop_dates
 from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
-import os
 from typing import List, Optional
 
 class DropDatesUI:
+    """
+    A class to represent the Drop Dates User Interface in a Streamlit application.
+
+    Attributes:
+        selected_date (Optional[str]): The selected drop date by the user.
+    """
     def __init__(self) -> None:
+        """
+        Initializes the DropDatesUI instance by setting up the user interface to select drop dates.
+        """
         self.setup_ui()
 
     def setup_ui(self) -> None:
+        """
+        Sets up the user interface to display drop dates and allow the user to select one.
+        """
         st.title("Supremebot")
 
         try:
@@ -27,5 +38,11 @@ class DropDatesUI:
 
     @staticmethod
     def get_drop_dates() -> List[str]:
+        """
+        Static method to fetch drop dates from a data source.
+
+        Returns:
+            List[str]: A list of drop dates.
+        """
         # Fetch drop dates
         return get_drop_dates() or []  # Return an empty list if no dates are available

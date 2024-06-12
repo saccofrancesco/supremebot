@@ -5,10 +5,35 @@ import playwright
 
 # Creating the Bot Class
 class Bot:
+    """
+    A class representing a bot for automating the Supreme shopping experience.
 
+    Attributes:
+        ITEMS_NAMES (list): A list of item names extracted from the JSON configuration file.
+        ITEMS_STYLES (list): A list of item styles (colors) extracted from the JSON configuration file.
+        ITEMS_SIZES (list): A list of item sizes extracted from the JSON configuration file.
+        ITEMS_TYPES (list): A list of item types (categories) extracted from the JSON configuration file.
+        EMAIL (str): User's email for checkout.
+        COUNTRY (str): User's country for checkout.
+        FIRST_NAME (str): User's first name for checkout.
+        LAST_NAME (str): User's last name for checkout.
+        ADDRESS (str): User's address for checkout.
+        POSTAL_CODE (str): User's postal code for checkout.
+        CITY (str): User's city for checkout.
+        PHONE (str): User's phone number for checkout.
+        CARD_NUMBER (str): User's credit card number for checkout.
+        MONTH_EXP (str): Expiration month of the user's credit card for checkout.
+        YEAR_EXP (str): Expiration year of the user's credit card for checkout.
+        CVV (str): CVV number of the user's credit card for checkout.
+        NAME_ON_CARD (str): Name on the user's credit card for checkout.
+        ZONE (str, optional): User's zone for checkout, if applicable.
+        links_list (list): A list to store valid product links found during scraping.
+    """
     # Constructor
     def __init__(self) -> None:
-
+        """
+        Initializes the Bot instance by loading configuration data and setting up required attributes.
+        """
         # Opening the Items File
         with open("./config/items.json", "r") as i:
 
@@ -60,6 +85,9 @@ class Bot:
 
     # Scrape Method for Saving the URLs
     def scrape(self) -> None:
+        """
+        Scrapes the Supreme website to find valid product links based on configured item criteria.
+        """
         for i in range(len(self.ITEMS_NAMES)):
             url: str = f"https://us.supreme.com/collections/{self.ITEMS_TYPES[i]}"
 
@@ -104,7 +132,12 @@ class Bot:
 
     # Method for Add to the Cart the founded Items
     def add_to_basket(self, page) -> None:
+        """
+        Adds items from the collected links to the shopping basket on the Supreme website.
 
+        Args:
+            page: The Playwright page object representing the current web page.
+        """
         # Looping the Element's to Buy List
         for i in range(len(self.links_list)):
             page.goto(self.links_list[i])
@@ -121,7 +154,12 @@ class Bot:
 
     # Method for Compiling the Checkout Form
     def checkout(self, page) -> None:
+        """
+        Completes the checkout process on the Supreme website.
 
+        Args:
+            page: The Playwright page object representing the current web page.
+        """
         # Going to the Checkout
         try:
             page.click('#product-root > div > div.collection-nav.display-none.bpS-display-block > div > div > div > a.button.button--s.c-white.width-100.display-flex.bg-red--aa', timeout=60000)  # Increased timeout

@@ -6,8 +6,31 @@ from components.zones import ZONES
 import os
 
 class CheckoutUI:
-    def __init__(self) -> None:
+    """
+    A class to represent the Checkout User Interface in a Streamlit application.
 
+    Attributes:
+        email (str): User's contact email.
+        country (str): Selected country for shipping.
+        name (str): User's first name.
+        surname (str): User's last name.
+        address (str): User's shipping address.
+        postal_code (str): Postal code for the shipping address.
+        city (str): City for the shipping address.
+        zone (str): Zone or region for the shipping address.
+        phone (str): User's phone number.
+        card_number (str): Credit card number.
+        expiration_year (str): Expiration year of the credit card.
+        expiration_month (str): Expiration month of the credit card.
+        cvv (int): CVV code of the credit card.
+        name_on_card (str): Name on the credit card.
+        save_pay_method_col: Column for saving payment method options.
+        buy_col: Column for the buy button.
+    """
+    def __init__(self) -> None:
+        """
+        Initializes the CheckoutUI instance by setting up the checkout form with user inputs.
+        """
         # Requesting user personal infos
         colored_header("Checkout", "", "red-80")
         add_vertical_space(1)

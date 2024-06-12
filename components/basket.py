@@ -8,12 +8,29 @@ import json
 import os
 
 class BasketUI:
+    """
+    A class to represent the Basket User Interface in a Streamlit application.
+
+    Attributes:
+        json_file_path (str): Path to the JSON file containing basket items.
+        is_empty (bool): Indicates if the basket is empty.
+    """
     def __init__(self) -> None:
+        """
+        Initializes the BasketUI instance by setting the JSON file path and checking if the basket is empty.
+        """
         # Get the absolute path to the JSON file
         self.json_file_path: str = os.path.join("config", "items.json")
         self.is_empty: bool = self.show_basket_content()
 
     def load_data_from_json(self) -> List[Dict[str, Union[str, int]]]:
+        """
+        Loads data from the JSON file.
+
+        Returns:
+            List[Dict[str, Union[str, int]]]: A list of dictionaries containing item details.
+            Returns an empty list if the file is not found or cannot be parsed.
+        """
         try:
             # Attempt to load data from the JSON file
             with open(self.json_file_path, "r") as file:
@@ -24,6 +41,12 @@ class BasketUI:
             return []
 
     def display_item(self, item: Dict[str, Union[str, int]]) -> None:
+        """
+        Displays information about a single item in the basket.
+
+        Args:
+            item (Dict[str, Union[str, int]]): A dictionary containing item details.
+        """
         # Display information about a single item in the basket
         col1, col2, col3, col4, col5 = st.columns([0.8, 4.5, 1, 1, 1])
         col1.image(item["image"], width=80)
@@ -34,6 +57,12 @@ class BasketUI:
         add_vertical_space(1)
 
     def show_basket_content(self) -> bool:
+        """
+        Displays the basket content and returns whether the basket is empty.
+
+        Returns:
+            bool: True if the basket is empty, False otherwise.
+        """
         # Load data from JSON file
         data: List[Dict[str, Union[str, int]]] = self.load_data_from_json()
 

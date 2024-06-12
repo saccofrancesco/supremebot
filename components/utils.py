@@ -12,7 +12,9 @@ import os
 # Function to initialize the program
 @st.cache_data
 def init() -> None:
-
+    """
+    Initializes the program by injecting CSS for image styling and creating necessary directories and files.
+    """
     # Injecting CSS for image styling
     st.markdown(
         "<style> img { border-radius: 5%; } </style>",
@@ -30,7 +32,13 @@ def init() -> None:
 # Util function to get all the drop dates for the current release
 @st.cache_data
 def get_drop_dates() -> list:
+    """
+    Fetches drop dates for the current release from Supreme Community website.
 
+    Returns:
+        list: A list of drop dates in string format.
+            Returns an empty list if the request fails or no dates are found.
+    """
     # Drops Site
     url: str = "https://www.supremecommunity.com/season/spring-summer2024/droplists/"
 
@@ -51,7 +59,18 @@ def get_drop_dates() -> list:
 # Util function to convert a date to a certain format
 @st.cache_data
 def convert_date(date: str) -> str:
+    """
+    Converts a date string into a formatted date string (YYYY-MM-DD).
 
+    Args:
+        date (str): The date string to be converted.
+
+    Returns:
+        str: The formatted date string.
+
+    Raises:
+        ValueError: If the input date string format is incorrect.
+    """
     # Remove the ordinal suffix (st, nd, rd) from the date string
     date: str = re.sub(r'(\d)(st|nd|rd|th)( |$)', r'\1\3', date)
 
@@ -63,7 +82,17 @@ def convert_date(date: str) -> str:
 
 # Util function to fetch all information based on Drop Date and Item Category
 def fetch_items(drop_date: str, item_category: str) -> dict:
+    """
+    Fetches information about items based on the specified drop date and item category from Supreme Community website.
 
+    Args:
+        drop_date (str): The drop date in string format.
+        item_category (str): The category of items to fetch.
+
+    Returns:
+        dict: A dictionary containing information about fetched items.
+            Keys are item names and values are dictionaries with item details.
+    """
     # Coverting data to url format
     data: str = convert_date(drop_date)
 
@@ -123,6 +152,15 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
 
 # Util function to check if an item is already
 def is_item_in_basket(item_name: str) -> bool:
+    """
+    Checks if an item with the specified name is already in the basket JSON file.
+
+    Args:
+        item_name (str): The name of the item to check.
+
+    Returns:
+        bool: True if the item is found in the basket, False otherwise.
+    """
     # Get the absolute path to the JSON file
     json_file_path = os.path.join("config", "items.json")
 
@@ -150,7 +188,17 @@ def add_to_basket(
         item_color: str,
         item_size: str,
         item_category: str):
+    """
+    Adds an item to the basket by appending its details to the items.json file.
 
+    Args:
+        item_image (str): The URL of the item's image.
+        item_price (int): The price of the item.
+        item_name (str): The name of the item.
+        item_color (str): The color of the item.
+        item_size (str): The size of the item.
+        item_category (str): The category of the item.
+    """
     # Creating the item object
     item_object: dict = {
         "image": item_image,
@@ -184,6 +232,15 @@ def add_to_basket(
 
 # Util function to delete an item
 def remove_from_basket(item_name: str) -> bool:
+    """
+    Removes an item with the specified name from the basket stored in items.json file.
+
+    Args:
+        item_name (str): The name of the item to remove.
+
+    Returns:
+        bool: True if the item was successfully removed, False otherwise.
+    """
     # Get the absolute path to the JSON file
     json_file_path = os.path.join("config", "items.json")
 
@@ -220,6 +277,15 @@ def remove_from_basket(item_name: str) -> bool:
 
 # Util function to check if the basket is empty
 def is_json_file_empty(file_path: str) -> bool:
+    """
+    Checks if the specified JSON file is empty.
+
+    Args:
+        file_path (str): The path to the JSON file.
+
+    Returns:
+        bool: True if the JSON file is empty or doesn't exist, False otherwise.
+    """
     try:
         with open(file_path, 'r') as file:
             data: str = json.load(file)
@@ -232,6 +298,17 @@ def is_json_file_empty(file_path: str) -> bool:
 
 # Util function to get infos about an item in the basket
 def get_info_for_item(item_name: str, param: str):
+    """
+    Retrieves information about a specific item from the items.json file.
+
+    Args:
+        item_name (str): The name of the item to retrieve information for.
+        param (str): The parameter or field to retrieve from the item's data.
+
+    Returns:
+        str: The value of the specified parameter for the item.
+            Returns an error message if the item or parameter is not found.
+    """
     # Get the absolute path to the JSON file
     json_file_path = os.path.join("config", "items.json")
 
@@ -251,18 +328,39 @@ def get_info_for_item(item_name: str, param: str):
 # Util function to list all the available country
 @st.cache_data
 def country_list() -> list:
+    """
+    Retrieves a list of all available countries from the NATIONS dictionary.
 
+    Returns:
+        list: A list of country names.
+    """
     return [nation for nation in NATIONS.keys()]
 
 # Util function to get a selected country and retur the list of his zones
 @st.cache_data
 def country_zones(country_name: str) -> list:
+    """
+    Retrieves a list of zones or regions for a specific country from the ZONES dictionary.
 
+    Args:
+        country_name (str): The name of the country.
+
+    Returns:
+        list: A list of zone names for the specified country.
+    """
     return [zone for zone in ZONES[country_name].keys()]
 
 # Util function to save payments data
 def save_pay_data(form: CheckoutUI) -> dict:
+    """
+    Creates a dictionary containing payment information from the CheckoutUI form instance.
 
+    Args:
+        form (CheckoutUI): An instance of CheckoutUI containing payment details.
+
+    Returns:
+        dict: A dictionary containing payment information.
+    """
     # Creating a pay data dict
     return {
         "email": form.email,
@@ -284,6 +382,12 @@ def save_pay_data(form: CheckoutUI) -> dict:
 # Util function to get the next 5 years from current year
 @st.cache_data
 def get_card_exp_years() -> list:
+    """
+    Retrieves a list of the next 5 years from the current year for selecting credit card expiration year.
+
+    Returns:
+        list: A list of years in string format.
+    """
     current_year: datetime.datetime = datetime.datetime.now().year
     next_5_years: list = [str(current_year + i) for i in range(6)]
     return next_5_years
@@ -291,6 +395,15 @@ def get_card_exp_years() -> list:
 # Util function to get month in a list based on current day
 @st.cache_data
 def months_in_numbers(selected_year: str):
+    """
+    Retrieves a list of months in numerical format based on the selected year.
+
+    Args:
+        selected_year (str): The selected year in string format.
+
+    Returns:
+        list: A list of months in numerical format.
+    """
     current_year: datetime.datetime = datetime.datetime.now().year
     current_month: datetime.datetime = datetime.datetime.now().month
 
@@ -306,7 +419,16 @@ def months_in_numbers(selected_year: str):
 
 # Util function to get pay props from pay.config file
 def get_pay_prop(prop: str) -> str:
+    """
+    Retrieves a specific property (e.g., email, country) from the pay.json configuration file.
 
+    Args:
+        prop (str): The property to retrieve from the configuration file.
+
+    Returns:
+        str: The value of the specified property.
+            Returns None if the property is not found or there is an error.
+    """
     file_path = os.path.join("config", "pay.json")
 
     try:

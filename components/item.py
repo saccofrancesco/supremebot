@@ -6,11 +6,28 @@ from components.utils import get_info_for_item, fetch_items
 from typing import List, Dict
 
 class ItemUI:
+    """
+    A class to represent each Item inside the Interface in a Streamlit application.
+    """
     def __init__(self, category: str, dates: str) -> None:
+        """
+        Initializes the ItemUI instance by rendering item cards based on the given category and dates.
+
+        Args:
+            category (str): The category of items to display.
+            dates (str): The dates associated with the items.
+        """
         self.render_item_cards(category, dates)
 
     @staticmethod
     def render_item_cards(category: str, dates: str) -> None:
+        """
+        Renders item cards for the specified category and dates.
+
+        Args:
+            category (str): The category of items to display.
+            dates (str): The dates associated with the items.
+        """
         items: Dict[str, Dict[str, str]] = fetch_items(dates, category)
         add_vertical_space(1)
 
@@ -26,13 +43,21 @@ class ItemUI:
                 ItemUI.render_item_not_in_basket(
                     item_name, item_info, buttons_col)
             else:
-                ItemUI.render_item_in_basket(item_name, item_info, info_col)
+                ItemUI.render_item_in_basket(item_name, info_col)
 
             add_vertical_space(2)
 
     @staticmethod
     def render_item_not_in_basket(
             item_name: str, item_info: Dict[str, str], buttons_col) -> None:
+        """
+        Renders the UI elements for an item that is not currently in the basket.
+
+        Args:
+            item_name (str): The name of the item.
+            item_info (Dict[str, str]): Information about the item.
+            buttons_col: The column in which to render the buttons.
+        """
         if item_info["colors"]:
             color: str = buttons_col.radio(
                 "Colors",
@@ -71,8 +96,14 @@ class ItemUI:
                 item_info["category"]))
 
     @staticmethod
-    def render_item_in_basket(
-            item_name: str, item_info: Dict[str, str], info_col) -> None:
+    def render_item_in_basket(item_name: str, info_col) -> None:
+        """
+        Renders the UI elements for an item that is currently in the basket.
+
+        Args:
+            item_name (str): The name of the item.
+            info_col: The column in which to render the item information.
+        """
         remove_key: str = f"{item_name}_remove_from_basket"
         info_col.markdown(
             f'**Color:** {get_info_for_item(item_name, "color")}')

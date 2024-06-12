@@ -4,7 +4,17 @@ from bot.bot import Bot
 from playwright.sync_api import sync_playwright, TimeoutError
 
 class BuyButtonUI:
+    """
+    A class to represent the Buy Button User Interface in a Streamlit application.
+
+    Attributes:
+        buy_btn (bool): Indicates whether the "Start Supremebot" button was clicked.
+    """
     def __init__(self) -> None:
+        """
+        Initializes the BuyButtonUI instance by creating a button in the Streamlit UI.
+        If the button is clicked, starts the Supremebot.
+        """
         # Create a button in the Streamlit UI
         self.buy_btn: bool = st.button(
             "Start Supremebot",
@@ -18,6 +28,10 @@ class BuyButtonUI:
             self.run_supremebot()
 
     def run_supremebot(self) -> None:
+        """
+        Runs the Supremebot to automate the process of adding items to the basket and checking out.
+        Handles exceptions that occur during the execution.
+        """
         try:
             # Creating an instance of the Supremebot
             bot: Bot = Bot()
