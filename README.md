@@ -1,6 +1,6 @@
 <div align="center">
   <img src="img/icon.png" alt="Supremebot" width="350">
-  <h1>snipreme</h1>
+  <h1>snipereme</h1>
 </div>
 
 <h4 align="center">A simple UI tool for buying Supreme items built on top of <a href="https://streamlit.io/" target="_blank">Streamlit</a>.</h4>
@@ -45,10 +45,10 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [P
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/saccofrancesco/snipreme.git
+$ git clone https://github.com/saccofrancesco/snipereme.git
 
 # Go into the repository
-$ cd snipreme
+$ cd snipereme
 
 # Install dependencies
 $ pip install -r requirements.txt
@@ -61,7 +61,7 @@ $ streamlit run main.py
 ```
 
 ## Emailware
-Snipreme is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <francescosacco.github@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
+Snipereme is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <francescosacco.github@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
 
 ## Credits
 This software uses the following open source packages:
