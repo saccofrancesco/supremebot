@@ -1,6 +1,6 @@
 <div align="center">
   <img src="img/icon.png" alt="Supremebot" width="350">
-  <h1>Supremebot</h1>
+  <h1>snipreme</h1>
 </div>
 
 <h4 align="center">A simple UI tool for buying Supreme items built on top of <a href="https://streamlit.io/" target="_blank">Streamlit</a>.</h4>
@@ -45,10 +45,10 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [P
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/saccofrancesco/supreme-bot.git
+$ git clone https://github.com/saccofrancesco/snipreme.git
 
 # Go into the repository
-$ cd supreme-bot
+$ cd snipreme
 
 # Install dependencies
 $ pip install -r requirements.txt
@@ -61,7 +61,7 @@ $ streamlit run main.py
 ```
 
 ## Emailware
-Supremebot is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <francescosacco.github@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
+Snipreme is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <francescosacco.github@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
 
 ## Credits
 This software uses the following open source packages:
@@ -73,7 +73,7 @@ This software uses the following open source packages:
 - [Beautifulsoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
 ## You may also like...
-- [crossword-solver](https://github.com/saccofrancesco/crosswords-solver) built on top of [Streamlit](https://streamlit.io/) and [Tesseract](https://github.com/tesseract-ocr/tesseract);
+- [crosswords](https://github.com/saccofrancesco/crosswords) built on top of [Streamlit](https://streamlit.io/) and [Tesseract](https://github.com/tesseract-ocr/tesseract);
 - [lock](https://github.com/saccofrancesco/lock) built on top of [Customtkinter](https://customtkinter.tomschimansky.com/).
 
 ## License

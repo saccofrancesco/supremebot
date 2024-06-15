@@ -13,7 +13,7 @@ from components.download_btn import DownloadButtonUI
 if __name__ == "__main__":
 
     # Configuration
-    st.set_page_config("Supremebot", "img/icon.png", "wide")
+    st.set_page_config("Snipreme", "img/icon.png", "wide")
 
     # Intialization
     init()
