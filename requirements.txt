@@ -1,6 +1,6 @@
 altair==5.3.0
 attrs==23.2.0
-autopep8==2.2.0
+autopep8==2.3.0
 beautifulsoup4==4.12.3
 blinker==1.8.2
 bottle==0.12.25
@@ -42,7 +42,7 @@ prometheus_client==0.20.0
 protobuf==4.25.3
 proxy_tools==0.1.0
 pyarrow==16.1.0
-pycodestyle==2.11.1
+pycodestyle==2.12.0
 pydeck==0.9.1
 pyee==11.1.0
 Pygments==2.18.0
@@ -76,7 +76,7 @@ streamlit-keyup==0.2.4
 streamlit-option-menu==0.3.13
 streamlit-toggle-switch==1.0.2
 streamlit-vertical-slider==2.5.5
-tenacity==8.3.0
+tenacity==8.4.0
 toml==0.10.2
 toolz==0.12.1
 tornado==6.4.1
