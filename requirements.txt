@@ -76,14 +76,14 @@ streamlit-keyup==0.2.4
 streamlit-option-menu==0.3.13
 streamlit-toggle-switch==1.0.2
 streamlit-vertical-slider==2.5.5
-tenacity==8.4.0
+tenacity==8.4.1
 toml==0.10.2
 toolz==0.12.1
 tornado==6.4.1
 typing_extensions==4.12.2
 tzdata==2024.1
 tzlocal==5.2
-urllib3==2.2.1
+urllib3==2.2.2
 validators==0.28.3
 watchdog==4.0.1
 zipp==3.19.2
