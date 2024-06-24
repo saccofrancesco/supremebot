@@ -1,6 +1,6 @@
 altair==5.3.0
 attrs==23.2.0
-autopep8==2.3.0
+autopep8==2.3.1
 beautifulsoup4==4.12.3
 blinker==1.8.2
 bottle==0.12.25
@@ -19,7 +19,7 @@ GitPython==3.1.43
 greenlet==3.0.3
 htbuilder==0.6.2
 idna==3.7
-importlib_metadata==7.2.0
+importlib_metadata==7.2.1
 Jinja2==3.1.4
 jsonschema==4.22.0
 jsonschema-specifications==2023.12.1
@@ -76,7 +76,7 @@ streamlit-keyup==0.2.4
 streamlit-option-menu==0.3.13
 streamlit-toggle-switch==1.0.2
 streamlit-vertical-slider==2.5.5
-tenacity==8.4.1
+tenacity==8.4.2
 toml==0.10.2
 toolz==0.12.1
 tornado==6.4.1
