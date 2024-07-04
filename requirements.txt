@@ -5,7 +5,7 @@ beautifulsoup4==4.12.3
 blinker==1.8.2
 bottle==0.12.25
 cachetools==5.3.3
-certifi==2024.6.2
+certifi==2024.7.4
 charset-normalizer==3.3.2
 click==8.1.7
 contourpy==1.2.1
@@ -29,7 +29,7 @@ Markdown==3.6
 markdown-it-py==3.0.0
 markdownlit==0.0.7
 MarkupSafe==2.1.5
-matplotlib==3.9.0
+matplotlib==3.9.1
 mdurl==0.1.2
 more-itertools==10.3.0
 numpy==2.0.0
@@ -84,6 +84,6 @@ typing_extensions==4.12.2
 tzdata==2024.1
 tzlocal==5.2
 urllib3==2.2.2
-validators==0.29.0
+validators==0.30.0
 watchdog==4.0.1
 zipp==3.19.2
