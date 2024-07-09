@@ -13,7 +13,7 @@ cycler==0.12.1
 entrypoints==0.4
 Faker==26.0.0
 favicon==0.7.0
-fonttools==4.53.0
+fonttools==4.53.1
 gitdb==4.0.11
 GitPython==3.1.43
 greenlet==3.0.3
@@ -21,7 +21,7 @@ htbuilder==0.6.2
 idna==3.7
 importlib_metadata==8.0.0
 Jinja2==3.1.4
-jsonschema==4.22.0
+jsonschema==4.23.0
 jsonschema-specifications==2023.12.1
 kiwisolver==1.4.5
 lxml==5.2.2
@@ -59,7 +59,7 @@ PyYAML==6.0.1
 referencing==0.35.1
 requests==2.32.3
 rich==13.7.1
-rpds-py==0.18.1
+rpds-py==0.19.0
 six==1.16.0
 smmap==5.0.1
 soupsieve==2.5
@@ -76,7 +76,7 @@ streamlit-keyup==0.2.4
 streamlit-option-menu==0.3.13
 streamlit-toggle-switch==1.0.2
 streamlit-vertical-slider==2.5.5
-tenacity==8.4.2
+tenacity==8.5.0
 toml==0.10.2
 toolz==0.12.1
 tornado==6.4.1
@@ -84,6 +84,6 @@ typing_extensions==4.12.2
 tzdata==2024.1
 tzlocal==5.2
 urllib3==2.2.2
-validators==0.30.0
+validators==0.31.0
 watchdog==4.0.1
 zipp==3.19.2
