@@ -32,7 +32,7 @@ MarkupSafe==2.1.5
 matplotlib==3.9.2
 mdurl==0.1.2
 more-itertools==10.4.0
-narwhals==1.5.2
+narwhals==1.5.3
 numpy==2.1.0
 packaging==24.1
 pandas==2.2.2
