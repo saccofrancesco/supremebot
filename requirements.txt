@@ -11,14 +11,14 @@ click==8.1.7
 contourpy==1.2.1
 cycler==0.12.1
 entrypoints==0.4
-Faker==27.4.0
+Faker==28.0.0
 favicon==0.7.0
 fonttools==4.53.1
 gitdb==4.0.11
 GitPython==3.1.43
 greenlet==3.0.3
 htbuilder==0.6.2
-idna==3.7
+idna==3.8
 importlib_metadata==8.4.0
 Jinja2==3.1.4
 jsonschema==4.23.0
@@ -32,7 +32,7 @@ MarkupSafe==2.1.5
 matplotlib==3.9.2
 mdurl==0.1.2
 more-itertools==10.4.0
-narwhals==1.5.3
+narwhals==1.5.5
 numpy==2.1.0
 packaging==24.1
 pandas==2.2.2
