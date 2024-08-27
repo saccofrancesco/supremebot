@@ -1,4 +1,4 @@
-altair==5.4.0
+altair==5.4.1
 attrs==24.2.0
 autopep8==2.3.1
 beautifulsoup4==4.12.3
@@ -88,5 +88,5 @@ tzdata==2024.1
 tzlocal==5.2
 urllib3==2.2.2
 validators==0.33.0
-watchdog==4.0.2
+watchdog==5.0.0
 zipp==3.20.1
