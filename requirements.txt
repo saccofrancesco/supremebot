@@ -19,7 +19,7 @@ GitPython==3.1.43
 greenlet==3.0.3
 htbuilder==0.6.2
 idna==3.8
-importlib_metadata==8.4.0
+importlib_metadata==8.5.0
 Jinja2==3.1.4
 jsonschema==4.23.0
 jsonschema-specifications==2023.12.1
@@ -32,7 +32,7 @@ MarkupSafe==2.1.5
 matplotlib==3.9.2
 mdurl==0.1.2
 more-itertools==10.5.0
-narwhals==1.6.4
+narwhals==1.7.0
 numpy==2.1.1
 packaging==24.1
 pandas==2.2.2
@@ -56,7 +56,7 @@ pyobjc-framework-Security==10.3.1
 pyobjc-framework-WebKit==10.3.1
 pyparsing==3.1.4
 python-dateutil==2.9.0.post0
-pytz==2024.1
+pytz==2024.2
 pywebview==5.2
 PyYAML==6.0.2
 referencing==0.35.1
