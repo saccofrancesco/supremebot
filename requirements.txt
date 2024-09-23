@@ -48,7 +48,7 @@ pycodestyle==2.12.1
 pydeck==0.9.1
 pyee==12.0.0
 Pygments==2.18.0
-pymdown-extensions==10.10
+pymdown-extensions==10.10.1
 pyobjc-core==10.3.1
 pyobjc-framework-Cocoa==10.3.1
 pyobjc-framework-Quartz==10.3.1
