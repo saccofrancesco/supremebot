@@ -9,6 +9,7 @@ from components.zones import *
 from components.checkout import CheckoutUI
 import os
 
+
 # Function to initialize the program
 @st.cache_data
 def init() -> None:
@@ -16,18 +17,17 @@ def init() -> None:
     Initializes the program by injecting CSS for image styling and creating necessary directories and files.
     """
     # Injecting CSS for image styling
-    st.markdown(
-        "<style> img { border-radius: 5%; } </style>",
-        unsafe_allow_html=True)
-    
+    st.markdown("<style> img { border-radius: 5%; } </style>", unsafe_allow_html=True)
+
     # Create the directory if it doesn't exist
     if not os.path.exists("./config"):
         os.makedirs("./config")
 
     # Write data (empty list) to the JSON file (if the file doesn't exists)
     if not os.path.exists("./config/items.json"):
-        with open("./config/items.json", 'w') as json_file:
+        with open("./config/items.json", "w") as json_file:
             json.dump([], json_file, indent=4)
+
 
 # Util function to get all the drop dates for the current release
 @st.cache_data
@@ -56,6 +56,7 @@ def get_drop_dates() -> list:
         # Return an empty list or handle the error as needed
         return []
 
+
 # Util function to convert a date to a certain format
 @st.cache_data
 def convert_date(date: str) -> str:
@@ -72,13 +73,14 @@ def convert_date(date: str) -> str:
         ValueError: If the input date string format is incorrect.
     """
     # Remove the ordinal suffix (st, nd, rd) from the date string
-    date: str = re.sub(r'(\d)(st|nd|rd|th)( |$)', r'\1\3', date)
+    date: str = re.sub(r"(\d)(st|nd|rd|th)( |$)", r"\1\3", date)
 
     # Parse the date using the modified format
     date_obj: datetime.datetime = datetime.datetime.strptime(date, "%d %B %y")
     formatted_date: str = date_obj.strftime("%Y-%m-%d")
 
     return formatted_date
+
 
 # Util function to fetch all information based on Drop Date and Item Category
 def fetch_items(drop_date: str, item_category: str) -> dict:
@@ -101,7 +103,9 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
         item_category = "tops-sweaters"
 
     # Constructing URL based on the Drop Date
-    url: str = f"https://www.supremecommunity.com/season/spring-summer2024/droplist/{data}"
+    url: str = (
+        f"https://www.supremecommunity.com/season/spring-summer2024/droplist/{data}"
+    )
 
     # Creating an Object to store the fetched items
     items_dict: dict = {}
@@ -113,29 +117,37 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     response: requests.models.Response = requests.get(url)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
-        item_divs: list = soup.find_all("div", {"data-category": f"{item_category.lower()}"})
+        item_divs: list = soup.find_all(
+            "div", {"data-category": f"{item_category.lower()}"}
+        )
 
     # Storing Items' Infos
     for item in item_divs:
         item_name: str = item.find(
-            "div", {"class": "catalog-item__title"}).text.replace("\n", "")
-        item_price: str = item.find("span",
-                                    {"class": "catalog-label-price"}).text.replace("\n",
-                                                                                   "").split("/")[0] if item.find("span",
-                                                                                                                  {"class": "catalog-label-price"}) else "None"
+            "div", {"class": "catalog-item__title"}
+        ).text.replace("\n", "")
+        item_price: str = (
+            item.find("span", {"class": "catalog-label-price"})
+            .text.replace("\n", "")
+            .split("/")[0]
+            if item.find("span", {"class": "catalog-label-price"})
+            else "None"
+        )
         item_image: str = f'https://www.supremecommunity.com{item.find("img")["src"]}'
         item_colors: list = []
-        item_full_link: str = f'https://www.supremecommunity.com{item.find("a")["href"]}'
+        item_full_link: str = (
+            f'https://www.supremecommunity.com{item.find("a")["href"]}'
+        )
         response: requests.models.Response = requests.get(item_full_link)
         if item_price != "None" and response.status_code == 200:
             soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
             colors_div: list = soup.find_all(
-                "div", {"class": "product-options active"})[1]
+                "div", {"class": "product-options active"}
+            )[1]
             item_colors: list = [
-                color.text.replace(
-                    "\n", "") for color in colors_div.find_all(
-                    "div", {
-                        "class": "product-option"})]
+                color.text.replace("\n", "")
+                for color in colors_div.find_all("div", {"class": "product-option"})
+            ]
             # Removing the VOTE button (not a color option, but a public pool)
             if "VOTING >" in item_colors:
                 item_colors.remove("VOTING >")
@@ -145,10 +157,11 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
             "price": item_price,
             "image": item_image,
             "colors": item_colors,
-            "link": item_full_link
+            "link": item_full_link,
         }
 
     return items_dict
+
 
 # Util function to check if an item is already
 def is_item_in_basket(item_name: str) -> bool:
@@ -180,14 +193,16 @@ def is_item_in_basket(item_name: str) -> bool:
     # If the item_name is not found in any item, return False
     return False
 
+
 # Util function to add an item to the basket (items.json)
 def add_to_basket(
-        item_image: str,
-        item_price: int,
-        item_name: str,
-        item_color: str,
-        item_size: str,
-        item_category: str):
+    item_image: str,
+    item_price: int,
+    item_name: str,
+    item_color: str,
+    item_size: str,
+    item_category: str,
+):
     """
     Adds an item to the basket by appending its details to the items.json file.
 
@@ -206,7 +221,7 @@ def add_to_basket(
         "name": item_name,
         "color": item_color,
         "size": item_size,
-        "category": item_category
+        "category": item_category,
     }
 
     # Get the absolute path to the JSON file
@@ -229,6 +244,7 @@ def add_to_basket(
 
     # Showing a success message
     st.toast("Item added to the basket", icon="✅")
+
 
 # Util function to delete an item
 def remove_from_basket(item_name: str) -> bool:
@@ -275,6 +291,7 @@ def remove_from_basket(item_name: str) -> bool:
 
     return item_deleted
 
+
 # Util function to check if the basket is empty
 def is_json_file_empty(file_path: str) -> bool:
     """
@@ -287,7 +304,7 @@ def is_json_file_empty(file_path: str) -> bool:
         bool: True if the JSON file is empty or doesn't exist, False otherwise.
     """
     try:
-        with open(file_path, 'r') as file:
+        with open(file_path, "r") as file:
             data: str = json.load(file)
             if not data:
                 return True  # JSON file is empty
@@ -295,6 +312,7 @@ def is_json_file_empty(file_path: str) -> bool:
                 return False  # JSON file is not empty
     except (FileNotFoundError, json.JSONDecodeError):
         return True  # Error occurred or file doesn't exist
+
 
 # Util function to get infos about an item in the basket
 def get_info_for_item(item_name: str, param: str):
@@ -313,7 +331,7 @@ def get_info_for_item(item_name: str, param: str):
     json_file_path = os.path.join("config", "items.json")
 
     try:
-        with open(json_file_path, 'r') as json_file:
+        with open(json_file_path, "r") as json_file:
             data: str = json.load(json_file)
             for item in data:
                 if "name" in item:
@@ -325,6 +343,7 @@ def get_info_for_item(item_name: str, param: str):
     except json.JSONDecodeError:
         return "Invalid JSON data"
 
+
 # Util function to list all the available country
 @st.cache_data
 def country_list() -> list:
@@ -335,6 +354,7 @@ def country_list() -> list:
         list: A list of country names.
     """
     return [nation for nation in NATIONS.keys()]
+
 
 # Util function to get a selected country and retur the list of his zones
 @st.cache_data
@@ -349,6 +369,7 @@ def country_zones(country_name: str) -> list:
         list: A list of zone names for the specified country.
     """
     return [zone for zone in ZONES[country_name].keys()]
+
 
 # Util function to save payments data
 def save_pay_data(form: CheckoutUI) -> dict:
@@ -376,8 +397,9 @@ def save_pay_data(form: CheckoutUI) -> dict:
         "expiration_year": form.expiration_year,
         "cvv": form.cvv,
         "name_on_card": form.name_on_card,
-        "zone": form.zone if hasattr(form, "zone") else "None"
+        "zone": form.zone if hasattr(form, "zone") else "None",
     }
+
 
 # Util function to get the next 5 years from current year
 @st.cache_data
@@ -391,6 +413,7 @@ def get_card_exp_years() -> list:
     current_year: datetime.datetime = datetime.datetime.now().year
     next_5_years: list = [str(current_year + i) for i in range(6)]
     return next_5_years
+
 
 # Util function to get month in a list based on current day
 @st.cache_data
@@ -417,6 +440,7 @@ def months_in_numbers(selected_year: str):
 
     return months
 
+
 # Util function to get pay props from pay.config file
 def get_pay_prop(prop: str) -> str:
     """
@@ -432,7 +456,7 @@ def get_pay_prop(prop: str) -> str:
     file_path = os.path.join("config", "pay.json")
 
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
             return data[prop]
     except FileNotFoundError:

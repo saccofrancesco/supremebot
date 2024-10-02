@@ -7,6 +7,7 @@ from components.utils import is_json_file_empty
 import json
 import os
 
+
 class BasketUI:
     """
     A class to represent the Basket User Interface in a Streamlit application.
@@ -15,6 +16,7 @@ class BasketUI:
         json_file_path (str): Path to the JSON file containing basket items.
         is_empty (bool): Indicates if the basket is empty.
     """
+
     def __init__(self) -> None:
         """
         Initializes the BasketUI instance by setting the JSON file path and checking if the basket is empty.

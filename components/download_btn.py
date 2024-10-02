@@ -6,6 +6,7 @@ import json
 import os
 from typing import Dict
 
+
 class DownloadButtonUI:
     """
     A class to represent the Download Button User Interface in a Streamlit application.
@@ -13,6 +14,7 @@ class DownloadButtonUI:
     Attributes:
         download_btn (bool): Indicates whether the "Save info for next time" button was clicked.
     """
+
     def __init__(self, form: CheckoutUI) -> None:
         """
         Initializes the DownloadButtonUI instance by creating a button to save payment information.
@@ -27,7 +29,8 @@ class DownloadButtonUI:
             "Save info for next time",
             key="save-btn",
             type="secondary",
-            use_container_width=True)
+            use_container_width=True,
+        )
         if self.download_btn:
             try:
                 self.save_payment_data(json_file_path, form)

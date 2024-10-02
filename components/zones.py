@@ -31,7 +31,7 @@ NATIONS = {
     "Spain": "ES",
     "Sweden": "SE",
     "Switzerland": "CH",
-    "Turkey": "TR"
+    "Turkey": "TR",
 }
 
 # Nation Zones
@@ -62,7 +62,7 @@ ZONES = {
         "Waterford": "WD",
         "Westmeath": "WH",
         "Wexford": "WX",
-        "Wicklow": "WW"
+        "Wicklow": "WW",
     },
     "Italy": {
         "Agrigento": "AG",
@@ -174,7 +174,7 @@ ZONES = {
         "Verona": "VR",
         "Vibo Valentia": "VV",
         "Vicenza": "VI",
-        "Viterbo": "VT"
+        "Viterbo": "VT",
     },
     "Portugal": {
         "Azores": "PT-20",
@@ -196,7 +196,7 @@ ZONES = {
         "Setúbal": "PT-15",
         "Viana do Castelo": "PT-16",
         "Vila Real": "PT-17",
-        "Viseu": "PT-18"
+        "Viseu": "PT-18",
     },
     "Romania": {
         "Alba": "AB",
@@ -238,7 +238,7 @@ ZONES = {
         "Teleorman": "TR",
         "Timiș": "TM",
         "Tulcea": "TL",
-        "Vâlcea": "VL"
+        "Vâlcea": "VL",
     },
     "Spain": {
         "A Coruña": "C",
@@ -291,6 +291,6 @@ ZONES = {
         "Valladolid": "VA",
         "Vizcaya": "BI",
         "Zamora": "ZA",
-        "Zaragoza": "Z"
-    }
+        "Zaragoza": "Z",
+    },
 }

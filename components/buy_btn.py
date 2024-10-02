@@ -3,6 +3,7 @@ import streamlit as st
 from bot.bot import Bot
 from playwright.sync_api import sync_playwright, TimeoutError
 
+
 class BuyButtonUI:
     """
     A class to represent the Buy Button User Interface in a Streamlit application.
@@ -10,6 +11,7 @@ class BuyButtonUI:
     Attributes:
         buy_btn (bool): Indicates whether the "Start Supremebot" button was clicked.
     """
+
     def __init__(self) -> None:
         """
         Initializes the BuyButtonUI instance by creating a button in the Streamlit UI.
@@ -17,10 +19,7 @@ class BuyButtonUI:
         """
         # Create a button in the Streamlit UI
         self.buy_btn: bool = st.button(
-            "Start Supremebot",
-            key="buy-btn",
-            type="primary",
-            use_container_width=True
+            "Start Supremebot", key="buy-btn", type="primary", use_container_width=True
         )
 
         # If the button is clicked, start the Supremebot

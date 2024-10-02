@@ -5,6 +5,7 @@ from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
 from typing import List, Optional
 
+
 class DropDatesUI:
     """
     A class to represent the Drop Dates User Interface in a Streamlit application.
@@ -12,6 +13,7 @@ class DropDatesUI:
     Attributes:
         selected_date (Optional[str]): The selected drop date by the user.
     """
+
     def __init__(self) -> None:
         """
         Initializes the DropDatesUI instance by setting up the user interface to select drop dates.
@@ -32,7 +34,8 @@ class DropDatesUI:
             colored_header("Select a Drop Date", "", "red-80")
             add_vertical_space(1)
             self.selected_date: Optional[str] = st.selectbox(
-                " ", drop_dates, label_visibility="collapsed")
+                " ", drop_dates, label_visibility="collapsed"
+            )
         except Exception as e:
             st.error(f"Error fetching drop dates: {e}")
 

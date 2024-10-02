@@ -2,6 +2,7 @@
 from typing import List
 from streamlit_option_menu import option_menu
 
+
 class CategoriesUI:
     """
     A class to represent the Categories User Interface in a Streamlit application.
@@ -10,10 +11,19 @@ class CategoriesUI:
         CATEGORIES (List[str]): A list of available categories.
         items_category (str): The category selected by the user.
     """
+
     # Define a list of available categories
     CATEGORIES: List[str] = [
-        "T-Shirts", "Accessories", "Sweatshirts", "Hats", "Jackets",
-        "Tops", "Pants", "Skate", "Bags", "Shirts"
+        "T-Shirts",
+        "Accessories",
+        "Sweatshirts",
+        "Hats",
+        "Jackets",
+        "Tops",
+        "Pants",
+        "Skate",
+        "Bags",
+        "Shirts",
     ]
 
     def __init__(self) -> None:
@@ -42,6 +52,6 @@ class CategoriesUI:
                 "container": {"font-family": "sans-serif"},
                 "menu-title": {"font-weight": "bold"},
                 "separator": {"color": "solid red"},
-                "icon": {"display": "none"}
-            }
+                "icon": {"display": "none"},
+            },
         )
