@@ -54,7 +54,7 @@ pyobjc-framework-Cocoa==10.3.1
 pyobjc-framework-Quartz==10.3.1
 pyobjc-framework-Security==10.3.1
 pyobjc-framework-WebKit==10.3.1
-pyparsing==3.1.4
+pyparsing==3.2.0
 python-dateutil==2.9.0.post0
 pytz==2024.2
 pywebview==5.2
