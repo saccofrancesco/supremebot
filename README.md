@@ -3,7 +3,7 @@
   <h1>supremebot</h1>
 </div>
 
-<h4 align="center">A simple UI tool for buying Supreme items built on top of <a href="https://streamlit.io/" target="_blank">Streamlit</a>.</h4>
+<h4 align="center">A simple UI tool for buying Supreme items built on top of <a href="https://nicegui.io" target="_blank">NiceGUI</a>.</h4>
 
 <p align="center">
   <img src="https://img.shields.io/github/contributors/saccofrancesco/supreme-bot?style=for-the-badge" alt="Contributors">
@@ -29,12 +29,12 @@
   - Every action changes the interface
 * Live items updates
   - See what you can buy before the drop
+* Live "Hype Counter"
+ - Each item can be displayed as in "hype" when high buying demand is predicted
 * Add the items to your basket
   - You can pre-add items to the basket
 * Form for checkout data
   - You can pre-compile the checkout form
-  - You can save the configuration for future shopping
-* Dark / Light mode
 * Full screen mode
   - Shop distraction free.
 * Cross platform
@@ -57,7 +57,7 @@ $ pip install -r requirements.txt
 $ playwright install
 
 # Run the app
-$ streamlit run main.py
+$ python main.py
 ```
 
 ## Emailware
@@ -66,8 +66,7 @@ Supremebot is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning,
 ## Credits
 This software uses the following open source packages:
 - [Python](https://www.python.org/)
-- [Streamlit](https://streamlit.io/)
-- [Streamlit Extras](https://extras.streamlit.app/)
+- [NiceGUI](https://nicegui.io)
 - [Playwright](https://playwright.dev/python/)
 - [Requests](https://requests.readthedocs.io/en/latest/)
 - [Beautifulsoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
