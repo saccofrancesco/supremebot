@@ -14,7 +14,7 @@ click==8.1.8
 docutils==0.21.2
 fastapi==0.115.12
 frozenlist==1.5.0
-greenlet==3.1.1
+greenlet==3.2.0
 h11==0.14.0
 httpcore==1.0.8
 httptools==0.6.4
@@ -36,7 +36,7 @@ proxy_tools==0.1.0
 pscript==0.7.7
 pydantic==2.11.3
 pydantic_core==2.33.1
-pyee==13.0.0
+pyee==12.1.1
 Pygments==2.19.1
 pyobjc-core==11.0
 pyobjc-framework-Cocoa==11.0
