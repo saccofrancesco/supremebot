@@ -14,7 +14,7 @@ click==8.1.8
 docutils==0.21.2
 fastapi==0.115.12
 frozenlist==1.6.0
-greenlet==3.2.0
+greenlet==3.2.1
 h11==0.14.0
 httpcore==1.0.8
 httptools==0.6.4
