@@ -10,11 +10,11 @@ bidict==0.23.1
 bottle==0.13.3
 certifi==2025.4.26
 charset-normalizer==3.4.2
-click==8.1.8
+click==8.2.0
 docutils==0.21.2
 fastapi==0.115.12
 frozenlist==1.6.0
-greenlet==3.2.1
+greenlet==3.2.2
 h11==0.16.0
 httpcore==1.0.9
 httptools==0.6.4
