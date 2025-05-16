@@ -908,12 +908,16 @@ class ItemsList:
 with ui.element("div").classes("w-full p-8"):
 
     # Creating the main heading
-    header: ui.row = ui.row()
+    header: ui.row = ui.row(align_items="center")
     with header:
         with ui.element("div").classes("w-fit bg-red-600"):
             ui.label("Supremebot").classes(
                 "text-white text-4xl text-bold italic font-mono"
             )
+        with ui.link(target="https://www.buymeacoffee.com/saccofrancesco"):
+            ui.image(
+                "https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=saccofrancesco&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+            ).classes("w-[200px]")
 
         # Creating some space to divide the title from the basket icon
         ui.space()
