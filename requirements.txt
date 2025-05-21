@@ -10,7 +10,7 @@ bidict==0.23.1
 bottle==0.13.3
 certifi==2025.4.26
 charset-normalizer==3.4.2
-click==8.2.0
+click==8.2.1
 docutils==0.21.2
 fastapi==0.115.12
 frozenlist==1.6.0
