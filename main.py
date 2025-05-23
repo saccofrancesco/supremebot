@@ -914,13 +914,14 @@ with ui.element("div").classes("w-full p-8"):
             ui.label("Supremebot").classes(
                 "text-white text-4xl text-bold italic font-mono"
             )
+
+        # Adding spacing between title and call to action
+        ui.space()
+
         with ui.link(target="https://www.buymeacoffee.com/saccofrancesco"):
             ui.image(
-                "https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=saccofrancesco&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
-            ).classes("w-[200px]")
-
-        # Creating some space to divide the title from the basket icon
-        ui.space()
+                "https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+            ).classes("w-[150px]")
 
     # Creating the grid for the date and category selectors
     selectors_container: ui.grid = ui.grid(columns="1fr 5fr").classes("py-8")
