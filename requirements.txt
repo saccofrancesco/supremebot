@@ -55,7 +55,7 @@ urllib3==2.4.0
 uvicorn==0.34.3
 uvloop==0.21.0
 vbuild==0.8.2
-wait_for2==0.3.2
+wait_for2==0.4.0
 watchfiles==1.0.5
 websockets==15.0.1
 wsproto==1.2.0
