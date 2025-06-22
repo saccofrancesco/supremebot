@@ -37,7 +37,7 @@ pscript==0.7.7
 pydantic==2.11.7
 pydantic_core==2.33.2
 pyee==13.0.0
-Pygments==2.19.1
+Pygments==2.19.2
 python-dotenv==1.1.0
 python-engineio==4.12.2
 python-multipart==0.0.20
