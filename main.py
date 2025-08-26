@@ -316,7 +316,7 @@ def get_drop_dates() -> list:
         Returns an empty list if the request fails or no dates are found.
     """
     # Drops Site
-    url: str = "https://www.supremecommunity.com/season/spring-summer2025/droplists/"
+    url: str = "https://www.supremecommunity.com/season/fall-winter2025/droplists/"
 
     # Fetching the source code
     response: requests.models.Response = requests.get(url)
