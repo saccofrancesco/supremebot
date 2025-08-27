@@ -304,6 +304,13 @@ ZONES: dict = {
     },
 }
 
+# Setting a user-agent to avoid 403 forbidden error
+headers: dict = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/58.0.3029.110 Safari/537.3"
+}
+
 
 # Util function to get all the drop dates for the current release
 @cache
@@ -319,7 +326,7 @@ def get_drop_dates() -> list:
     url: str = "https://www.supremecommunity.com/season/fall-winter2025/droplists/"
 
     # Fetching the source code
-    response: requests.models.Response = requests.get(url)
+    response: requests.models.Response = requests.get(url, headers=headers)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
         # Find all dates
@@ -390,7 +397,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     item_divs: list = list()
 
     # Fetching all items of a certain type
-    response: requests.models.Response = requests.get(url)
+    response: requests.models.Response = requests.get(url, headers=headers)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
         item_divs: list = soup.find_all(
@@ -409,12 +416,13 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
             if item.find("span", {"class": "catalog-label-price"})
             else "None"
         )
-        item_image: str = f'https://www.supremecommunity.com{item.find("img")["src"]}'
+        item_image: str = item.find("img")["src"]
+        print(item_image)
         item_colors: list = list()
         item_full_link: str = (
             f'https://www.supremecommunity.com{item.find("a")["href"]}'
         )
-        response: requests.models.Response = requests.get(item_full_link)
+        response: requests.models.Response = requests.get(item_full_link, headers=headers)
         if item_price != "None" and response.status_code == 200:
             soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
             colors_div: list = soup.find_all(
