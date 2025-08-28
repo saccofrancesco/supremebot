@@ -417,7 +417,6 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
             else "None"
         )
         item_image: str = item.find("img")["src"]
-        print(item_image)
         item_colors: list = list()
         item_full_link: str = (
             f'https://www.supremecommunity.com{item.find("a")["href"]}'
