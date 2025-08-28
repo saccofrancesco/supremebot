@@ -387,7 +387,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
 
     # Constructing URL based on the Drop Date
     url: str = (
-        f"https://www.supremecommunity.com/season/spring-summer2024/droplist/{convert_date(drop_date)}"
+        f"https://www.supremecommunity.com/season/fall-winter2025/droplist/{convert_date(drop_date)}"
     )
 
     # Creating an Object to store the fetched items
@@ -421,7 +421,9 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
         item_full_link: str = (
             f'https://www.supremecommunity.com{item.find("a")["href"]}'
         )
-        response: requests.models.Response = requests.get(item_full_link, headers=headers)
+        response: requests.models.Response = requests.get(
+            item_full_link, headers=headers
+        )
         if item_price != "None" and response.status_code == 200:
             soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
             colors_div: list = soup.find_all(
