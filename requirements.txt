@@ -30,7 +30,7 @@ nicegui==2.23.3
 orjson==3.11.3
 packaging==25.0
 pip-review==1.3.0
-playwright==1.54.0
+playwright==1.55.0
 propcache==0.3.2
 proxy_tools==0.1.0
 pscript==0.7.7
