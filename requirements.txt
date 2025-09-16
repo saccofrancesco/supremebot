@@ -12,7 +12,7 @@ certifi==2025.8.3
 charset-normalizer==3.4.3
 click==8.2.1
 docutils==0.22
-fastapi==0.116.1
+fastapi==0.116.2
 frozenlist==1.7.0
 greenlet==3.2.4
 h11==0.16.0
