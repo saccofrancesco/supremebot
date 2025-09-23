@@ -3,7 +3,7 @@ aiohappyeyeballs==2.6.1
 aiohttp==3.12.15
 aiosignal==1.4.0
 annotated-types==0.7.0
-anyio==4.10.0
+anyio==4.11.0
 attrs==25.3.0
 beautifulsoup4==4.13.5
 bidict==0.23.1
@@ -26,7 +26,7 @@ Jinja2==3.1.6
 markdown2==2.5.4
 MarkupSafe==3.0.2
 multidict==6.6.4
-nicegui==2.24.1
+nicegui==2.24.2
 orjson==3.11.3
 packaging==25.0
 pip-review==1.3.0
@@ -57,7 +57,7 @@ starlette==0.47.3
 typing-inspection==0.4.1
 typing_extensions==4.15.0
 urllib3==2.5.0
-uvicorn==0.36.0
+uvicorn==0.37.0
 uvloop==0.21.0
 vbuild==0.8.2
 wait_for2==0.4.1
