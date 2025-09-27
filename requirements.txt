@@ -5,7 +5,7 @@ aiosignal==1.4.0
 annotated-types==0.7.0
 anyio==4.11.0
 attrs==25.3.0
-beautifulsoup4==4.13.5
+beautifulsoup4==4.14.0
 bidict==0.23.1
 bottle==0.13.4
 certifi==2025.8.3
@@ -24,7 +24,7 @@ ifaddr==0.2.0
 itsdangerous==2.2.0
 Jinja2==3.1.6
 markdown2==2.5.4
-MarkupSafe==3.0.2
+MarkupSafe==3.0.3
 multidict==6.6.4
 nicegui==2.24.2
 orjson==3.11.3
