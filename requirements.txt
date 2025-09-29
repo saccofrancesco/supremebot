@@ -5,14 +5,14 @@ aiosignal==1.4.0
 annotated-types==0.7.0
 anyio==4.11.0
 attrs==25.3.0
-beautifulsoup4==4.14.0
+beautifulsoup4==4.14.2
 bidict==0.23.1
 bottle==0.13.4
 certifi==2025.8.3
 charset-normalizer==3.4.3
 click==8.3.0
 docutils==0.22
-fastapi==0.117.1
+fastapi==0.118.0
 frozenlist==1.7.0
 greenlet==3.2.4
 h11==0.16.0
