@@ -26,7 +26,7 @@ Jinja2==3.1.6
 markdown2==2.5.4
 MarkupSafe==3.0.3
 multidict==6.6.4
-nicegui==2.24.2
+nicegui==3.0.0
 orjson==3.11.3
 packaging==25.0
 pip-review==1.3.0
@@ -46,7 +46,7 @@ pyobjc-framework-WebKit==11.1
 python-dotenv==1.1.1
 python-engineio==4.12.3
 python-multipart==0.0.20
-python-socketio==5.14.0
+python-socketio==5.14.1
 pywebview==6.0
 PyYAML==6.0.3
 requests==2.32.5
