@@ -895,8 +895,8 @@ class ItemsList:
     def __init__(self, basket: BasketCheckout, container: ui.column) -> None:
 
         # Creating a date and category parameter to use to show items
-        #変更
-        self.date: str = get_drop_dates()[0] if drop_dates else "2025-10-02" 
+        drop_dates: list[str] = get_drop_dates()
+        self.date: str = drop_dates[0] if drop_dates else "2025-10-09"
         self.category: str = "T-Shirts"
         self.basket: BasketCheckout = basket
         self.container: ui.column = container
