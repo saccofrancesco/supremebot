@@ -896,7 +896,7 @@ class ItemsList:
 
         # Creating a date and category parameter to use to show items
         drop_dates: list[str] = get_drop_dates()
-        self.date: str = drop_dates[0] if drop_dates else "2025-10-09"
+        self.date: str = drop_dates[0] if drop_dates else "2025-10-16"
         self.category: str = "T-Shirts"
         self.basket: BasketCheckout = basket
         self.container: ui.column = container
