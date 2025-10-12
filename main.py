@@ -925,14 +925,6 @@ with ui.element("div").classes("w-full p-8"):
                 "text-white text-4xl text-bold italic font-mono"
             )
 
-        # Adding spacing between title and call to action
-        ui.space()
-
-        with ui.link(target="https://www.buymeacoffee.com/saccofrancesco"):
-            ui.image(
-                "https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-            ).classes("w-[150px]")
-
     # Creating the grid for the date and category selectors
     selectors_container: ui.grid = ui.grid(columns="1fr 5fr").classes("py-8")
 
