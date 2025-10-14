@@ -9,7 +9,7 @@ beautifulsoup4==4.14.2
 bidict==0.23.1
 bottle==0.13.4
 certifi==2025.10.5
-charset-normalizer==3.4.3
+charset-normalizer==3.4.4
 click==8.3.0
 docutils==0.22
 fastapi==0.119.0
@@ -61,7 +61,7 @@ uvicorn==0.37.0
 uvloop==0.21.0
 vbuild==0.8.2
 wait_for2==0.4.1
-watchfiles==1.1.0
+watchfiles==1.1.1
 websockets==15.0.1
 wsproto==1.2.0
 yarl==1.22.0
