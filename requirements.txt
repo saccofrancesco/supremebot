@@ -2,6 +2,7 @@ aiofiles==25.1.0
 aiohappyeyeballs==2.6.1
 aiohttp==3.13.1
 aiosignal==1.4.0
+annotated-doc==0.0.2
 annotated-types==0.7.0
 anyio==4.11.0
 attrs==25.4.0
@@ -12,7 +13,7 @@ certifi==2025.10.5
 charset-normalizer==3.4.4
 click==8.3.0
 docutils==0.22
-fastapi==0.119.1
+fastapi==0.120.0
 frozenlist==1.8.0
 greenlet==3.2.4
 h11==0.16.0
