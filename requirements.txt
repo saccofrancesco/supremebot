@@ -27,11 +27,11 @@ Jinja2==3.1.6
 markdown2==2.5.4
 MarkupSafe==3.0.3
 multidict==6.7.0
-nicegui==3.3.1
+nicegui==3.4.0
 orjson==3.11.5
 packaging==25.0
 pip-review==1.3.0
-playwright==1.56.0
+playwright==1.57.0
 propcache==0.4.1
 proxy_tools==0.1.0
 pscript==0.7.7
@@ -58,7 +58,7 @@ soupsieve==2.8
 starlette==0.50.0
 typing-inspection==0.4.2
 typing_extensions==4.15.0
-urllib3==2.6.0
+urllib3==2.6.1
 uvicorn==0.38.0
 uvloop==0.22.1
 vbuild==0.8.2
