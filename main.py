@@ -1,7 +1,9 @@
 # Importing Libraries
 from nicegui import ui
 import requests
+import cloudscraper
 from bs4 import BeautifulSoup
+import platform
 from functools import cache
 import re
 import datetime
@@ -326,7 +328,16 @@ def get_drop_dates() -> list:
     url: str = "https://www.supremecommunity.com/season/fall-winter2025/droplists/"
 
     # Fetching the source code
-    response: requests.models.Response = requests.get(url, headers=headers)
+    if platform.system() == "Windows":
+        scraper = cloudscraper.create_scraper(
+            browser={
+                "browser": "chrome",
+                "platform": "windows",
+            },
+        )
+        response = scraper.get(url)
+    else:
+        response: requests.models.Response = requests.get(url, headers=headers)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
         # Find all dates
@@ -397,7 +408,16 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     item_divs: list = list()
 
     # Fetching all items of a certain type
-    response: requests.models.Response = requests.get(url, headers=headers)
+    if platform.system() == "Windows":
+        scraper = cloudscraper.create_scraper(
+            browser={
+                "browser": "chrome",
+                "platform": "windows",
+            },
+        )
+        response = scraper.get(url)
+    else:
+        response: requests.models.Response = requests.get(url, headers=headers)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
         item_divs: list = soup.find_all(
@@ -421,9 +441,18 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
         item_full_link: str = (
             f'https://www.supremecommunity.com{item.find("a")["href"]}'
         )
-        response: requests.models.Response = requests.get(
-            item_full_link, headers=headers
-        )
+        if platform.system() == "Windows":
+            scraper = cloudscraper.create_scraper(
+                browser={
+                    "browser": "chrome",
+                    "platform": "windows",
+                },
+            )
+            response = scraper.get(url)
+        else:
+            response: requests.models.Response = requests.get(
+                item_full_link, headers=headers
+            )
         if item_price != "None" and response.status_code == 200:
             soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
             colors_div: list = soup.find_all(
