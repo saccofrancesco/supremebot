@@ -448,7 +448,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
                     "platform": "windows",
                 },
             )
-            response = scraper.get(url)
+            response = scraper.get(item_full_link)
         else:
             response: requests.models.Response = requests.get(
                 item_full_link, headers=headers
