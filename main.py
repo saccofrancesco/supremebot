@@ -966,6 +966,11 @@ with ui.element("div").classes("w-full p-8"):
 
     # Creating the basket with its notifier
     with header:
+        ui.space()
+        with ui.link(target="https://www.buymeacoffee.com/saccofrancesco"):
+            ui.image(
+                "https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=saccofrancesco&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+            ).classes("w-[200px]")
         items_number: int = get_number_of_items()
         basket_link: ui.link = ui.link(target="#basket").classes("text-black")
         with basket_link:
