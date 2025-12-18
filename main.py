@@ -314,6 +314,27 @@ headers: dict = {
 }
 
 
+# Function to separate the fetching between Windows and other OSs (simplyfied code structure)
+def get(url: str) -> requests.models.Response:
+    """
+    Separate the requesting process between different OS and guarantees successful fetching
+
+    Args:
+        url (str): The url to fetch in string format
+    Returns:
+        requests.models.Response: The source code of the given url
+    """
+    if platform.system() == "Windows":
+        scraper: cloudscraper.CloudScraper = cloudscraper.create_scraper(
+            browser={
+                "browser": "chrome",
+                "platform": "windows",
+            },
+        )
+        return scraper.get(url)
+    else:
+        return requests.get(url, headers=headers)
+
 # Util function to get all the drop dates for the current release
 @cache
 def get_drop_dates() -> list:
@@ -328,16 +349,7 @@ def get_drop_dates() -> list:
     url: str = "https://www.supremecommunity.com/season/fall-winter2025/droplists/"
 
     # Fetching the source code
-    if platform.system() == "Windows":
-        scraper: cloudscraper.CloudScraper = cloudscraper.create_scraper(
-            browser={
-                "browser": "chrome",
-                "platform": "windows",
-            },
-        )
-        response: requests.models.Response = scraper.get(url)
-    else:
-        response: requests.models.Response = requests.get(url, headers=headers)
+    response: requests.models.Response = get(url)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
         # Find all dates
@@ -408,16 +420,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     item_divs: list = list()
 
     # Fetching all items of a certain type
-    if platform.system() != "Windows":
-        scraper: cloudscraper.CloudScraper = cloudscraper.create_scraper(
-            browser={
-                "browser": "chrome",
-                "platform": "windows",
-            },
-        )
-        response: requests.models.Response = scraper.get(url)
-    else:
-        response: requests.models.Response = requests.get(url, headers=headers)
+    response: requests.models.Response = get(url)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
         item_divs: list = soup.find_all(
@@ -441,18 +444,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
         item_full_link: str = (
             f'https://www.supremecommunity.com{item.find("a")["href"]}'
         )
-        if platform.system() == "Windows":
-            scraper: cloudscraper.CloudScraper = cloudscraper.create_scraper(
-                browser={
-                    "browser": "chrome",
-                    "platform": "windows",
-                },
-            )
-            response: requests.models.Response = scraper.get(item_full_link)
-        else:
-            response: requests.models.Response = requests.get(
-                item_full_link, headers=headers
-            )
+        response: requests.models.Response = get(item_full_link)
         if item_price != "None" and response.status_code == 200:
             soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
             colors_div: list = soup.find_all(
