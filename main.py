@@ -329,13 +329,13 @@ def get_drop_dates() -> list:
 
     # Fetching the source code
     if platform.system() == "Windows":
-        scraper = cloudscraper.create_scraper(
+        scraper: cloudscraper.CloudScraper = cloudscraper.create_scraper(
             browser={
                 "browser": "chrome",
                 "platform": "windows",
             },
         )
-        response = scraper.get(url)
+        response: requests.models.Response = scraper.get(url)
     else:
         response: requests.models.Response = requests.get(url, headers=headers)
     if response.status_code == 200:
