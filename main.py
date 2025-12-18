@@ -408,14 +408,14 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
     item_divs: list = list()
 
     # Fetching all items of a certain type
-    if platform.system() == "Windows":
-        scraper = cloudscraper.create_scraper(
+    if platform.system() != "Windows":
+        scraper: cloudscraper.CloudScraper = cloudscraper.create_scraper(
             browser={
                 "browser": "chrome",
                 "platform": "windows",
             },
         )
-        response = scraper.get(url)
+        response: requests.models.Response = scraper.get(url)
     else:
         response: requests.models.Response = requests.get(url, headers=headers)
     if response.status_code == 200:
@@ -442,13 +442,13 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
             f'https://www.supremecommunity.com{item.find("a")["href"]}'
         )
         if platform.system() == "Windows":
-            scraper = cloudscraper.create_scraper(
+            scraper: cloudscraper.CloudScraper = cloudscraper.create_scraper(
                 browser={
                     "browser": "chrome",
                     "platform": "windows",
                 },
             )
-            response = scraper.get(item_full_link)
+            response: requests.models.Response = scraper.get(item_full_link)
         else:
             response: requests.models.Response = requests.get(
                 item_full_link, headers=headers
