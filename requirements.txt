@@ -14,7 +14,7 @@ charset-normalizer==3.4.4
 click==8.3.1
 cloudscraper==1.2.71
 docutils==0.22.3
-fastapi==0.124.4
+fastapi==0.125.0
 frozenlist==1.8.0
 greenlet==3.3.0
 h11==0.16.0
@@ -36,7 +36,7 @@ playwright==1.57.0
 propcache==0.4.1
 proxy_tools==0.1.0
 pscript==0.7.7
-pydantic==2.12.4
+pydantic==2.12.5
 pydantic_core==2.41.5
 pyee==13.0.0
 Pygments==2.19.2
