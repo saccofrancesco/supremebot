@@ -10,15 +10,25 @@ from nicegui import ui
 
 # Creating the Bot Class
 class Bot:
-    """
-    A class representing a bot for automating the Supreme shopping experience.
-    """
 
     # Constructor
     def __init__(self, nations_codes: dict, zones_codes: dict) -> None:
         """
-        Initializes the Bot instance by loading configuration data and setting up required attributes.
+        Automation controller responsible for purchasing items on Supreme.
+
+        This class:
+        - Reads selected items from `items.json`
+        - Scrapes Supreme product availability
+        - Adds matching items to the cart
+        - Completes the checkout flow using Playwright
+
+        It acts as the execution layer for the UI-driven basket and checkout logic.
+
+        Args:
+            nations_codes (dict): Mapping of country names to country codes.
+            zones_codes (dict): Mapping of country zones for shipping selection.
         """
+
         # Opening the Items File
         with open("items.json", "r") as i:
 
@@ -45,8 +55,12 @@ class Bot:
 
     def update(self) -> None:
         """
-        Updates the bot's personal data based on the user's input.
+        Reload items from `items.json`.
+
+        This method ensures the bot reflects any changes made
+        to the basket before starting the automation process.
         """
+
         # Opening the Items File
         with open("items.json", "r") as i:
 
@@ -62,8 +76,14 @@ class Bot:
     # Scrape Method for Saving the URLs
     async def scrape(self) -> None:
         """
-        Scrapes the Supreme website to find valid product links based on configured item criteria.
+        Scrape Supreme's 'new' collection to locate product URLs.
+
+        This method:
+        - Fetches product JSON from Supreme
+        - Matches products by name, color, and category
+        - Stores valid product URLs for checkout
         """
+
         # Clear the list of links
         self.links_list.clear()
 
@@ -72,7 +92,24 @@ class Bot:
         HEADERS: str = {"User-Agent": "Mozilla/5.0"}
 
         def fetch_data(url: str) -> dict:
-            """Fetch the webpage content and extract the JSON product data."""
+            """
+            Fetch and parse the product JSON embedded in a Supreme collection page.
+
+            This function performs an HTTP GET request to the given URL, extracts
+            the `<script>` tag containing the products JSON, and deserializes it
+            into a Python dictionary.
+
+            Args:
+                url (str): The Supreme collection page URL to scrape.
+
+            Returns:
+                dict: Parsed JSON data containing product information.
+
+            Raises:
+                requests.RequestException: If the HTTP request fails.
+                ValueError: If the products JSON script is missing or empty.
+                json.JSONDecodeError: If the script content is not valid JSON.
+            """
             response: requests.models.Response = requests.get(
                 url, headers=HEADERS, timeout=10
             )
@@ -87,7 +124,38 @@ class Bot:
             return json.loads(script_tag.text.strip())
 
         def structure_data(products: list[dict]) -> dict:
-            """Organize products by category with only necessary fields."""
+            """
+            Normalize and group product data by category.
+
+            This function takes a flat list of product dictionaries (as returned by
+            the Supreme products JSON), extracts only the relevant fields, and groups
+            products by their normalized category name.
+
+            Category names are sanitized by replacing '/' with '-', ensuring they
+            match the internal category format used by the bot.
+
+            Args:
+                products (list[dict]): List of raw product dictionaries obtained
+                    from the Supreme products JSON.
+
+            Returns:
+                dict: A dictionary with a single key `"categories"`, mapping
+                normalized category names to lists of simplified product dictionaries.
+
+                Example:
+                {
+                    "categories": {
+                        "t-shirts": [
+                            {
+                                "title": "Box Logo Tee",
+                                "color": "Black",
+                                "url": "/products/12345",
+                                "available": True
+                            }
+                        ]
+                    }
+                }
+            """
             structured: dict = dict()
             for product in products:
                 category: str = product.get("product_type", "uncategorized").replace(
@@ -126,7 +194,10 @@ class Bot:
     # Method for Add to Basket
     async def add_to_basket(self, page: playwright.async_api._generated.Page) -> None:
         """
-        Adds items from the collected links to the shopping basket on the Supreme website.
+        Add selected items to the Supreme cart.
+
+        Args:
+            page (Page): Active Playwright page instance.
         """
         for i in range(len(self.links_list)):
             await page.goto(self.links_list[i])
@@ -147,7 +218,10 @@ class Bot:
     # Method for Checkout
     async def checkout(self, page: playwright.async_api._generated.Page) -> None:
         """
-        Completes the checkout process on the Supreme website.
+        Complete the checkout form on Supreme.
+
+        Args:
+            page (Page): Active Playwright page instance.
         """
 
         # Going to the supreme checkout form link
@@ -196,6 +270,16 @@ class Bot:
 
     # Function to start the bot
     async def start(self) -> None:
+        """
+        Entry point to start the full automation process.
+
+        This method:
+        - Reloads basket data
+        - Scrapes available products
+        - Launches the browser
+        - Adds items to the cart
+        - Fills the checkout form
+        """
         try:
 
             # Update the info if something is changed

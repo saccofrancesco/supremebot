@@ -307,7 +307,7 @@ ZONES: dict = {
 }
 
 # Setting a user-agent to avoid 403 forbidden error
-headers: dict = {
+headers: dict[str, str] = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/58.0.3029.110 Safari/537.3"
@@ -317,12 +317,21 @@ headers: dict = {
 # Function to separate the fetching between Windows and other OSs (simplyfied code structure)
 def get(url: str) -> requests.models.Response:
     """
-    Separate the requesting process between different OS and guarantees successful fetching
+    Fetch a web page using the appropriate method depending on the operating system.
 
-    Args:
-        url (str): The url to fetch in string format
-    Returns:
-        requests.models.Response: The source code of the given url
+    On Windows, uses `cloudscraper` to bypass anti-bot protections.
+    On other operating systems, uses a standard `requests.get` call with
+    predefined headers.
+
+    Parameters
+    ----------
+    url : str
+        The URL of the web page to fetch.
+
+    Returns
+    -------
+    requests.models.Response
+        The HTTP response object resulting from the GET request.
     """
     if platform.system() == "Windows":
         scraper: cloudscraper.CloudScraper = cloudscraper.create_scraper(
@@ -335,16 +344,24 @@ def get(url: str) -> requests.models.Response:
     else:
         return requests.get(url, headers=headers)
 
+
 # Util function to get all the drop dates for the current release
 @cache
 def get_drop_dates() -> list:
     """
-    Fetches drop dates for the current release from Supreme Community website.
+    Retrieve all drop dates for the current Supreme release season.
 
-    Returns:
-        list: A list of drop dates in string format.
-        Returns an empty list if the request fails or no dates are found.
+    This function fetches the HTML content from the SupremeCommunity droplists
+    page for the Fall/Winter 2025 season and parses it to extract all release
+    dates. The results are cached to avoid repeated network requests.
+
+    Returns
+    -------
+    list of str
+        A list of drop dates as strings. Returns an empty list if the page
+        could not be fetched successfully.
     """
+
     # Drops Site
     url: str = "https://www.supremecommunity.com/season/fall-winter2025/droplists/"
 
@@ -367,17 +384,23 @@ def get_drop_dates() -> list:
 @cache
 def convert_date(date: str) -> str:
     """
-    Converts a date string into a formatted date string (YYYY-MM-DD).
+    Convert a date string with ordinal suffixes into standard YYYY-MM-DD format.
 
-    Args:
-        date (str): The date string to be converted.
+    This function removes ordinal suffixes such as "st", "nd", "rd", "th" from
+    the input date string, parses it, and returns it in ISO 8601 format.
 
-    Returns:
-        formatted_date (str): The formatted date string.
+    Parameters
+    ----------
+    date : str
+        The date string to convert, expected in the format "DD Month YY" with
+        possible ordinal suffixes (e.g., "1st January 25").
 
-    Raises:
-        ValueError: If the input date string format is incorrect.
+    Returns
+    -------
+    str
+        The date in "YYYY-MM-DD" format.
     """
+
     # Remove the ordinal suffix (st, nd, rd) from the date string
     date: str = re.sub(r"(\d)(st|nd|rd|th)( |$)", r"\1\3", date)
 
@@ -392,16 +415,31 @@ def convert_date(date: str) -> str:
 @cache
 def fetch_items(drop_date: str, item_category: str) -> dict:
     """
-    Fetches information about items based on the specified drop date and item category
-    from the Supreme Community website.
+    Fetch all item information for a specific drop date and category from SupremeCommunity.
 
-    Args:
-        drop_date (str): The drop date in string format.
-        item_category (str): The category of items to fetch.
+    This function retrieves items released on a given drop date and belonging to a
+    specific category. It collects the item's name, price, image URL, available
+    colors, product link, and votes (likes/dislikes). The "Tops" category is
+    internally converted to "tops-sweaters".
 
-    Returns:
-        dict: A dictionary containing information about fetched items.
-            Keys are item names and values are dictionaries with item details.
+    Parameters
+    ----------
+    drop_date : str
+        The drop date of the items, expected in a format compatible with `convert_date`.
+    item_category : str
+        The category of items to fetch (e.g., "Tops", "Accessories").
+
+    Returns
+    -------
+    dict
+        A dictionary where each key is an item name and each value is a dictionary
+        containing the following information:
+        - "category": Item category.
+        - "price": Item price as a string (or "None" if unavailable).
+        - "image": URL of the item's image.
+        - "colors": List of available color options.
+        - "link": Direct link to the item page.
+        - "votes": Tuple of (likes, dislikes) as strings.
     """
 
     # Converting the tops-sweater option
@@ -476,6 +514,16 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
 
 # Function to get the number of items in the basket
 def get_number_of_items() -> None:
+    """
+    Get the number of items stored in the local 'items.json' basket file.
+
+    Returns
+    -------
+    int
+        The total number of items in the JSON file.
+    str
+        Error message if the file is missing or contains invalid JSON.
+    """
 
     # Get the absolute path to the JSON file
     json_file_path: str = "items.json"
@@ -494,6 +542,21 @@ def get_number_of_items() -> None:
 
 # Return a customized input component (with app desing guidlines)
 def custom_input(placeholder: str | None = None, on_change=None) -> ui.input:
+    """
+    Create a customized NiceGUI input component following app design guidelines.
+
+    Parameters
+    ----------
+    placeholder : str | None
+        Placeholder text for the input field.
+    on_change : callable | None
+        Function to call when the input value changes.
+
+    Returns
+    -------
+    ui.input
+        A styled NiceGUI input component.
+    """
     return (
         ui.input(None, placeholder=placeholder, on_change=on_change)
         .props("square outlined color=black")
@@ -505,6 +568,25 @@ def custom_input(placeholder: str | None = None, on_change=None) -> ui.input:
 def custom_select(
     options: list | dict = [], *, label: Any = None, value: Any = None, on_change=None
 ) -> ui.select:
+    """
+    Create a customized NiceGUI select component following app design guidelines.
+
+    Parameters
+    ----------
+    options : list | dict
+        Options to display in the select component.
+    label : Any
+        Label for the select field.
+    value : Any
+        Default selected value.
+    on_change : Callable | None
+        Function to call when the selected value changes.
+
+    Returns
+    -------
+    ui.select
+        A styled NiceGUI select component.
+    """
     return (
         ui.select(options=options, label=label, value=value, on_change=on_change)
         .props("square outlined color=black")
@@ -515,6 +597,23 @@ def custom_select(
 # Creating the Basket object and its UI
 class BasketCheckout:
     def __init__(self, notifier: ui.badge, container: ui.grid) -> None:
+        """
+        Manages the shopping basket UI and checkout flow.
+
+        This class is responsible for:
+        - Rendering the basket recap (items, prices, total)
+        - Rendering the checkout form
+        - Managing basket state persistence via a JSON file
+        - Updating the UI badge that displays the number of items
+        - Binding checkout inputs to the automation Bot
+
+        The basket data is stored locally in a JSON file and rendered dynamically
+        using NiceGUI components.
+
+        Args:
+            notifier (ui.badge): Badge used to display the number of items in the basket.
+            container (ui.grid): Parent container used to render recap and checkout columns.
+        """
 
         # Objects properties
         self.items_number: int = get_number_of_items()
@@ -536,10 +635,11 @@ class BasketCheckout:
     # Utility to check if the basket is empty
     def is_empty(self) -> bool:
         """
-        Checks if the basket JSON file is empty.
+        Checks whether the basket is empty.
 
         Returns:
-            bool: True if the JSON file is empty or doesn't exist, False otherwise.
+            bool: True if the basket file does not exist, is invalid,
+            or contains no items. False otherwise.
         """
         try:
             with open(self.file_path, "r") as file:
@@ -553,7 +653,15 @@ class BasketCheckout:
 
     # Function to check if an item is inside the basket
     def item_in(self, item_name: str) -> None:
+        """
+        Checks if a specific item is present in the basket.
 
+        Args:
+            item_name (str): Name of the item to search for.
+
+        Returns:
+            bool: True if the item is in the basket, False otherwise.
+        """
         try:
             # Load existing items from the JSON file if it exists
             with open(self.file_path, "r") as json_file:
@@ -572,6 +680,14 @@ class BasketCheckout:
 
     # Function to update the number of item
     def update_number_of_item(self) -> None:
+        """
+        Updates the internal item count and refreshes the UI badge.
+
+        This method:
+        - Recomputes the number of items in the basket
+        - Updates badge text
+        - Toggles badge visibility
+        """
 
         # Updating the internal number state
         self.items_number: int = get_number_of_items()
@@ -584,8 +700,17 @@ class BasketCheckout:
 
     # Function to render only the recap
     def render_recap(self) -> None:
+        """
+        Renders the basket recap section.
 
-        # Always cllearing the wrapper before
+        Displays:
+        - Item names
+        - Selected color and size (if available)
+        - Individual prices
+        - Basket total
+        """
+
+        # Always clearing the wrapper before
         self.recap_container.clear()
 
         # Checking frist if the basket isn't empty
@@ -630,6 +755,12 @@ class BasketCheckout:
 
     # Function to render only the row for zones options if possible
     def render_zone(self) -> None:
+        """
+        Renders country-specific address and zone inputs.
+
+        Some countries require zone selection (e.g. Italy, Spain),
+        while others use a simplified address form.
+        """
 
         # Checking if the selected country falls inside the country zones options
         if self.bot.COUNTRY in ["Ireland", "Italy", "Portugal", "Romania", "Spain"]:
@@ -648,6 +779,15 @@ class BasketCheckout:
 
     # Function to render only the checkout
     def render_checkout(self) -> None:
+        """
+        Renders the checkout form.
+
+        Includes:
+        - Personal details
+        - Payment information
+        - Address and shipping details
+        - Country-dependent zone selection
+        """
 
         # Checking frist if the basket isn't empty
         if not self.is_empty():
@@ -689,14 +829,25 @@ class BasketCheckout:
 
     # Util fucntion to reload the checkout based on conutry zone relationships
     def reload(self, container: ui.grid) -> None:
+        """
+        Reloads the zone selection UI when the country changes.
 
+        Args:
+            container (ui.grid): The grid container holding zone-related inputs.
+        """
         container.clear()
         with container:
             self.render_zone()
 
     # Function to render the basket recap
     def render(self) -> None:
+        """
+        Renders the entire basket UI.
 
+        This includes:
+        - Basket recap
+        - Checkout form
+        """
         self.render_recap()
         self.render_checkout()
 
@@ -704,6 +855,21 @@ class BasketCheckout:
 # Creating the Item UI and logic blueprint
 class Item(ui.grid):
     def __init__(self, name: str, info: dict, basket: BasketCheckout) -> None:
+        """
+        UI component representing a single product item.
+
+        This class is responsible for rendering a product card, handling
+        customization options (color, size), and managing add/remove
+        interactions with the basket.
+
+        It extends `ui.grid` and tightly integrates with a `BasketCheckout`
+        instance to keep UI state and persisted basket data in sync.
+
+        Args:
+            name (str): Product name.
+            info (dict): Product metadata (image, price, category, colors, votes, link).
+            basket (BasketCheckout): Shared basket controller instance.
+        """
 
         # Initializing the basic grid
         super().__init__(columns="2fr 4fr 1fr")
@@ -721,6 +887,15 @@ class Item(ui.grid):
 
     # Renders the item UI inside the grid
     def render(self) -> None:
+        """
+        Render the item UI.
+
+        This method:
+        - Displays product image, name, price, and trend indicator
+        - Shows either "add to basket" or "remove from basket" CTA
+        - Conditionally renders customization controls (color, size)
+        - Re-renders entirely on state changes
+        """
 
         # Using the grid to place the items, in two states: "in" or "not in" basket
         self.clear()
@@ -808,8 +983,15 @@ class Item(ui.grid):
     # Function to add the item to the basket
     def add_to_basket(self) -> None:
         """
-        Adds an item to the basket by appending its details to the items.json file
+        Add the current item to the basket.
+
+        This method:
+        - Serializes item data into `items.json`
+        - Updates basket counters and UI
+        - Triggers checkout rendering if necessary
+        - Re-renders the item UI to reflect state change
         """
+
         # Creating the item dict to convert in json format
         item_object: dict = {
             "name": self.name,
@@ -849,7 +1031,13 @@ class Item(ui.grid):
     # Function to remove the item from the baskt
     def remove_from_basket(self) -> None:
         """
-        Removes an item with the specified name from the basket stored in items.json file
+        Remove the item from the basket.
+
+        This method:
+        - Removes the item from `items.json`
+        - Updates basket counters and UI
+        - Clears checkout UI if basket becomes empty
+        - Re-renders the item UI
         """
         try:
             # Load existing items from the JSON file if it exists
@@ -891,6 +1079,14 @@ class Item(ui.grid):
 
     # Function to generate the trend UI for the item
     def trend(self) -> None:
+        """
+        Render the trending indicator for the item.
+
+        Uses a likes/dislikes ratio to determine if the item
+        is trending. Displays:
+        - 🔥 icon if trending
+        - ℹ️ icon if vote data is unavailable
+        """
 
         # Calculate the ratio, ensure 'dislikes' is non-zero by adding 1
         try:
@@ -914,6 +1110,20 @@ class Item(ui.grid):
 # Creating the Items List UI and logic blueprint
 class ItemsList:
     def __init__(self, basket: BasketCheckout, container: ui.column) -> None:
+        """
+        Controller class responsible for rendering a list of product items.
+
+        This class fetches product data based on a selected drop date
+        and category, then instantiates and renders `Item` components
+        inside a provided UI container.
+
+        It acts as a bridge between data retrieval and UI composition,
+        while sharing a common `BasketCheckout` instance across items.
+
+        Args:
+            basket (BasketCheckout): Shared basket controller instance.
+            container (ui.column): UI column used to render item components.
+        """
 
         # Creating a date and category parameter to use to show items
         drop_dates: list[str] = get_drop_dates()
@@ -924,6 +1134,14 @@ class ItemsList:
 
     # Render all the Items object inside the column, with the specified date and category
     def render(self) -> None:
+        """
+        Render all items for the selected date and category.
+
+        This method:
+        - Fetches items using the current date and category
+        - Clears the container before rendering
+        - Instantiates an `Item` UI component for each product
+        """
 
         # Fetching the items
         items: dict = fetch_items(self.date, self.category)
