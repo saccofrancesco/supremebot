@@ -14,7 +14,7 @@ charset-normalizer==3.4.4
 click==8.3.1
 cloudscraper==1.2.71
 docutils==0.22.3
-fastapi==0.125.0
+fastapi==0.127.0
 frozenlist==1.8.0
 greenlet==3.3.0
 h11==0.16.0
@@ -62,7 +62,7 @@ starlette==0.50.0
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 urllib3==2.6.2
-uvicorn==0.38.0
+uvicorn==0.40.0
 uvloop==0.22.1
 vbuild==0.8.2
 wait_for2==0.4.1
