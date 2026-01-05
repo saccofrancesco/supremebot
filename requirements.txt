@@ -1,6 +1,6 @@
 aiofiles==25.1.0
 aiohappyeyeballs==2.6.1
-aiohttp==3.13.2
+aiohttp==3.13.3
 aiosignal==1.4.0
 annotated-doc==0.0.4
 annotated-types==0.7.0
@@ -9,7 +9,7 @@ attrs==25.4.0
 beautifulsoup4==4.14.3
 bidict==0.23.1
 bottle==0.13.4
-certifi==2025.11.12
+certifi==2026.1.4
 charset-normalizer==3.4.4
 click==8.3.1
 cloudscraper==1.2.71
@@ -40,6 +40,12 @@ pydantic==2.12.5
 pydantic_core==2.41.5
 pyee==13.0.0
 Pygments==2.19.2
+pyobjc-core==12.1
+pyobjc-framework-Cocoa==12.1
+pyobjc-framework-Quartz==12.1
+pyobjc-framework-Security==12.1
+pyobjc-framework-UniformTypeIdentifiers==12.1
+pyobjc-framework-WebKit==12.1
 pyparsing==3.3.1
 python-dotenv==1.2.1
 python-engineio==4.13.0
