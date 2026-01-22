@@ -30,7 +30,7 @@ MarkupSafe==3.0.3
 multidict==6.7.0
 nicegui==3.6.1
 orjson==3.11.5
-packaging==25.0
+packaging==26.0
 pip-review==1.3.0
 playwright==1.57.0
 propcache==0.4.1
