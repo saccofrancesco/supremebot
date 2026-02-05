@@ -4,8 +4,7 @@
 </div>
 
 <div align="center">
-  <a href="https://www.buymeacoffee.com/saccofrancesco">
-    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=saccofrancesco&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+  <a href="https://www.buymeacoffee.com/saccofrancesco"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=saccofrancesco&button_colour=FFDD00&font_colour=000000&font_family=Bree&outline_colour=000000&coffee_colour=ffffff" /></a>
 </div>
 
 <h4 align="center">A fast and intuitive Supreme bot built with <a href="https://nicegui.io" target="_blank">NiceGUI</a> to streamline your shopping during Supreme drops.</h4>
