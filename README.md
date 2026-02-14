@@ -1,11 +1,13 @@
 <div align="center">
   <img src="img/icon.png" alt="SupremeBot - Supreme Item Buying Tool" width="350">
-  <h1>🧢 SupremeBot: Supreme Item Purchasing Bot</h1>
+  <h1> Supremebot: Supreme Item Purchasing Bot</h1>
 </div>
 
-<div align="center">
-  <a href="https://www.buymeacoffee.com/saccofrancesco"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=saccofrancesco&button_colour=FFDD00&font_colour=000000&font_family=Bree&outline_colour=000000&coffee_colour=ffffff" /></a>
-</div>
+<p align="center">
+  <a href="https://www.buymeacoffee.com/saccofrancesco">
+    <img src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=000000" />
+  </a>
+</p>
 
 <h4 align="center">A fast and intuitive Supreme bot built with <a href="https://nicegui.io" target="_blank">NiceGUI</a> to streamline your shopping during Supreme drops.</h4>
 
@@ -32,7 +34,7 @@
 
 ## 📌 TL;DR
 
-SupremeBot helps you get ahead of the drop by tracking items, showing their hype rating, and letting you pre-fill your basket and checkout — all wrapped in a clean NiceGUI interface.
+Supremebot helps you get ahead of the drop by tracking items, showing their hype rating, and letting you pre-fill your basket and checkout — all wrapped in a clean NiceGUI interface.
 
 ---
 
@@ -71,15 +73,15 @@ python main.py
 
 ## 📬 Emailware: Share Your Thoughts
 
-SupremeBot is [emailware](https://en.wiktionary.org/wiki/emailware) — if you find it useful, I’d love to hear from you! Whether it's feedback, ideas, or just a quick hello:
+Supremebot is [emailware](https://en.wiktionary.org/wiki/emailware) — if you find it useful, I’d love to hear from you! Whether it's feedback, ideas, or just a quick hello:
 
 📩 **[francescosacco.github@gmail.com](mailto:francescosacco.github@gmail.com)**
 
 ---
 
-## 🙏 Like SupremeBot? Support the Project
+## 🙏 Like Supremebot? Support the Project
 
-If SupremeBot made your shopping smoother:
+If Supremebot made your shopping smoother:
 
 * ⭐️ Star the repo
 * 🧃 [Buy me a coffee](https://www.buymeacoffee.com/saccofrancesco)
