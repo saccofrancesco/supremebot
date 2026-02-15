@@ -38,7 +38,7 @@ proxy_tools==0.1.0
 pscript==0.7.7
 pydantic==2.12.5
 pydantic_core==2.41.5
-pyee==13.0.0
+pyee==13.0.1
 Pygments==2.19.2
 pyobjc-core==12.1
 pyobjc-framework-Cocoa==12.1
