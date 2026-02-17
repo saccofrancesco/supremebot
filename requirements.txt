@@ -62,7 +62,7 @@ starlette==0.52.1
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 urllib3==2.6.3
-uvicorn==0.40.0
+uvicorn==0.41.0
 uvloop==0.22.1
 vbuild==0.8.2
 wait_for2==0.4.1
