@@ -711,7 +711,7 @@ class BasketCheckout:
         self.notifier.update()
 
     # Function to render only the recap
-    @ui.refreshable
+    @ui.refreshable_method
     def render_recap(self) -> None:
         """
         Renders the basket recap section.
@@ -732,39 +732,36 @@ class BasketCheckout:
 
             # Using the column wrapped in the passed constructor container
             total: int = 0
-            with self.recap_container:
-                ui.label("Basket").classes("font-mono font-bold text-xl")
-                for i, item in enumerate(data):
-                    with ui.row(align_items="stretch").classes("pb-4"):
-                        with ui.column():
-                            ui.label(item["name"]).classes(
-                                "font-mono font-bold text-base"
-                            )
-                            if item["color"] != "None":
-                                ui.label(item["color"]).classes("font-mono")
-                            if item["size"] != "None":
-                                ui.label(item["size"]).classes("font-mono")
-                        ui.space()
-                        if item["price"] != "None":
-                            total += int(item["price"].replace("$", ""))
-                            if i == len(data) - 1:
-                                with ui.column(align_items="stretch"):
-                                    with ui.row():
-                                        ui.space()
-                                        ui.label(item["price"]).classes(
-                                            "font-mono font-bold text-base"
-                                        )
+            ui.label("Basket").classes("font-mono font-bold text-xl")
+            for i, item in enumerate(data):
+                with ui.row(align_items="stretch").classes("pb-4"):
+                    with ui.column():
+                        ui.label(item["name"]).classes("font-mono font-bold text-base")
+                        if item["color"] != "None":
+                            ui.label(item["color"]).classes("font-mono")
+                        if item["size"] != "None":
+                            ui.label(item["size"]).classes("font-mono")
+                    ui.space()
+                    if item["price"] != "None":
+                        total += int(float(item["price"].replace("$", "")))
+                        if i == len(data) - 1:
+                            with ui.column(align_items="stretch"):
+                                with ui.row():
                                     ui.space()
-                                    ui.label(f"Total: ${total}").classes(
+                                    ui.label(item["price"]).classes(
                                         "font-mono font-bold text-base"
                                     )
-                            else:
-                                ui.label(item["price"]).classes(
+                                ui.space()
+                                ui.label(f"Total: ${total}").classes(
                                     "font-mono font-bold text-base"
                                 )
+                        else:
+                            ui.label(item["price"]).classes(
+                                "font-mono font-bold text-base"
+                            )
 
     # Function to render only the row for zones options if possible
-    @ui.refreshable
+    @ui.refreshable_method
     def render_zone(self) -> None:
         """
         Renders country-specific address and zone inputs.
@@ -854,7 +851,8 @@ class BasketCheckout:
         - Basket recap
         - Checkout form
         """
-        self.render_recap()
+        with self.recap_container:
+            self.render_recap()
         self.render_checkout()
 
 
@@ -894,7 +892,7 @@ class Item(ui.grid):
             self.render()
 
     # Renders the item UI inside the grid
-    @ui.refreshable
+    @ui.refreshable_method
     def render(self) -> None:
         """
         Render the item UI.
