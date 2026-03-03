@@ -345,6 +345,37 @@ def get(url: str) -> requests.models.Response:
         return requests.get(url, headers=headers)
 
 
+# Util function to convert a date to a certain format
+@cache
+def convert_date(date_str: str) -> str:
+    """
+    Convert between:
+    - YYYY-MM-DD  -> 5th March 2026
+    - 5th March 2026 -> YYYY-MM-DD
+    """
+
+    # Case 1: ISO format -> Human readable
+    if re.match(r"\d{4}-\d{2}-\d{2}$", date_str):
+        date = datetime.datetime.strptime(date_str, "%Y-%m-%d")
+
+        day = date.day
+        month = date.strftime("%B")
+        year = date.year
+
+        if 10 <= day % 100 <= 20:
+            suffix = "th"
+        else:
+            suffix = {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
+
+        return f"{day}{suffix} {month} {year}"
+
+    # Case 2: Human readable -> ISO format
+    else:
+        cleaned = re.sub(r"(\d+)(st|nd|rd|th)", r"\1", date_str)
+        date = datetime.datetime.strptime(cleaned, "%d %B %Y")
+        return date.strftime("%Y-%m-%d")
+
+
 # Util function to get all the drop dates for the current release
 @cache
 def get_drop_dates() -> list:
@@ -363,52 +394,25 @@ def get_drop_dates() -> list:
     """
 
     # Drops Site
-    url: str = "https://www.supremecommunity.com/season/fall-winter2025/droplists/"
+    url: str = "https://www.supremecommunity.com/season/spring-summer2026/droplists/"
 
     # Fetching the source code
     response: requests.models.Response = get(url)
     if response.status_code == 200:
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
-        # Find all dates
-        dates_divs: list = soup.find_all("div", {"class": "week-item-subtitle"})
-        dates: list[str] = [date.text for date in dates_divs]
 
-        return dates
+        # Find all dates
+        dates_href: list = soup.find_all("a", {"class": "droplist-row"})
+        dates: list[str] = [a["href"].split("/")[-2] for a in dates_href]
+
+        # Convert dates
+        formatted_dates: list[str] = list(map(convert_date, dates))
+
+        return formatted_dates
 
     else:
         # Return an empty list or handle the error as needed
         return list()
-
-
-# Util function to convert a date to a certain format
-@cache
-def convert_date(date: str) -> str:
-    """
-    Convert a date string with ordinal suffixes into standard YYYY-MM-DD format.
-
-    This function removes ordinal suffixes such as "st", "nd", "rd", "th" from
-    the input date string, parses it, and returns it in ISO 8601 format.
-
-    Parameters
-    ----------
-    date : str
-        The date string to convert, expected in the format "DD Month YY" with
-        possible ordinal suffixes (e.g., "1st January 25").
-
-    Returns
-    -------
-    str
-        The date in "YYYY-MM-DD" format.
-    """
-
-    # Remove the ordinal suffix (st, nd, rd) from the date string
-    date: str = re.sub(r"(\d)(st|nd|rd|th)( |$)", r"\1\3", date)
-
-    # Parse the date using the modified format
-    date_obj: datetime.datetime = datetime.datetime.strptime(date, "%d %B %y")
-    formatted_date: str = date_obj.strftime("%Y-%m-%d")
-
-    return formatted_date
 
 
 # Util function to fetch all information based on drop date and item category
