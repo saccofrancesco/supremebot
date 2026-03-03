@@ -467,7 +467,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
 
     # Constructing URL based on the Drop Date
     url: str = (
-        f"https://www.supremecommunity.com/season/fall-winter2025/droplist/{convert_date(drop_date)}"
+        f"https://www.supremecommunity.com/season/spring-summer2026/droplist/{convert_date(drop_date)}/"
     )
 
     # Creating an Object to store the fetched items
@@ -486,14 +486,12 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
 
     # Storing Items' Infos
     for item in item_divs:
-        item_name: str = item.find(
-            "div", {"class": "catalog-item__title"}
-        ).text.replace("\n", "")
+        item_name: str = item.find("h3", {"class": "item-name"}).text.replace("\n", "")
         item_price: str = (
-            item.find("span", {"class": "catalog-label-price"})
+            item.find("span", {"class": "item-price"})
             .text.replace("\n", "")
             .split("/")[0]
-            if item.find("span", {"class": "catalog-label-price"})
+            if item.find("span", {"class": "item-price"})
             else "None"
         )
         item_image: str = item.find("img")["src"]
@@ -504,19 +502,14 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
         response: requests.models.Response = get(item_full_link)
         if item_price != "None" and response.status_code == 200:
             soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
-            colors_div: list = soup.find_all(
-                "div", {"class": "product-options active"}
-            )[1]
+            color_div = soup.find("div", {"class": "colorway-list"})
             item_colors: list = [
                 color.text.replace("\n", "")
-                for color in colors_div.find_all("div", {"class": "product-option"})
+                for color in color_div.find_all("span", {"class": "colorway-tag"})
             ]
-            # Removing the VOTE button (not a color option, but a public pool)
-            if "VOTING >" in item_colors:
-                item_colors.remove("VOTING >")
         item_votes: tuple[str, str] = (
-            soup.find("div", {"class": "like"}).text,
-            soup.find("div", {"class": "dislike"}).text,
+            soup.find("span", {"id": "upvote-count"}).text,
+            soup.find("span", {"id": "downvote-count"}).text,
         )
         item_type: str = item["data-category"]
         items_dict[item_name.strip()] = {
