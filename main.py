@@ -711,6 +711,7 @@ class BasketCheckout:
         self.notifier.update()
 
     # Function to render only the recap
+    @ui.refreshable
     def render_recap(self) -> None:
         """
         Renders the basket recap section.
@@ -721,9 +722,6 @@ class BasketCheckout:
         - Individual prices
         - Basket total
         """
-
-        # Always clearing the wrapper before
-        self.recap_container.clear()
 
         # Checking frist if the basket isn't empty
         if not self.is_empty():
@@ -766,6 +764,7 @@ class BasketCheckout:
                                 )
 
     # Function to render only the row for zones options if possible
+    @ui.refreshable
     def render_zone(self) -> None:
         """
         Renders country-specific address and zone inputs.
@@ -820,7 +819,7 @@ class BasketCheckout:
                     custom_select(
                         [nation for nation in NATIONS.keys()],
                         value="Austria",
-                        on_change=lambda _: self.reload(zones_grid),
+                        on_change=lambda _: self.reload(),
                     ).bind_value_to(self.bot, "COUNTRY")
                     custom_input("Card Number").bind_value_to(self.bot, "CARD_NUMBER")
                 with details_exp_grid:
@@ -840,16 +839,11 @@ class BasketCheckout:
                     ).props(f"square fill color=red-600").classes("font-mono")
 
     # Util fucntion to reload the checkout based on conutry zone relationships
-    def reload(self, container: ui.grid) -> None:
+    def reload(self) -> None:
         """
         Reloads the zone selection UI when the country changes.
-
-        Args:
-            container (ui.grid): The grid container holding zone-related inputs.
         """
-        container.clear()
-        with container:
-            self.render_zone()
+        self.render_zone.refresh()
 
     # Function to render the basket recap
     def render(self) -> None:
@@ -894,10 +888,13 @@ class Item(ui.grid):
         self.selected_size = "None"
         self.basket: BasketCheckout = basket
 
-        # Rendering the item
-        self.render()
+        # Rendering the item — must be called inside `with self:` so the
+        # refreshable slot is registered *inside* the grid, not in the outer context
+        with self:
+            self.render()
 
     # Renders the item UI inside the grid
+    @ui.refreshable
     def render(self) -> None:
         """
         Render the item UI.
@@ -910,87 +907,83 @@ class Item(ui.grid):
         """
 
         # Using the grid to place the items, in two states: "in" or "not in" basket
-        self.clear()
-        with self:
 
-            # Render the item image
-            with ui.element("div").style(
-                "border-width: 1px; border-color: rgb(194, 194, 194);"
-            ).classes("p-4 w-fit"):
-                ui.image(self.info["image"]).style("width: 11.7rem;")
+        # Render the item image
+        with ui.element("div").style(
+            "border-width: 1px; border-color: rgb(194, 194, 194);"
+        ).classes("p-4 w-fit"):
+            ui.image(self.info["image"]).style("width: 11.7rem;")
 
-            # Name, price and trend (if founded)
-            with ui.column():
-                with ui.row(align_items="center").classes("pt-2"):
-                    ui.markdown("**Product**").classes("font-mono text-lg")
-                    ui.link(self.name, self.info["link"]).classes(
-                        "font-mono font-bold text-black text-lg"
-                    )
-                    self.trend()
-                with ui.row(align_items="center").classes("pt-2"):
-                    ui.markdown(f"**Price**").classes("font-mono text-lg")
-                    ui.label(self.info["price"]).classes("font-mono text-lg")
-
-                # Render the cta (call to action) "add to basket" or "remove from basket"
-                if not self.basket.item_in(self.name):
-                    ui.button("add to", on_click=lambda _: self.add_to_basket()).props(
-                        f"square fill color=red-600 icon-right=shopping_cart"
-                    ).classes("font-mono mt-2")
-                else:
-                    ui.button(
-                        "remove from", on_click=lambda _: self.remove_from_basket()
-                    ).props(
-                        f"square outline color=red-600 icon-right=shopping_cart"
-                    ).classes(
-                        "font-mono mt-2"
-                    )
-
-            # Render the customize buttons area
-            with ui.column(align_items="stretch").classes("pt-2"):
-
-                # Filtering the sizes' options
-                size_options: list[str] = (
-                    "None"
-                    if self.info["category"]
-                    not in [
-                        "t-shirts",
-                        "sweatshirts",
-                        "jackets",
-                        "tops-sweaters",
-                        "pants",
-                        "shirts",
-                    ]
-                    else ["Small", "Medium", "Large", "XLarge", "XXLarge"]
+        # Name, price and trend (if founded)
+        with ui.column():
+            with ui.row(align_items="center").classes("pt-2"):
+                ui.markdown("**Product**").classes("font-mono text-lg")
+                ui.link(self.name, self.info["link"]).classes(
+                    "font-mono font-bold text-black text-lg"
                 )
-                if not self.basket.item_in(self.name):
+                self.trend()
+            with ui.row(align_items="center").classes("pt-2"):
+                ui.markdown(f"**Price**").classes("font-mono text-lg")
+                ui.label(self.info["price"]).classes("font-mono text-lg")
 
-                    # Creating the title (if the customize options are availbale)
-                    if self.info["colors"] or size_options != "None":
-                        ui.label("Customize").classes(
-                            "text-lg text-bold font-mono pt-2"
-                        )
+            # Render the cta (call to action) "add to basket" or "remove from basket"
+            if not self.basket.item_in(self.name):
+                ui.button("add to", on_click=lambda _: self.add_to_basket()).props(
+                    f"square fill color=red-600 icon-right=shopping_cart"
+                ).classes("font-mono mt-2")
+            else:
+                ui.button(
+                    "remove from", on_click=lambda _: self.remove_from_basket()
+                ).props(
+                    f"square outline color=red-600 icon-right=shopping_cart"
+                ).classes(
+                    "font-mono mt-2"
+                )
 
-                    if self.info["colors"]:
-                        ui.select(
-                            options=self.info["colors"],
-                            label="Select a color",
-                            value=self.info["colors"][0],
-                        ).props("square outlined color=black").classes(
-                            "font-mono pt-2"
-                        ).bind_value_to(
-                            self, "selected_color"
-                        )
+        # Render the customize buttons area
+        with ui.column(align_items="stretch").classes("pt-2"):
 
-                    if size_options != "None":
-                        ui.select(
-                            options=size_options,
-                            label="Select a size",
-                            value=size_options[0],
-                        ).props("square outlined color=black").classes(
-                            "font-mono pt-2"
-                        ).bind_value_to(
-                            self, "selected_size"
-                        )
+            # Filtering the sizes' options
+            size_options: list[str] = (
+                "None"
+                if self.info["category"]
+                not in [
+                    "t-shirts",
+                    "sweatshirts",
+                    "jackets",
+                    "tops-sweaters",
+                    "pants",
+                    "shirts",
+                ]
+                else ["Small", "Medium", "Large", "XLarge", "XXLarge"]
+            )
+            if not self.basket.item_in(self.name):
+
+                # Creating the title (if the customize options are availbale)
+                if self.info["colors"] or size_options != "None":
+                    ui.label("Customize").classes("text-lg text-bold font-mono pt-2")
+
+                if self.info["colors"]:
+                    ui.select(
+                        options=self.info["colors"],
+                        label="Select a color",
+                        value=self.info["colors"][0],
+                    ).props("square outlined color=black").classes(
+                        "font-mono pt-2"
+                    ).bind_value_to(
+                        self, "selected_color"
+                    )
+
+                if size_options != "None":
+                    ui.select(
+                        options=size_options,
+                        label="Select a size",
+                        value=size_options[0],
+                    ).props("square outlined color=black").classes(
+                        "font-mono pt-2"
+                    ).bind_value_to(
+                        self, "selected_size"
+                    )
 
     # Function to add the item to the basket
     def add_to_basket(self) -> None:
@@ -1030,7 +1023,7 @@ class Item(ui.grid):
 
         # Updating the basket
         self.basket.update_number_of_item()
-        self.basket.render_recap()
+        self.basket.render_recap.refresh()
         if not self.basket.checkout_already_rendered:
             self.basket.render_checkout()
         if self.basket.is_empty():
@@ -1038,7 +1031,7 @@ class Item(ui.grid):
             self.basket.checkout_already_rendered = False
 
         # Refreshing the item UI
-        self.render()
+        self.render.refresh()
 
     # Function to remove the item from the baskt
     def remove_from_basket(self) -> None:
@@ -1079,7 +1072,7 @@ class Item(ui.grid):
 
         # Updating the basket
         self.basket.update_number_of_item()
-        self.basket.render_recap()
+        self.basket.render_recap.refresh()
         if not self.basket.checkout_already_rendered:
             self.basket.render_checkout()
         if self.basket.is_empty():
@@ -1087,7 +1080,7 @@ class Item(ui.grid):
             self.basket.checkout_already_rendered = False
 
         # Refreshing the item UI
-        self.render()
+        self.render.refresh()
 
     # Function to generate the trend UI for the item
     def trend(self) -> None:
