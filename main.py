@@ -349,23 +349,38 @@ def get(url: str) -> requests.models.Response:
 @cache
 def convert_date(date_str: str) -> str:
     """
-    Convert between:
-    - YYYY-MM-DD  -> 5th March 2026
-    - 5th March 2026 -> YYYY-MM-DD
-    """
+    Convert a date string between ISO format and human-readable format.
 
+    If the input date is in ISO format (`YYYY-MM-DD`), it is converted to a
+    human-readable format with an ordinal day suffix (e.g. `5th March 2026`).
+    If the input date is already in human-readable format with an ordinal
+    suffix, it is converted back to ISO format.
+
+    The result is cached to avoid repeated parsing of the same date strings.
+
+    Parameters
+    ----------
+    date_str : str
+        The date string to convert. Supported formats are:
+        - ISO format: `YYYY-MM-DD`
+        - Human-readable format: `5th March 2026`
+
+    Returns
+    -------
+    str
+        The converted date string in the opposite format.
+    """
     # Case 1: ISO format -> Human readable
     if re.match(r"\d{4}-\d{2}-\d{2}$", date_str):
-        date = datetime.datetime.strptime(date_str, "%Y-%m-%d")
-
-        day = date.day
-        month = date.strftime("%B")
-        year = date.year
+        date: datetime.datetime = datetime.datetime.strptime(date_str, "%Y-%m-%d")
+        day: int = date.day
+        month: str = date.strftime("%B")
+        year: int = date.year
 
         if 10 <= day % 100 <= 20:
-            suffix = "th"
+            suffix: str = "th"
         else:
-            suffix = {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
+            suffix: str = {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
 
         return f"{day}{suffix} {month} {year}"
 
