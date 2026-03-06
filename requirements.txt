@@ -10,7 +10,7 @@ beautifulsoup4==4.14.3
 bidict==0.23.1
 bottle==0.13.4
 certifi==2026.2.25
-charset-normalizer==3.4.4
+charset-normalizer==3.4.5
 click==8.3.1
 cloudscraper==1.2.71
 docutils==0.22.4
