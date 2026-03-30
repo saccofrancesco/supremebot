@@ -41,7 +41,7 @@ pscript==0.7.7
 pydantic==2.12.5
 pydantic_core==2.41.5
 pyee==13.0.1
-Pygments==2.19.2
+Pygments==2.20.0
 pyobjc-core==12.1
 pyobjc-framework-Cocoa==12.1
 pyobjc-framework-Quartz==12.1
