@@ -55,7 +55,7 @@ python-multipart==0.0.22
 python-socketio==5.16.1
 pywebview==6.1
 PyYAML==6.0.3
-requests==2.33.0
+requests==2.33.1
 requests-toolbelt==1.0.0
 simple-websocket==1.1.0
 sniffio==1.3.1
