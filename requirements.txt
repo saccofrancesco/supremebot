@@ -10,11 +10,11 @@ beautifulsoup4==4.14.3
 bidict==0.23.1
 bottle==0.13.4
 certifi==2026.2.25
-charset-normalizer==3.4.6
+charset-normalizer==3.4.7
 click==8.3.1
 cloudscraper==1.2.71
 docutils==0.22.4
-fastapi==0.135.2
+fastapi==0.135.3
 frozenlist==1.8.0
 greenlet==3.3.2
 h11==0.16.0
