@@ -51,7 +51,7 @@ pyobjc-framework-WebKit==12.1
 pyparsing==3.3.2
 python-dotenv==1.2.2
 python-engineio==4.13.1
-python-multipart==0.0.22
+python-multipart==0.0.23
 python-socketio==5.16.1
 pywebview==6.1
 PyYAML==6.0.3
