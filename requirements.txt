@@ -51,7 +51,7 @@ pyobjc-framework-WebKit==12.1
 pyparsing==3.3.2
 python-dotenv==1.2.2
 python-engineio==4.13.1
-python-multipart==0.0.23
+python-multipart==0.0.24
 python-socketio==5.16.1
 pywebview==6.1
 PyYAML==6.0.3
@@ -64,7 +64,7 @@ starlette==1.0.0
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 urllib3==2.6.3
-uvicorn==0.43.0
+uvicorn==0.44.0
 uvloop==0.22.1
 vbuild==0.8.2
 wait_for2==0.4.1
