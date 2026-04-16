@@ -53,7 +53,7 @@ python-dotenv==1.2.2
 python-engineio==4.13.1
 python-multipart==0.0.26
 python-socketio==5.16.1
-pywebview==6.2
+pywebview==6.2.1
 PyYAML==6.0.3
 requests==2.33.1
 requests-toolbelt==1.0.0
