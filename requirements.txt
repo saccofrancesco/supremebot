@@ -38,8 +38,8 @@ playwright==1.58.0
 propcache==0.4.1
 proxy_tools==0.1.0
 pscript==0.7.7
-pydantic==2.12.5
-pydantic_core==2.41.5
+pydantic==2.13.2
+pydantic_core==2.46.2
 pyee==13.0.1
 Pygments==2.20.0
 pyobjc-core==12.1
