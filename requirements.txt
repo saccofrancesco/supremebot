@@ -11,7 +11,7 @@ bidict==0.23.1
 bottle==0.13.4
 certifi==2026.4.22
 charset-normalizer==3.4.7
-click==8.3.2
+click==8.3.3
 cloudscraper==1.2.71
 docutils==0.22.4
 fastapi==0.136.0
@@ -21,7 +21,7 @@ h11==0.16.0
 httpcore==1.0.9
 httptools==0.7.1
 httpx==0.28.1
-idna==3.12
+idna==3.13
 ifaddr==0.2.0
 itsdangerous==2.2.0
 Jinja2==3.1.6
@@ -64,7 +64,7 @@ starlette==1.0.0
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 urllib3==2.6.3
-uvicorn==0.45.0
+uvicorn==0.46.0
 uvloop==0.22.1
 vbuild==0.8.2
 wait_for2==0.4.1
