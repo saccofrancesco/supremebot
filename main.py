@@ -503,10 +503,11 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
         if item_price != "None" and response.status_code == 200:
             soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
             color_div = soup.find("div", {"class": "colorway-list"})
-            item_colors: list = [
-                color.text.replace("\n", "")
-                for color in color_div.find_all("span", {"class": "colorway-tag"})
-            ]
+            if color_div:
+                item_colors: list = [
+                    color.text.replace("\n", "")
+                    for color in color_div.find_all("span", {"class": "colorway-tag"})
+                ]
         item_votes: tuple[str, str] = (
             soup.find("span", {"id": "upvote-count"}).text,
             soup.find("span", {"id": "downvote-count"}).text,
@@ -1237,4 +1238,4 @@ with ui.element("div").classes("w-full p-8"):
     items_list.render()
 
 # Running the app
-ui.run(title="Supremebot", favicon="img/icon.png")
+ui.run(title="Supremebot", favicon="img/icon.png", port=8000)
