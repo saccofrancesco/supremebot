@@ -26,9 +26,7 @@
   <a href="#license">License</a>
 </p>
 
-<div align="center">
-  <img src="./img/usage.gif" alt="SupremeBot in action">
-</div>
+https://github.com/user-attachments/assets/4a2ddd30-e038-4f4c-8508-782549ed2768
 
 ---
 
