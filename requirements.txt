@@ -11,7 +11,7 @@ bidict==0.23.1
 bottle==0.13.4
 certifi==2026.4.22
 charset-normalizer==3.4.7
-click==8.3.3
+click==8.4.0
 cloudscraper==1.2.71
 docutils==0.22.4
 fastapi==0.136.1
