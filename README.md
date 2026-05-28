@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="img/icon.png" alt="SupremeBot - Supreme Item Buying Tool" width="350">
+  <img src="img/icon.png" alt="SupremeBot - Supreme Item Buying Tool" width="200">
   <h1> Supremebot: Supreme Item Purchasing Bot</h1>
 </div>
 
