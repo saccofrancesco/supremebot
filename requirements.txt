@@ -10,7 +10,7 @@ beautifulsoup4==4.15.0
 bidict==0.23.1
 bottle==0.13.4
 certifi==2026.6.17
-charset-normalizer==3.4.7
+charset-normalizer==3.4.8
 click==8.4.2
 cloudscraper==1.2.71
 docutils==0.23
@@ -65,7 +65,7 @@ tinycss2==1.5.1
 typing-inspection==0.4.2
 typing_extensions==4.16.0
 urllib3==2.7.0
-uvicorn==0.50.0
+uvicorn==0.50.2
 uvloop==0.22.1
 vbuild==0.8.2
 wait_for2==0.4.1
