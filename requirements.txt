@@ -65,7 +65,7 @@ tinycss2==1.5.1
 typing-inspection==0.4.2
 typing_extensions==4.16.0
 urllib3==2.7.0
-uvicorn==0.50.2
+uvicorn==0.51.0
 uvloop==0.22.1
 vbuild==0.8.2
 wait_for2==0.4.1
