@@ -14,7 +14,7 @@ charset-normalizer==3.4.9
 click==8.4.2
 cloudscraper==1.2.71
 docutils==0.23
-fastapi==0.139.0
+fastapi==0.139.2
 frozenlist==1.8.0
 greenlet==3.5.3
 h11==0.16.0
