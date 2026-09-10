@@ -42,7 +42,7 @@ lxml_html_clean==0.4.5
 macholib==1.16.4
 markdown2==2.5.5
 MarkupSafe==3.0.3
-multidict==6.7.1
+multidict==6.8.0
 nicegui==3.16.0
 orjson==3.12.0
 packaging==26.3
