@@ -25,7 +25,7 @@ Eel==0.18.2
 fastapi==0.141.1
 frozenlist==1.8.0
 future==1.0.0
-gevent==26.8.0
+gevent==26.9.0
 gevent-websocket==0.10.1
 greenlet==3.5.6
 h11==0.16.0
@@ -43,7 +43,7 @@ macholib==1.16.4
 markdown2==2.5.5
 MarkupSafe==3.0.3
 multidict==6.8.0
-nicegui==3.16.0
+nicegui==3.17.0
 orjson==3.12.0
 packaging==26.3
 pillow==12.3.0
