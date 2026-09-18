@@ -32,7 +32,7 @@ h11==0.16.0
 httpcore==1.0.9
 httptools==0.8.0
 httpx==0.28.1
-idna==3.19
+idna==3.20
 ifaddr==0.2.0
 importlib_resources==7.1.0
 itsdangerous==2.2.0
@@ -42,8 +42,8 @@ lxml_html_clean==0.4.5
 macholib==1.16.4
 markdown2==2.5.5
 MarkupSafe==3.0.3
-multidict==6.8.0
-nicegui==3.17.0
+multidict==6.9.0
+nicegui==3.17.1
 orjson==3.12.0
 packaging==26.3
 pillow==12.3.0
