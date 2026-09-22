@@ -42,7 +42,7 @@ lxml_html_clean==0.4.5
 macholib==1.16.4
 markdown2==2.5.5
 MarkupSafe==3.0.3
-multidict==6.9.0
+multidict==6.9.1
 nicegui==3.17.1
 orjson==3.12.0
 packaging==26.3
@@ -87,7 +87,7 @@ uvicorn==0.53.0
 uvloop==0.22.1
 vbuild==0.8.2
 wait_for2==0.4.1
-watchfiles==1.2.0
+watchfiles==1.3.0
 webencodings==0.6.1
 websockets==17.1
 wsproto==1.3.2
