@@ -22,7 +22,7 @@ customtkinter==6.0.0
 darkdetect==0.8.0
 docutils==0.23
 Eel==0.18.2
-fastapi==0.141.1
+fastapi==0.142.0
 frozenlist==1.8.0
 future==1.0.0
 gevent==26.9.0
@@ -44,6 +44,7 @@ markdown2==2.5.5
 MarkupSafe==3.0.3
 multidict==6.9.1
 nicegui==3.17.1
+opentelemetry-api==1.45.0
 orjson==3.12.0
 packaging==26.3
 pillow==12.3.0
