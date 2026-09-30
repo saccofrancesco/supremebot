@@ -14,7 +14,7 @@ bottle==0.13.4
 bottle-websocket==0.2.9
 certifi==2026.7.22
 cffi==2.1.1
-charset-normalizer==3.5.1
+charset-normalizer==3.5.2
 click==8.5.0
 cloudscraper==1.2.71
 cryptography==50.0.1
@@ -22,7 +22,7 @@ customtkinter==6.0.0
 darkdetect==0.8.0
 docutils==0.23
 Eel==0.18.2
-fastapi==0.142.0
+fastapi==0.142.1
 frozenlist==1.8.0
 future==1.0.0
 gevent==26.9.0
