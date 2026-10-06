@@ -15,14 +15,14 @@ bottle-websocket==0.2.9
 certifi==2026.10.23
 cffi==2.1.1
 charset-normalizer==3.5.2
-click==8.5.0
+click==8.5.1
 cloudscraper==1.2.71
 cryptography==50.0.2
 customtkinter==6.0.0
 darkdetect==0.8.0
 docutils==0.23
 Eel==0.18.2
-fastapi==0.162.0
+fastapi==0.162.1
 frozenlist==1.8.0
 future==1.0.0
 gevent==26.9.0
