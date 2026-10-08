@@ -22,7 +22,7 @@ customtkinter==6.0.0
 darkdetect==0.8.0
 docutils==0.23
 Eel==0.18.2
-fastapi==0.142.2
+fastapi==0.142.4
 frozenlist==1.8.0
 future==1.0.0
 gevent==26.9.0
