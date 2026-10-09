@@ -22,7 +22,7 @@ customtkinter==6.0.0
 darkdetect==0.8.0
 docutils==0.23
 Eel==0.18.2
-fastapi==0.142.4
+fastapi==0.143.0
 frozenlist==1.8.0
 future==1.0.0
 gevent==26.9.0
@@ -53,7 +53,7 @@ playwright==1.63.0
 propcache==0.5.4
 proxy_tools==0.1.0
 pscript==0.7.7
-pycparser==3.0
+pycparser==3.1
 pydantic==2.13.4
 pydantic_core==2.46.4
 pyee==13.0.1
