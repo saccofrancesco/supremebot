@@ -467,7 +467,7 @@ def fetch_items(drop_date: str, item_category: str) -> dict:
 
     # Constructing URL based on the Drop Date
     url: str = (
-        f"https://www.supremecommunity.com/season/spring-summer2026/droplist/{convert_date(drop_date)}/"
+        f"https://www.supremecommunity.com/season/fall-winter2026/droplist/{convert_date(drop_date)}/"
     )
 
     # Creating an Object to store the fetched items
