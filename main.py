@@ -409,7 +409,7 @@ def get_drop_dates() -> list:
     """
 
     # Drops Site
-    url: str = "https://www.supremecommunity.com/season/spring-summer2026/droplists/"
+    url: str = "https://www.supremecommunity.com/season/fall-winter2026/droplists/"
 
     # Fetching the source code
     response: requests.models.Response = get(url)
