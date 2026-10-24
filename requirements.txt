@@ -22,7 +22,7 @@ customtkinter==6.0.0
 darkdetect==0.8.0
 docutils==0.23
 Eel==0.18.2
-fastapi==0.161.1
+fastapi==0.162.0
 frozenlist==1.8.0
 future==1.0.0
 gevent==26.9.0
@@ -42,7 +42,7 @@ lxml_html_clean==0.4.5
 macholib==1.16.4
 markdown2==2.5.5
 MarkupSafe==3.0.4
-multidict==7.1.0
+multidict==7.2.0
 nicegui==3.18.0
 opentelemetry-api==1.45.1
 orjson==3.13.0
@@ -79,7 +79,7 @@ setuptools==84.2.1
 simple-websocket==1.1.0
 sniffio==1.3.1
 soupsieve==3.0.4
-starlette==1.9.0
+starlette==1.10.0
 tinycss2==1.5.1
 typing-inspection==0.4.4
 typing_extensions==4.16.0
