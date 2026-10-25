@@ -42,7 +42,7 @@ lxml_html_clean==0.4.5
 macholib==1.16.4
 markdown2==2.5.5
 MarkupSafe==3.0.4
-multidict==7.2.0
+multidict==7.2.1
 nicegui==3.18.0
 opentelemetry-api==1.45.1
 orjson==3.13.0
