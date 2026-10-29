@@ -68,7 +68,7 @@ pyobjc-framework-UniformTypeIdentifiers==12.2.2
 pyobjc-framework-WebKit==12.2.2
 pyparsing==3.3.3
 python-dotenv==1.2.4
-python-engineio==4.15.0
+python-engineio==4.15.1
 python-multipart==0.0.32
 python-socketio==5.17.0
 pywebview==6.2.1
