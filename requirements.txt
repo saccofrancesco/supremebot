@@ -14,7 +14,7 @@ bottle==0.13.4
 bottle-websocket==0.2.9
 certifi==2026.11.20
 cffi==2.1.1
-charset-normalizer==3.5.2
+charset-normalizer==3.5.3
 click==8.5.1
 cloudscraper==1.2.71
 cryptography==50.0.2
