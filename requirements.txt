@@ -58,7 +58,7 @@ pscript==0.7.7
 pycparser==3.12
 pydantic==2.14.4
 pydantic_core==2.50.5
-pyee==14.0.0
+pyee==16.1.0
 Pygments==2.21.0
 pyinstaller==6.22.3
 pyinstaller-hooks-contrib==2026.10
